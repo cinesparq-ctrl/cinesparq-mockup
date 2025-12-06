@@ -5,7 +5,6 @@
   <title>CineSparq – Industry Partner Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Inline styles so you don't have to chase a separate CSS file -->
   <style>
     :root {
       --cs-deep-blue: #0a4f84;
@@ -13,6 +12,15 @@
       --cs-ink: #1c1f26;
       --cs-cream: #f9f5ef;
       --cs-white: #ffffff;
+
+      --rating-high-bg: #16a34a;    /* green */
+      --rating-high-text: #f0fdf4;
+
+      --rating-mid-bg: #d4a017;     /* goldenrod */
+      --rating-mid-text: #171717;
+
+      --rating-low-bg: #dc2626;     /* red */
+      --rating-low-text: #fef2f2;
     }
 
     * {
@@ -32,7 +40,7 @@
       color: inherit;
     }
 
-    /* HEADER */
+    /* HEADER – LOGGED-IN STATE */
 
     .site-header {
       background-color: var(--cs-white);
@@ -42,29 +50,29 @@
     .header-inner {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 0.9rem 1.5rem;
+      padding: 0.7rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
 
-    .brand {
-      display: inline-flex;
+    .header-left {
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    .brand-mark {
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      background: var(--cs-gold);
+    .brand-logo {
+      display: block;
+      height: 32px;
+      width: auto;
     }
 
-    .brand-name {
-      font-weight: 700;
-      font-size: 1.05rem;
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
     }
 
     .dashboard-nav {
@@ -75,7 +83,7 @@
 
     .dashboard-nav a {
       position: relative;
-      padding-bottom: 0.25rem;
+      padding-bottom: 0.2rem;
       color: #4b5563;
     }
 
@@ -103,14 +111,60 @@
       width: 100%;
     }
 
-    .btn-login {
-      background: var(--cs-gold);
-      color: var(--cs-ink);
-      padding: 0.4rem 1rem;
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
+      background: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: 0.9rem;
       font-weight: 600;
+      color: #374151;
     }
+
+    .icon-button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-button {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+    }
+
+    .menu-button-bars {
+      width: 14px;
+      height: 10px;
+      position: relative;
+    }
+
+    .menu-button-bars span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #4b5563;
+      border-radius: 999px;
+    }
+
+    .menu-button-bars span:nth-child(1) { top: 0; }
+    .menu-button-bars span:nth-child(2) { top: 4px; }
+    .menu-button-bars span:nth-child(3) { top: 8px; }
 
     /* BUTTONS */
 
@@ -119,12 +173,12 @@
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      padding: 0.6rem 1.2rem;
+      padding: 0.55rem 1.2rem;
       font-weight: 600;
       font-size: 0.9rem;
       border: none;
       cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
     }
 
     .btn-primary {
@@ -141,250 +195,182 @@
     .btn-ghost {
       background: transparent;
       color: var(--cs-deep-blue);
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-ghost:hover {
+      background: #e5e7eb;
     }
 
     .btn-small {
-      padding: 0.45rem 0.9rem;
-      font-size: 0.85rem;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.84rem;
     }
 
-    .icon-button {
+    .btn-text {
       border: none;
       background: transparent;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.78rem;
+      color: #4b5563;
       cursor: pointer;
-      padding: 0.25rem;
-      font-size: 1.1rem;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #6b7280;
     }
 
-    .icon-button:hover {
+    .btn-text:hover {
       color: var(--cs-deep-blue);
     }
 
-    /* LAYOUT */
+    /* PAGE LAYOUT */
 
     .page {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 1.75rem 1.5rem 2.5rem;
+      padding: 1.6rem 1.5rem 2.5rem;
     }
 
     .page-header {
       display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .page-header-top {
+      display: flex;
       justify-content: space-between;
       align-items: flex-end;
       gap: 1rem;
-      margin-bottom: 1.5rem;
     }
 
-    .page-title {
+    .page-title-block h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
-    .page-subtitle {
-      margin: 0.35rem 0 0;
-      font-size: 0.95rem;
+    .page-title-block p {
+      margin: 0.25rem 0 0;
+      font-size: 0.96rem;
       color: #4b5563;
     }
 
-    /* METRICS */
+    /* CONTROLS BAR */
 
-    .metrics-row {
+    .controls-bar {
       display: flex;
-      gap: 1.5rem;
       flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .controls-bar-left {
+      font-size: 0.83rem;
+      color: #6b7280;
+    }
+
+    .controls-bar-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .input, .select {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.85rem;
+      background: var(--cs-white);
+      min-width: 150px;
+    }
+
+    .input {
+      min-width: 220px;
+    }
+
+    .input::placeholder {
+      color: #9ca3af;
+    }
+
+    /* OVERVIEW ROW – METRICS + RECENT ACTIVITY */
+
+    .overview-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
       margin-bottom: 1.75rem;
     }
 
+    .card {
+      background: var(--cs-white);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .metrics-card {
+      border: 1px solid #e5e7eb;
+    }
+
+    .metrics-header {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      margin-bottom: 0.6rem;
+    }
+
+    .metrics-content {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .metric-item {
+      text-align: center;
+      flex: 1;
+      min-width: 140px;
+    }
+
     .metric-circle {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 0.5rem;
       border-radius: 50%;
       background: var(--cs-cream);
       border: 2px solid var(--cs-deep-blue);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 0.5rem;
-    }
-
-    .metric-number {
       font-size: 1.7rem;
       font-weight: 700;
       color: var(--cs-deep-blue);
-      line-height: 1;
     }
 
     .metric-label {
-      font-size: 0.75rem;
-      color: #4b5563;
-      margin-top: 0.35rem;
-    }
-
-    /* CARDS */
-
-    .card {
-      background: var(--cs-white);
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-title {
-      margin: 0;
-      font-size: 1.1rem;
-    }
-
-    .card-subtitle {
-      margin: 0;
-      font-size: 0.9rem;
+      font-size: 0.83rem;
       color: #4b5563;
     }
 
-    /* MAIN GRID: WATCHLIST + ACTIVITY + QUALIFIED PROJECTS */
-
-    .main-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .top-row {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
-
-    /* TABLE / LIST STYLING */
-
-    .project-list {
-      list-style: none;
-      margin: 0.75rem 0 0;
-      padding: 0;
-    }
-
-    .project-row {
-      display: grid;
-      grid-template-columns: 80px minmax(0, 1.6fr) auto;
-      gap: 1rem;
-      align-items: center;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #f3f4f6;
-    }
-
-    .project-row:last-child {
-      border-bottom: none;
-    }
-
-    .project-thumbnail img {
-      width: 80px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #111827;
-    }
-
-    .project-main h3 {
+    .recent-activity-card .card-title {
       margin: 0;
-      font-size: 0.98rem;
+      font-size: 1.05rem;
     }
 
-    .project-main .project-type {
-      margin: 0.1rem 0 0.25rem;
-      font-size: 0.8rem;
+    .recent-activity-card .card-subtitle {
+      margin: 0.25rem 0 0.75rem;
+      font-size: 0.85rem;
       color: #6b7280;
     }
 
-    .logline {
-      margin: 0.25rem 0 0.4rem;
-      font-size: 0.85rem;
-      color: #4b5563;
-    }
-
-    .chip-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-    }
-
-    .chip {
-      font-size: 0.75rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      background: #e5e7eb;
-      color: #374151;
-    }
-
-    .project-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-    }
-
-    .sparq-rating {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.8rem;
-    }
-
-    .sparq-rating-high {
-      background: var(--cs-deep-blue);
-      color: var(--cs-white);
-    }
-
-    .sparq-rating-medium {
-      background: var(--cs-gold);
-      color: var(--cs-ink);
-    }
-
-    .sparq-rating-low {
-      background: #fecaca;
-      color: var(--cs-ink);
-    }
-
-    .project-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .timestamp {
-      color: #9ca3af;
-      font-size: 0.75rem;
-    }
-
-    /* RECENT ACTIVITY LIST */
-
     .activity-list {
       list-style: none;
-      margin: 0.75rem 0 0;
+      margin: 0;
       padding: 0;
-      font-size: 0.85rem;
+      font-size: 0.86rem;
     }
 
     .activity-item {
@@ -400,17 +386,209 @@
       font-weight: 500;
     }
 
-    /* QUALIFIED PROJECTS SECTION */
-
-    .qualified-projects .card-subtitle {
-      max-width: 32rem;
+    .timestamp {
+      font-size: 0.76rem;
+      color: #9ca3af;
+      margin-top: 0.15rem;
     }
 
-    /* LEGEND */
+    /* WATCHLIST */
+
+    .watchlist-card {
+      margin-bottom: 1.75rem;
+    }
+
+    .watchlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .watchlist-header h2 {
+      margin: 0;
+      font-size: 1.15rem;
+    }
+
+    .watchlist-header p {
+      margin: 0.25rem 0 0;
+      font-size: 0.88rem;
+      color: #4b5563;
+      max-width: 34rem;
+    }
+
+    .watchlist-tools {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .project-list {
+      list-style: none;
+      margin: 0.75rem 0 0;
+      padding: 0;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1.7fr) minmax(0, 0.9fr);
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .project-row:last-child {
+      border-bottom: none;
+    }
+
+    .project-thumbnail {
+      width: 88px;
+    }
+
+    .project-thumbnail img {
+      width: 88px;
+      height: 124px;
+      object-fit: cover;   /* PORTRAIT posters */
+      border-radius: 10px;
+      background: #111827;
+      display: block;
+    }
+
+    .project-main h3 {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .project-type {
+      margin: 0.15rem 0 0.35rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .logline {
+      margin: 0.2rem 0 0.45rem;
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+
+    .chip-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+    }
+
+    .sparq-rating-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .rating-high {
+      background: var(--rating-high-bg);
+      color: var(--rating-high-text);
+    }
+
+    .rating-mid {
+      background: var(--rating-mid-bg);
+      color: var(--rating-mid-text);
+    }
+
+    .rating-low {
+      background: var(--rating-low-bg);
+      color: var(--rating-low-text);
+    }
+
+    .project-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .action-label {
+      font-size: 0.76rem;
+      color: #6b7280;
+    }
+
+    /* MORE PROJECTS – THUMBNAILS ONLY */
+
+    .more-projects-card {
+      padding-top: 1.2rem;
+      padding-bottom: 1.2rem;
+    }
+
+    .more-projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .more-projects-header h2 {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .more-projects-header p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #6b7280;
+      max-width: 28rem;
+    }
+
+    .more-projects-strip {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+
+    .more-poster {
+      flex: 0 0 84px;
+    }
+
+    .more-poster img {
+      width: 84px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #111827;
+      display: block;
+    }
+
+    /* SPARQ LEGEND + FOOTER */
 
     .sparq-legend {
-      margin-top: 1.75rem;
-      padding-top: 1rem;
+      max-width: 1120px;
+      margin: 1.75rem auto 0;
+      padding: 1rem 1.5rem 0;
       border-top: 1px solid #e5e7eb;
       display: flex;
       flex-wrap: wrap;
@@ -429,10 +607,25 @@
       padding: 0.15rem 0.7rem;
     }
 
-    /* FOOTER */
+    .legend-high {
+      background: var(--rating-high-bg);
+      color: var(--rating-high-text);
+    }
+
+    .legend-mid {
+      background: var(--rating-mid-bg);
+      color: var(--rating-mid-text);
+    }
+
+    .legend-low {
+      background: var(--rating-low-bg);
+      color: var(--rating-low-text);
+    }
 
     .page-footer {
-      margin-top: 2rem;
+      max-width: 1120px;
+      margin: 1.25rem auto 0;
+      padding: 0 1.5rem;
       font-size: 0.8rem;
       color: #9ca3af;
       text-align: center;
@@ -441,267 +634,313 @@
     /* RESPONSIVE */
 
     @media (max-width: 900px) {
-      .top-row {
+      .header-inner {
+        padding-inline: 1rem;
+      }
+
+      .overview-row {
         grid-template-columns: 1fr;
       }
 
       .project-row {
-        grid-template-columns: 70px minmax(0, 1fr);
-        grid-template-rows: auto auto;
+        grid-template-columns: 88px minmax(0, 1fr);
       }
 
       .project-meta {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 0.5rem;
         grid-column: 1 / -1;
+        align-items: flex-start;
+        margin-top: 0.4rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER – LOGGED-IN -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-mark"></span>
-        <span class="brand-name">CineSparq</span>
-      </a>
+      <div class="header-left">
+        <!-- Use the CS_Logo_light bg.png logo on white sections -->
+        <img src="CS_Logo_light bg.png" alt="CineSparq logo" class="brand-logo" />
+      </div>
 
-      <nav class="dashboard-nav">
-        <!-- No (MVP) label, and Dashboard goes to THIS page -->
-        <a href="industry-partner-dashboard.html" class="active">Dashboard</a>
-        <a href="#">Projects</a>
-        <a href="#">Reports</a>
-      </nav>
+      <div class="header-right">
+        <nav class="dashboard-nav">
+          <a href="industry-partner-dashboard.html" class="active">Dashboard</a>
+          <a href="#">Projects</a>
+          <a href="#">Reports</a>
+        </nav>
 
-      <a href="login.html" class="btn-login">Login</a>
+        <div class="header-user">
+          <!-- Logged-in user avatar (initial only) -->
+          <div class="user-avatar" aria-label="User profile">A</div>
+
+          <!-- Hamburger menu for account, settings, support, logout (static in mockup) -->
+          <button class="icon-button menu-button" aria-label="Open user menu">
+            <div class="menu-button-bars">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- PAGE CONTENT -->
   <main class="page">
-    <header class="page-header">
-      <div>
-        <h1 class="page-title">Industry Partner Dashboard</h1>
-        <p class="page-subtitle">
-          See the projects you’ve engaged with, what’s on your watchlist, and which titles are most aligned with your mandates.
-        </p>
-      </div>
-      <button class="btn btn-primary btn-small">Download project one-sheet</button>
-    </header>
 
-    <!-- METRICS -->
-    <section class="metrics-row">
-      <div class="metric-circle">
-        <span class="metric-number">5</span>
-        <span class="metric-label">Unique projects viewed</span>
+    <!-- PAGE HEADER + CONTROLS -->
+    <section class="page-header">
+      <div class="page-header-top">
+        <div class="page-title-block">
+          <h1>Industry Partner Dashboard</h1>
+          <p>
+            A clear view of the projects you’ve engaged with, how you’ve scored them, and where your attention is going.
+          </p>
+        </div>
       </div>
-      <div class="metric-circle">
-        <span class="metric-number">3</span>
-        <span class="metric-label">Saved to watchlist</span>
+
+      <!-- Controls: search, sort, filter (static UI for demo) -->
+      <div class="controls-bar">
+        <div class="controls-bar-left">
+          Use search, sort, and filters to focus on the projects that matter most to you.
+        </div>
+        <div class="controls-bar-right">
+          <input class="input" type="search" placeholder="Search by title or keyword" />
+          <select class="select">
+            <option>Sort by rating (high to low)</option>
+            <option>Sort by rating (low to high)</option>
+            <option>Sort by recently updated</option>
+            <option>Sort A–Z</option>
+          </select>
+          <select class="select">
+            <option>Filter by rating band</option>
+            <option>Strong fit (8.0–10)</option>
+            <option>Emerging (6.0–7.9)</option>
+            <option>Early stage (&lt; 6.0)</option>
+          </select>
+        </div>
       </div>
     </section>
 
-    <!-- MAIN GRID -->
-    <section class="main-grid">
+    <!-- OVERVIEW ROW -->
+    <section class="overview-row">
 
-      <!-- TOP ROW: WATCHLIST + RECENT ACTIVITY -->
-      <div class="top-row">
-
-        <!-- WATCHLIST -->
-        <section class="card watchlist">
-          <div class="card-header">
-            <div>
-              <h2 class="card-title">Your Watchlist</h2>
-              <p class="card-subtitle">
-                Your watchlist indicates soft interest. Filmmakers only learn your identity when you request an introduction.
-              </p>
-            </div>
+      <!-- METRICS PANEL -->
+      <section class="card metrics-card">
+        <div class="metrics-header">Overview</div>
+        <div class="metrics-content">
+          <div class="metric-item">
+            <div class="metric-circle">5</div>
+            <div class="metric-label">Unique projects viewed</div>
           </div>
-
-          <ul class="project-list">
-
-            <!-- AS TIME GOES BY -->
-            <li class="project-row">
-              <div class="project-thumbnail">
-                <!-- Update src to your actual thumbnail path -->
-                <img src="as-time-goes-by-thumb.jpg" alt="As Time Goes By poster" />
-              </div>
-
-              <div class="project-main">
-                <h3>As Time Goes By</h3>
-                <p class="project-type">Feature Film · Period Drama</p>
-                <p class="logline">
-                  A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him.
-                </p>
-                <ul class="chip-list">
-                  <li class="chip">1950s–2000s Chicago</li>
-                  <li class="chip">Music & culture</li>
-                  <li class="chip">Character-driven</li>
-                </ul>
-              </div>
-
-              <div class="project-meta">
-                <!-- Sparq Rating: no project type, just numeric -->
-                <span class="sparq-rating sparq-rating-high">8.4/10</span>
-
-                <div class="project-actions">
-                  <!-- Simple icon-style buttons instead of "Pass" -->
-                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
-                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
-
-                  <!-- REVIEW button navigates to project-detail-partner.html -->
-                  <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
-                </div>
-
-                <span class="timestamp">Updated 2 days ago</span>
-              </div>
-            </li>
-
-            <!-- LEARNING TO FALL IN LOVE -->
-            <li class="project-row">
-              <div class="project-thumbnail">
-                <img src="learning-to-fall-in-love-thumb.jpg" alt="Learning to Fall In Love poster" />
-              </div>
-
-              <div class="project-main">
-                <h3>Learning to Fall In Love</h3>
-                <p class="project-type">Feature Film · Romantic Comedy · Asian Market</p>
-                <p class="logline">
-                  After a major setback, a successful retiree trades love for ambition until life forces him to learn how to open his heart again.
-                </p>
-                <ul class="chip-list">
-                  <li class="chip">Romantic Comedy</li>
-                  <li class="chip">Witty</li>
-                  <li class="chip">Light-hearted</li>
-                  <li class="chip">Touching</li>
-                  <li class="chip">Asian talent & locations</li>
-                </ul>
-              </div>
-
-              <div class="project-meta">
-                <span class="sparq-rating sparq-rating-medium">7.6/10</span>
-                <div class="project-actions">
-                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
-                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
-                  <button class="btn btn-ghost btn-small" type="button">Review</button>
-                </div>
-                <span class="timestamp">Updated 5 days ago</span>
-              </div>
-            </li>
-
-            <!-- ABYSS OF DECEPTIONS (VERTICAL SERIES MICRODRAMA) -->
-            <li class="project-row">
-              <div class="project-thumbnail">
-                <img src="abyss-poster.jpg" alt="Abyss of Deceptions vertical series poster" />
-              </div>
-
-              <div class="project-main">
-                <h3>Abyss of Deceptions</h3>
-                <p class="project-type">Microdrama · Vertical Series · Coming-of-age Psychological Thriller</p>
-                <p class="logline">
-                  When a guarded teen escapes into a secret vertical video account, he uncovers anonymous posts exposing his friends’ darkest truths—and realizes somebody is scripting his breakdown in real time.
-                </p>
-                <ul class="chip-list">
-                  <li class="chip">Vertical series</li>
-                  <li class="chip">Coming-of-age</li>
-                  <li class="chip">Psychological thriller</li>
-                  <li class="chip">Social suspense</li>
-                </ul>
-              </div>
-
-              <div class="project-meta">
-                <span class="sparq-rating sparq-rating-high">8.1/10</span>
-                <div class="project-actions">
-                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
-                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
-                  <button class="btn btn-ghost btn-small" type="button">Review</button>
-                </div>
-                <span class="timestamp">Updated 1 day ago</span>
-              </div>
-            </li>
-
-          </ul>
-        </section>
-
-        <!-- RECENT SCORING ACTIVITY -->
-        <section class="card recent-activity">
-          <div class="card-header">
-            <h2 class="card-title">Recent scoring activity</h2>
-          </div>
-
-          <ul class="activity-list">
-            <li class="activity-item">
-              <span class="activity-label">As Time Goes By</span><br />
-              Updated readiness score to <strong>8.4/10</strong>
-              <div class="timestamp">2 days ago</div>
-            </li>
-            <li class="activity-item">
-              <span class="activity-label">Learning to Fall In Love</span><br />
-              Added to watchlist
-              <div class="timestamp">5 days ago</div>
-            </li>
-            <li class="activity-item">
-              <span class="activity-label">Abyss of Deceptions</span><br />
-              Marked as high interest
-              <div class="timestamp">1 week ago</div>
-            </li>
-          </ul>
-        </section>
-      </div>
-
-      <!-- QUALIFIED PROJECTS -->
-      <section class="card qualified-projects">
-        <div class="card-header">
-          <div>
-            <h2 class="card-title">Qualified projects for your mandates</h2>
-            <p class="card-subtitle">
-              Projects that meet or exceed your Sparq Rating threshold based on your stated interests, markets, and financial parameters.
-            </p>
+          <div class="metric-item">
+            <div class="metric-circle">3</div>
+            <div class="metric-label">Saved to watchlist</div>
           </div>
         </div>
+      </section>
 
-        <ul class="project-list">
-          <!-- You can repeat similar rows here or keep it simple for the demo -->
-          <li class="project-row">
-            <div class="project-thumbnail">
-              <img src="as-time-goes-by-thumb.jpg" alt="As Time Goes By poster" />
-            </div>
-            <div class="project-main">
-              <h3>As Time Goes By</h3>
-              <p class="project-type">Feature Film · Period Drama</p>
-              <p class="logline">
-                A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him.
-              </p>
-            </div>
-            <div class="project-meta">
-              <span class="sparq-rating sparq-rating-high">8.4/10</span>
-              <div class="project-actions">
-                <button class="icon-button" title="Save to watchlist">&#9733;</button>
-                <button class="icon-button" title="Mark as viewed">&#128065;</button>
-                <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
-              </div>
-            </div>
+      <!-- RECENT SCORING ACTIVITY -->
+      <section class="card recent-activity-card">
+        <h2 class="card-title">Recent scoring activity</h2>
+        <p class="card-subtitle">
+          A quick look at how you’ve engaged with projects on CineSparq.
+        </p>
+
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-label">As Time Goes By</span><br />
+            Updated Sparq Rating to <strong>8.4/10</strong>.
+            <div class="timestamp">2 days ago</div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-label">Learning to Fall In Love</span><br />
+            Updated Sparq Rating to <strong>5.9/10</strong>.
+            <div class="timestamp">4 days ago</div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-label">Abyss of Deceptions</span><br />
+            Marked as high interest and added to watchlist.
+            <div class="timestamp">1 week ago</div>
           </li>
         </ul>
       </section>
     </section>
 
-    <!-- SPARQ RATING LEGEND -->
-    <section class="sparq-legend">
-      <span class="legend-label">Sparq Rating key:</span>
-      <span class="legend-pill sparq-rating-high">8.0–10 · Strong fit</span>
-      <span class="legend-pill sparq-rating-medium">6.0–7.9 · Emerging</span>
-      <span class="legend-pill sparq-rating-low">&lt; 6.0 · Early stage</span>
+    <!-- WATCHLIST -->
+    <section class="card watchlist-card">
+      <div class="watchlist-header">
+        <div>
+          <h2>Your watchlist</h2>
+          <p>
+            Your watchlist indicates soft interest only. Filmmakers see your identity when—and only when—you request an introduction.
+          </p>
+        </div>
+        <div class="watchlist-tools">
+          <span>Showing 3 projects</span>
+        </div>
+      </div>
+
+      <ul class="project-list">
+
+        <!-- AS TIME GOES BY – STRONG FIT -->
+        <li class="project-row">
+          <div class="project-thumbnail">
+            <!-- Make sure the filename matches your repo exactly -->
+            <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
+          </div>
+
+          <div class="project-main">
+            <h3>As Time Goes By</h3>
+            <p class="project-type">Feature Film · Period Drama</p>
+            <p class="logline">
+              A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him across five decades.
+            </p>
+            <ul class="chip-list">
+              <li class="chip">1950s–2000s Chicago</li>
+              <li class="chip">Music & culture</li>
+              <li class="chip">Character-driven</li>
+            </ul>
+          </div>
+
+          <div class="project-meta">
+            <!-- HIGH rating – green -->
+            <span class="sparq-rating-pill rating-high">8.4/10</span>
+
+            <div class="project-actions">
+              <button class="btn-text" type="button">Save</button>
+              <button class="btn-text" type="button">Viewed</button>
+              <!-- Review links to project-detail-partner.html -->
+              <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
+            </div>
+
+            <span class="timestamp">Updated 2 days ago</span>
+          </div>
+        </li>
+
+        <!-- LEARNING TO FALL IN LOVE – WARNING / EARLY-STAGE SCORE -->
+        <li class="project-row">
+          <div class="project-thumbnail">
+            <img src="learning-poster.png" alt="Learning to Fall In Love poster" />
+          </div>
+
+          <div class="project-main">
+            <h3>Learning to Fall In Love</h3>
+            <p class="project-type">Feature Film · Romantic Comedy · Asian Market</p>
+            <p class="logline">
+              After a major setback, a successful retiree trades love for ambition until life forces him to learn how to open his heart again.
+            </p>
+            <ul class="chip-list">
+              <li class="chip">Romantic comedy</li>
+              <li class="chip">Witty</li>
+              <li class="chip">Light-hearted</li>
+              <li class="chip">Touching</li>
+              <li class="chip">Asian talent & locations</li>
+            </ul>
+          </div>
+
+          <div class="project-meta">
+            <!-- LOW rating – red (gives you a chance to explain in the demo) -->
+            <span class="sparq-rating-pill rating-low">5.9/10</span>
+
+            <div class="project-actions">
+              <button class="btn-text" type="button">Save</button>
+              <button class="btn-text" type="button">Viewed</button>
+              <button class="btn btn-ghost btn-small" type="button">Review</button>
+            </div>
+
+            <span class="timestamp">Updated 4 days ago</span>
+          </div>
+        </li>
+
+        <!-- ABYSS OF DECEPTIONS – EMERGING / MID SCORE -->
+        <li class="project-row">
+          <div class="project-thumbnail">
+            <img src="abyss-poster.png" alt="Abyss of Deceptions vertical series poster" />
+          </div>
+
+          <div class="project-main">
+            <h3>Abyss of Deceptions</h3>
+            <p class="project-type">Microdrama · Vertical Series · Coming-of-age Psychological Thriller</p>
+            <p class="logline">
+              When a guarded teen escapes into a secret vertical video account, he uncovers anonymous posts exposing his friends’ darkest truths—and realizes somebody is scripting his breakdown in real time.
+            </p>
+            <ul class="chip-list">
+              <li class="chip">Vertical series</li>
+              <li class="chip">Coming-of-age</li>
+              <li class="chip">Psychological thriller</li>
+              <li class="chip">Social suspense</li>
+            </ul>
+          </div>
+
+          <div class="project-meta">
+            <!-- MID rating – goldenrod -->
+            <span class="sparq-rating-pill rating-mid">7.2/10</span>
+
+            <div class="project-actions">
+              <button class="btn-text" type="button">Save</button>
+              <button class="btn-text" type="button">Viewed</button>
+              <button class="btn btn-ghost btn-small" type="button">Review</button>
+            </div>
+
+            <span class="timestamp">Updated 1 week ago</span>
+          </div>
+        </li>
+
+      </ul>
     </section>
 
-    <footer class="page-footer">
-      © <span id="year"></span> CineSparq. All rights reserved.
-    </footer>
+    <!-- MORE PROJECTS – THUMBNAILS ONLY -->
+    <section class="card more-projects-card">
+      <div class="more-projects-header">
+        <h2>Based on your selections, you might also like</h2>
+        <p>Click to explore.</p>
+      </div>
+
+      <div class="more-projects-strip">
+        <div class="more-poster">
+          <img src="as-time-goes-by-poster.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="learning-poster.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="abyss-poster.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="placeholder-project-1.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="placeholder-project-2.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="placeholder-project-3.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="placeholder-project-4.png" alt="Project thumbnail" />
+        </div>
+        <div class="more-poster">
+          <img src="placeholder-project-5.png" alt="Project thumbnail" />
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- SPARQ RATING LEGEND -->
+  <section class="sparq-legend">
+    <span class="legend-label">Sparq Rating key:</span>
+    <span class="legend-pill legend-high">8.0–10 · Strong fit</span>
+    <span class="legend-pill legend-mid">6.0–7.9 · Emerging</span>
+    <span class="legend-pill legend-low">&lt; 6.0 · Early stage</span>
+  </section>
+
+  <footer class="page-footer">
+    © <span id="year"></span> CineSparq. All rights reserved.
+  </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
