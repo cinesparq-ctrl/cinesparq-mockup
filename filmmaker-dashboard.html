@@ -2,817 +2,799 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Filmmaker Dashboard (Mockup)</title>
+  <title>CineSparq – Filmmaker Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
-      --bg: #f3f4f6;
-      --bg-soft: #e5e7eb;
-      --sidebar-bg: #ffffff;
-      --card: #ffffff;
-      --brand-blue: #0a4f84;
-      --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.18);
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border-subtle: #e5e7eb;
-      --border-strong: #d1d5db;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --warning: #d97706;
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
+
+      --rating-high-bg: #16a34a;    /* green */
+      --rating-high-text: #f0fdf4;
+
+      --rating-mid-bg: #d4a017;     /* goldenrod */
+      --rating-mid-text: #171717;
+
+      --rating-low-bg: #dc2626;     /* red */
+      --rating-low-text: #fef2f2;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
     }
 
     body {
       min-height: 100vh;
       display: flex;
-      background: radial-gradient(circle at top left, #ffffff 0, #f3f4f6 40%, #e5e7eb 100%);
-      color: var(--text-main);
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-      width: 260px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border-subtle);
-      padding: 24px 20px;
-      display: flex;
       flex-direction: column;
-      gap: 28px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .logo-image {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-section-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .nav-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .nav-item:hover {
-      background: #f9fafb;
-    }
-
-    .nav-item.active {
-      background: var(--accent-soft);
-      color: var(--text-main);
-      border: 1px solid rgba(248, 212, 24, 0.6);
-    }
-
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .nav-item span.label {
-      flex: 1;
-    }
-
-    .nav-item span.badge {
-      font-size: 0.72rem;
-      background: #eff6ff;
-      padding: 2px 8px;
-      border-radius: 999px;
-      color: var(--brand-blue);
-      border: 1px solid #dbeafe;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 12px;
-      line-height: 1.4;
-    }
-
-    .sidebar-footer strong {
-      color: var(--brand-blue);
-    }
-
-    /* MAIN LAYOUT */
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 32px;
-      gap: 24px;
-    }
-
-    <header class="top-bar">
-  <div class="top-title">
-    <h1>Filmmaker Dashboard</h1>
-    <p>Track investor signals, IP-protected views, and Sparq readiness across all projects.</p>
-  </div>
-  ...
-</header>
-
-    <div class="top-title">
-  <span class="view-label">Filmmaker Dashboard</span>
-  <h1>Welcome back, Steve</h1>
-  <p>Here’s how your slate is performing this week.</p>
-</div>
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .btn {
-      border: 1px solid var(--border-strong);
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #ffffff;
-      color: var(--brand-blue);
+    a {
       text-decoration: none;
-      white-space: nowrap;
+      color: inherit;
     }
 
-    .btn:hover {
-      background: #f9fafb;
+    /* HEADER – LOGGED-IN */
+
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    .btn-primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #f8d418 0%, #f8d418 40%, #0a4f84 100%);
-      color: #111827;
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      display: block;
+      height: 32px;
+      width: auto;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .dashboard-nav a {
+      position: relative;
+      padding-bottom: 0.2rem;
+      color: #4b5563;
+    }
+
+    .dashboard-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.2s ease;
+    }
+
+    .dashboard-nav a:hover::after {
+      width: 100%;
+    }
+
+    .dashboard-nav a.active {
+      color: var(--cs-deep-blue);
       font-weight: 600;
-      box-shadow:
-        0 8px 20px rgba(15, 23, 42, 0.18),
-        0 0 0 1px rgba(248, 212, 24, 0.25);
     }
 
-    .avatar-circle {
+    .dashboard-nav a.active::after {
+      width: 100%;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
       width: 32px;
       height: 32px;
       border-radius: 999px;
       background: #e5e7eb;
-      border: 1px solid var(--border-subtle);
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1.9fr 1.3fr;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      padding: 18px 18px 16px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
-    }
-
-    .card + .card {
-      margin-top: 12px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .card-title {
-      font-size: 0.96rem;
+      justify-content: center;
+      font-size: 0.9rem;
       font-weight: 600;
+      color: #374151;
     }
 
-    .card-subtitle {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    .card-link {
-      font-size: 0.8rem;
-      color: var(--brand-blue);
+    .icon-button {
+      border: none;
+      background: transparent;
       cursor: pointer;
-      text-decoration: none;
-    }
-
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    /* METRICS ROW */
-
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-      margin-bottom: 18px;
-    }
-
-    .metric-card {
-      background: #f9fafb;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      padding: 12px 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .metric-ring {
-      position: relative;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      background: conic-gradient(
-        #f8d418 0 230deg,
-        #0a4f84 230deg 270deg,
-        #e5e7eb 270deg 360deg
-      );
-      display: flex;
+      padding: 0.25rem;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
     }
 
-    .metric-ring-inner {
+    .menu-button {
       width: 26px;
       height: 26px;
       border-radius: 999px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--brand-blue);
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid #d1d5db;
     }
 
-    .metric-labels {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .menu-button-bars {
+      width: 14px;
+      height: 10px;
+      position: relative;
     }
 
-    .metric-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+    .menu-button-bars span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #4b5563;
+      border-radius: 999px;
     }
 
-    .metric-value {
-      font-size: 1rem;
-      font-weight: 600;
-    }
+    .menu-button-bars span:nth-child(1) { top: 0; }
+    .menu-button-bars span:nth-child(2) { top: 4px; }
+    .menu-button-bars span:nth-child(3) { top: 8px; }
 
-    .metric-tag {
-      font-size: 0.72rem;
-      color: var(--brand-blue);
-    }
-
-    /* TABLE */
-
-    .projects-table {
-      width: 100%;
-      margin-top: 8px;
-      border-collapse: collapse;
-      font-size: 0.84rem;
-    }
-
-    .projects-table thead {
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.7rem;
-    }
-
-    .projects-table th,
-    .projects-table td {
-      padding: 10px 4px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .projects-table th:first-child,
-    .projects-table td:first-child {
-      padding-left: 0;
-    }
-
-    .projects-table tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .project-name {
-      font-weight: 550;
-      color: var(--text-main);
-      margin-bottom: 2px;
-    }
-
-    .project-pill {
+    .icon-chip {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      background: #f3f4f6;
-      color: var(--text-muted);
-    }
-
-    .rating-pill {
-      color: var(--brand-blue);
-      background: #eff6ff;
-      border: 1px solid #dbeafe;
-    }
-
-    .status-pill--inreview {
-      color: var(--warning);
-      background: #fffbeb;
-      border: 1px solid #fef3c7;
-    }
-
-    .status-pill--ready {
-      color: var(--success);
-      background: #ecfdf3;
-      border: 1px solid #bbf7d0;
-    }
-
-    .link-subtle {
-      font-size: 0.8rem;
-      color: var(--brand-blue);
+      justify-content: center;
       cursor: pointer;
-      text-decoration: none;
+      padding: 0;
+      transition: background 0.12s ease, border-color 0.12s ease;
     }
 
-    .link-subtle:hover {
-      text-decoration: underline;
+    .icon-chip:hover {
+      background: #e5e7eb;
+      border-color: #cbd5f5;
     }
 
-    /* RIGHT COLUMN */
-
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .icon-chip svg {
+      width: 13px;
+      height: 13px;
+      display: block;
+      stroke: #4b5563;
     }
 
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 10px;
-      font-size: 0.8rem;
-    }
-
-    .timeline-dot {
-      margin-top: 4px;
-      width: 7px;
-      height: 7px;
+    .info-icon {
+      width: 18px;
+      height: 18px;
       border-radius: 999px;
-      background: var(--accent);
-      flex-shrink: 0;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      color: #6b7280;
+      padding: 0;
     }
 
-    .timeline-body {
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .section-subtitle {
+      margin: 0.1rem 0 0.75rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.6rem 1.5rem 2.5rem;
       flex: 1;
     }
 
-    .timeline-label {
-      color: var(--text-main);
+    .page-header {
+      margin-bottom: 1.5rem;
     }
 
-    .timeline-meta {
-      color: var(--text-muted);
-      font-size: 0.74rem;
-    }
-
-    .chip-row {
+    .page-title-row {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
     }
 
-    .chip {
+    .page-title-row h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .page-title-row p {
+      margin: 0.25rem 0 0;
+      font-size: 0.96rem;
+      color: #4b5563;
+    }
+
+    .card {
+      background: var(--cs-white);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .metrics-row {
+      margin-bottom: 1.75rem;
+    }
+
+    .metric-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-label {
+      font-size: 0.86rem;
+      color: #6b7280;
+      margin-bottom: 0.15rem;
+    }
+
+    .metric-footnote {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin: 0.1rem 0 0;
+    }
+
+    /* PROJECT LIST */
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1.6fr) minmax(0, 0.9fr) auto;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .project-thumb {
+      width: 60px;
+      height: 88px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #111827;
+      flex-shrink: 0;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-main {
+      min-width: 0;
+    }
+
+    .project-main h3 {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .project-main h3 a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .project-meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.2rem;
+    }
+
+    .project-meta span + span::before {
+      content: "•";
+      margin: 0 0.3rem;
+      color: #9ca3af;
+    }
+
+    .project-rating-block {
+      text-align: right;
+      font-size: 0.82rem;
+    }
+
+    .sparq-rating-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.15rem 0.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .rating-high {
+      background: var(--rating-high-bg);
+      color: var(--rating-high-text);
+    }
+
+    .rating-mid {
+      background: var(--rating-mid-bg);
+      color: var(--rating-mid-text);
+    }
+
+    .rating-low {
+      background: var(--rating-low-bg);
+      color: var(--rating-low-text);
+    }
+
+    .project-rating-caption {
+      margin: 0;
+      color: #6b7280;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.35rem;
+      justify-content: flex-end;
+    }
+
+    /* ROADMAP + MATCHES */
+
+    .roadmap-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .roadmap-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .roadmap-tag {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .matches-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0;
+      font-size: 0.86rem;
+    }
+
+    .matches-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .match-name {
+      font-weight: 600;
+    }
+
+    .match-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.05rem 0.45rem;
+      border-radius: 999px;
+      background: #e5e7eb;
       font-size: 0.74rem;
-      padding: 3px 9px;
+      margin-left: 0.3rem;
+    }
+
+    .visibility-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: #4b5563;
+    }
+
+    .visibility-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.1rem 0.55rem;
       border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      background: #f9fafb;
-    }
-
-    .chip.alert {
-      border-color: rgba(220, 38, 38, 0.35);
-      color: var(--danger);
-      background: #fef2f2;
-    }
-
-    .chip.soft {
-      border-color: rgba(10, 79, 132, 0.3);
-      color: var(--brand-blue);
-      background: #eff6ff;
-    }
-
-    .watermark-preview {
-      margin-top: 10px;
-      border-radius: 12px;
-      border: 1px dashed var(--border-strong);
-      padding: 10px;
       font-size: 0.78rem;
-      background: #f9fafb;
+      background: #e5e7eb;
     }
 
-    .watermark-tag {
-      display: inline-block;
-      padding: 3px 8px;
-      font-size: 0.72rem;
-      border-radius: 999px;
-      background: #fffbeb;
-      color: var(--warning);
-      margin-bottom: 5px;
-      border: 1px solid #fef3c7;
+    .visibility-pill.public {
+      background: #d1fae5;
+      color: #065f46;
     }
 
-    .helper-text {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      line-height: 1.5;
+    .visibility-pill.private {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* FOOTER */
+
+    .page-footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
     }
 
     /* RESPONSIVE */
 
-    @media (max-width: 1024px) {
-      .content-grid {
+    @media (max-width: 900px) {
+      .header-inner {
+        padding-inline: 1rem;
+      }
+
+      .grid-2 {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
+      .project-row {
+        grid-template-columns: auto minmax(0, 1.7fr);
+        grid-template-rows: auto auto;
       }
-      .sidebar {
-        display: none;
+
+      .project-rating-block {
+        text-align: left;
       }
-      .main {
-        padding: 20px 16px;
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .top-actions {
+
+      .project-actions {
         justify-content: flex-start;
       }
     }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo">
-      <!-- GitHub will serve this even with the space; %20 is the URL-encoded space -->
-      <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-image" />
-    </div>
 
-    <div>
-      <div class="nav-section-title">Overview</div>
-      <div class="nav-group">
-        <div class="nav-item active">
-          <span class="nav-dot"></span>
-          <span class="label">Dashboard</span>
-          <span class="badge">MVP</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Projects</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Sparq Reports</span>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="CS_Logo_light bg.png" alt="CineSparq logo" class="brand-logo" />
+      </div>
+
+      <div class="header-right">
+        <nav class="dashboard-nav">
+          <a href="filmmaker-dashboard.html" class="active">Dashboard</a>
+          <a href="#">Projects</a>
+          <a href="#">Reports</a>
+        </nav>
+
+        <div class="header-user">
+          <span style="font-size:0.86rem; color:#4b5563;">Welcome back, Jay.</span>
+          <div class="user-avatar" aria-label="Jay profile">J</div>
+          <button class="icon-button menu-button" aria-label="Open user menu">
+            <div class="menu-button-bars">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
         </div>
       </div>
     </div>
+  </header>
 
-    <div>
-      <div class="nav-section-title">Signals</div>
-      <div class="nav-group">
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Investor Activity</span>
-          <span class="badge">3</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Access Events</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      Sparq rating and access logs are informational only.<br />
-      <strong>Investors choose when to reveal themselves.</strong>
-    </div>
-  </aside>
-
-  <main class="main">
-    <header class="top-bar">
-      <div class="top-title">
-        <h1>Filmmaker Dashboard</h1>
-        <p>
-          Track investor signals, IP-protected views, and Sparq readiness across your slate
-          so you know which project to move first.
-        </p>
-      </div>
-      <div class="top-actions">
-        <a href="investor-dashboard.html" class="btn">View as Investor</a>
-        <button class="btn btn-primary">Upload New Project</button>
-        <div class="avatar-circle"></div>
-      </div>
-    </header>
-
-    <section class="content-grid">
-      <!-- Left: Metrics + Projects -->
-      <div>
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Portfolio Signals</div>
-              <div class="card-subtitle">Last 30 days across active projects</div>
-            </div>
-            <a class="card-link">View full log</a>
-          </div>
-
-          <div class="metrics-row">
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">3</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Active projects</div>
-                <div class="metric-value">3</div>
-                <div class="metric-tag">Per slate (MVP)</div>
-              </div>
-            </div>
-
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">12</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Qualified views</div>
-                <div class="metric-value">12</div>
-                <div class="metric-tag">Investors only</div>
-              </div>
-            </div>
-
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">5</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Projects saved</div>
-                <div class="metric-value">5</div>
-                <div class="metric-tag">Soft interest</div>
-              </div>
-            </div>
-
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">2</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Access thresholds</div>
-                <div class="metric-value">2</div>
-                <div class="metric-tag">Contact suggested</div>
-              </div>
-            </div>
-          </div>
-
-          <table class="projects-table">
-            <thead>
-              <tr>
-                <th>Project</th>
-                <th>Sparq Score</th>
-                <th>Investor Activity</th>
-                <th>IP Events</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="project-name">As Time Goes By</div>
-                  <div class="project-pill status-pill--ready">Ready for outreach</div>
-                </td>
-                <td>
-                  <div class="project-pill rating-pill">
-                    <span>8.4</span>
-                    <span>• Narrative feature</span>
-                  </div>
-                </td>
-                <td>
-                  <div>7 views • 3 saves</div>
-                  <div class="card-subtitle">Last touch: 2 days ago</div>
-                </td>
-                <td>
-                  <div>1 threshold hit</div>
-                  <div class="card-subtitle">1 investor reached max views</div>
-                </td>
-                <td>
-                  <a class="link-subtle">View access log →</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="project-name">Southside Bloom</div>
-                  <div class="project-pill status-pill--inreview">In Sparq review</div>
-                </td>
-                <td>
-                  <div class="project-pill rating-pill">
-                    <span>—</span>
-                    <span>score pending</span>
-                  </div>
-                </td>
-                <td>
-                  <div>3 views • 1 save</div>
-                  <div class="card-subtitle">Last touch: 5 days ago</div>
-                </td>
-                <td>
-                  <div>0 thresholds</div>
-                  <div class="card-subtitle">Safe access window</div>
-                </td>
-                <td>
-                  <a class="link-subtle">View access log →</a>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="project-name">Vertical Series Pilot</div>
-                  <div class="project-pill status-pill--ready">Ready for outreach</div>
-                </td>
-                <td>
-                  <div class="project-pill rating-pill">
-                    <span>7.2</span>
-                    <span>• Microdrama</span>
-                  </div>
-                </td>
-                <td>
-                  <div>2 views • 1 save</div>
-                  <div class="card-subtitle">Last touch: 7 days ago</div>
-                </td>
-                <td>
-                  <div>0 thresholds</div>
-                  <div class="card-subtitle">Within preview limits</div>
-                </td>
-                <td>
-                  <a class="link-subtle">View access log →</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Right: Activity & IP preview -->
-      <div class="stack">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Recent Investor Activity</div>
-              <div class="card-subtitle">Anonymized until contact is requested</div>
-            </div>
-            <a class="card-link">Download one-sheets</a>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  Unnamed investor <strong>reached max view threshold</strong> on
-                  <em>As Time Goes By</em>
-                </div>
-                <div class="timeline-meta">
-                  2 hours ago • 5/5 views used • Based in North America
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  New investor <strong>saved</strong> <em>Southside Bloom</em> to watchlist
-                </div>
-                <div class="timeline-meta">
-                  Yesterday • 2 views • Sparq-approved buyer profile
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  Returning investor <strong>previewed</strong> <em>Vertical Series Pilot</em>
-                </div>
-                <div class="timeline-meta">
-                  3 days ago • single-device access • watermarked screener
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="chip-row">
-            <div class="chip soft">3 active investors</div>
-            <div class="chip">2 new in last 7 days</div>
-            <div class="chip alert">2 projects at threshold</div>
-          </div>
-
-          <p class="helper-text">
-            Threshold hits do <strong>not</strong> reveal investor identity. They simply signal it’s time
-            to move the conversation off platform.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">IP Protection Snapshot</div>
-              <div class="card-subtitle">How your work is being accessed this week</div>
-            </div>
-            <a class="card-link">Full IP report →</a>
-          </div>
-
-          <div class="watermark-preview">
-            <div class="watermark-tag">Tier 1 • Watermarked screener</div>
-            <div>
-              • Device-bound access<br />
-              • Time-boxed previews<br />
-              • On-screen watermark: project ID + anonymized buyer ID
-            </div>
-          </div>
-
-          <p class="helper-text">
-            In the MVP, you’ll see <strong>counts and patterns</strong> here, not names:
-            daily views, devices used, and when an investor hits your configured limit.
+  <!-- PAGE -->
+  <main class="page">
+    <section class="page-header">
+      <div class="page-title-row">
+        <div>
+          <h1>Filmmaker Dashboard</h1>
+          <p>
+            A snapshot of your projects, scores, and partner interest—plus a direct path to refine your work and connect when the timing is right.
           </p>
         </div>
       </div>
     </section>
+
+    <!-- METRICS -->
+    <section class="metrics-row grid grid-3">
+      <article class="card">
+        <div class="section-header">
+          <h2>Project Activity</h2>
+          <button class="info-icon" type="button"
+            title="High-level view of the projects you’ve submitted for a Sparq Rating.">
+            i
+          </button>
+        </div>
+        <div class="metric-number">3</div>
+        <div class="metric-label">Projects With Sparq Ratings</div>
+        <p class="metric-footnote">
+          Includes public and private projects currently in your CineSparq portfolio.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2>Partner Interest</h2>
+          <button class="info-icon" type="button"
+            title="Views and watchlist activity from accredited industry partners.">
+            i
+          </button>
+        </div>
+        <div class="metric-number">9</div>
+        <div class="metric-label">Verified Partner Views</div>
+        <p class="metric-footnote">
+          4 watchlist adds and 2 active review flags across your current slate.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2>Connection Requests</h2>
+          <button class="info-icon" type="button"
+            title="Requests you’ve received or queued introductions awaiting partner activation.">
+            i
+          </button>
+        </div>
+        <div class="metric-number">3</div>
+        <div class="metric-label">Open Opportunities</div>
+        <p class="metric-footnote">
+          1 direct introduction, 2 queued requests for partners who haven’t activated yet.
+        </p>
+      </article>
+    </section>
+
+    <!-- PROJECTS + ROADMAP/MATCHES -->
+    <section class="grid grid-2">
+      <!-- PROJECT LIST -->
+      <section class="card">
+        <div class="section-header">
+          <h2>Your Projects</h2>
+          <button class="info-icon" type="button"
+            title="View scores, visibility status, and activity for each project.">
+            i
+          </button>
+        </div>
+        <p class="section-subtitle">
+          Each project tile shows your current Sparq Rating, visibility, and high-level partner engagement. Select any project to open your full project view.
+        </p>
+
+        <div class="project-list">
+
+          <!-- AS TIME GOES BY -->
+          <article class="project-row">
+            <div class="project-thumb">
+              <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
+            </div>
+
+            <div class="project-main">
+              <h3>
+                <a href="filmmaker-project-detail.html">As Time Goes By</a>
+              </h3>
+              <div class="project-meta">
+                <span>Feature · Period Drama</span>
+                <span>Chicago · 120 minutes</span>
+                <span>
+                  <span class="visibility-pill public">Public · Ready For Partners</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="project-rating-block">
+              <div class="sparq-rating-pill rating-high">8.4/10</div>
+              <p class="project-rating-caption">
+                Viewed by 4 accredited partners · 2 watchlist adds
+              </p>
+            </div>
+
+            <div class="project-actions">
+              <!-- View -->
+              <a href="filmmaker-project-detail.html"
+                 class="icon-chip"
+                 title="Open project view"
+                 aria-label="Open project view">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- LEARNING TO FALL IN LOVE -->
+          <article class="project-row">
+            <div class="project-thumb">
+              <img src="learning-poster.png" alt="Learning to Fall In Love poster" />
+            </div>
+
+            <div class="project-main">
+              <h3>
+                <a href="filmmaker-project-detail.html">Learning to Fall In Love</a>
+              </h3>
+              <div class="project-meta">
+                <span>Feature · Romantic Comedy</span>
+                <span>Asia-set · 100 minutes</span>
+                <span>
+                  <span class="visibility-pill public">Public · Emerging Opportunity</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="project-rating-block">
+              <div class="sparq-rating-pill rating-mid">6.3/10</div>
+              <p class="project-rating-caption">
+                3 partner views · 1 active review flag
+              </p>
+            </div>
+
+            <div class="project-actions">
+              <a href="filmmaker-project-detail.html"
+                 class="icon-chip"
+                 title="Open project view"
+                 aria-label="Open project view">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- ABYSS OF DECEPTIONS -->
+          <article class="project-row">
+            <div class="project-thumb">
+              <img src="abyss-poster.png" alt="Abyss of Deceptions poster" />
+            </div>
+
+            <div class="project-main">
+              <h3>
+                <a href="filmmaker-project-detail.html">Abyss of Deceptions</a>
+              </h3>
+              <div class="project-meta">
+                <span>Microdrama · Vertical Series</span>
+                <span>Coming-of-Age · Psychological Thriller</span>
+                <span>
+                  <span class="visibility-pill private">Private · In Refinement</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="project-rating-block">
+              <div class="sparq-rating-pill rating-low">4.9/10</div>
+              <p class="project-rating-caption">
+                Not yet visible to partners · Internal use only
+              </p>
+            </div>
+
+            <div class="project-actions">
+              <a href="filmmaker-project-detail.html"
+                 class="icon-chip"
+                 title="Open project view"
+                 aria-label="Open project view">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ROADMAP + MATCHES SNAPSHOT -->
+      <section class="card">
+        <div class="section-header">
+          <h2>Roadmap & Partner Matches</h2>
+          <button class="info-icon" type="button"
+            title="High-level guidance on how to strengthen your slate, plus a snapshot of partners aligned with your projects.">
+            i
+          </button>
+        </div>
+        <p class="section-subtitle">
+          CineSparq doesn’t just score your project—it helps you understand what to refine and who is most likely to respond.
+        </p>
+
+        <h3 style="margin:0.4rem 0 0.25rem; font-size:0.95rem;">Project Elevation Roadmap</h3>
+        <ul class="roadmap-list">
+          <li>
+            <span class="roadmap-tag">As Time Goes By:</span>
+            Lock locations and refine music clearances to further reduce execution risk.
+          </li>
+          <li>
+            <span class="roadmap-tag">Learning to Fall In Love:</span>
+            Tighten comps and clarify international marketing lane to move toward “Investment Ready.”
+          </li>
+          <li>
+            <span class="roadmap-tag">Abyss of Deceptions:</span>
+            Strengthen series arc overview and revise budget before making the project public.
+          </li>
+        </ul>
+
+        <h3 style="margin:1.1rem 0 0.25rem; font-size:0.95rem;">Partner Match Snapshot</h3>
+        <ul class="matches-list">
+          <li>
+            <span class="match-name">Atlas Street Pictures</span>
+            <span class="match-pill">Drama · US · $250K–$1M</span><br />
+            Strong affinity for As Time Goes By based on genre, region, and budget lane.
+          </li>
+          <li>
+            <span class="match-name">Nimble Light Studios</span>
+            <span class="match-pill">Romantic Comedy · Asia Focus</span><br />
+            Solid match for Learning to Fall In Love with interest in cross-border titles.
+          </li>
+          <li>
+            <span class="match-name">Signal Verticals</span>
+            <span class="match-pill">Vertical Series · Thriller</span><br />
+            Emerging match for Abyss of Deceptions once the project moves to public status.
+          </li>
+        </ul>
+      </section>
+    </section>
   </main>
+
+  <footer class="page-footer">
+    © <span id="year"></span> CineSparq. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
