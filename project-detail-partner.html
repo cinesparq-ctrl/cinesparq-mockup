@@ -2,1038 +2,697 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Industry Partner View</title>
+  <title>CineSparq – Project Detail (As Time Goes By)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
-      --bg: #f3f4f6;
-      --bg-soft: #e5e7eb;
-      --sidebar-bg: #ffffff;
-      --card: #ffffff;
-      --brand-blue: #0a4f84;
-      --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.18);
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border-subtle: #e5e7eb;
-      --border-strong: #d1d5db;
-      --success: #16a34a;
-      --warning: #d97706;
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      background: radial-gradient(circle at top left, #ffffff 0, #f3f4f6 40%, #e5e7eb 100%);
-      color: var(--text-main);
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* SIDEBAR */
+    /* HEADER */
 
-    .sidebar {
-      width: 260px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border-subtle);
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    .logo {
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-    }
-
-    .logo-image {
-      height: 48px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-section-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .nav-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .nav-item:hover {
-      background: #f9fafb;
-    }
-
-    .nav-item.active {
-      background: var(--accent-soft);
-      color: var(--text-main);
-      border: 1px solid rgba(248, 212, 24, 0.6);
-    }
-
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .nav-item span.label {
-      flex: 1;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 12px;
-      line-height: 1.4;
-    }
-
-    .sidebar-footer strong {
-      color: var(--brand-blue);
-    }
-
-    /* MAIN */
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 32px;
-      gap: 18px;
-    }
-
-    .top-bar {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .top-header-row {
-      display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-      gap: 18px;
+      gap: 1rem;
     }
 
-    .top-title {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .top-title h1 {
-      font-size: 1.5rem;
-      font-weight: 650;
-      letter-spacing: 0.01em;
-    }
-
-    .top-title p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      max-width: 640px;
-    }
-
-    .top-title span.view-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--brand-blue);
-      font-weight: 600;
-    }
-
-    /* ICON ACTION BAR */
-
-    .action-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .icon-btn {
-      border: none;
-      background: transparent;
-      color: var(--brand-blue);
-      font-size: 1.05rem;
-      cursor: pointer;
+    .brand {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      transition: background 0.15s ease, transform 0.05s ease;
+      gap: 0.5rem;
     }
 
-    .icon-btn span {
-      font-size: 0.9rem;
-      font-weight: 500;
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--cs-gold);
     }
 
-    .icon-btn:hover {
-      background: #eff6ff;
-      transform: translateY(-0.5px);
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.05rem;
     }
 
-    .icon-btn-connect {
-      padding-inline: 10px;
-      border: 1px solid var(--brand-blue);
-      background: var(--accent);
-      color: #111827;
-    }
-
-    .icon-btn-connect:hover {
-      background: #fef3c7;
-    }
-
-    /* ICONS */
-
-    .icon {
-      width: 18px;
-      height: 18px;
-      display: inline-block;
-    }
-
-    .icon path,
-    .icon rect,
-    .icon polygon,
-    .icon line,
-    .icon polyline {
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .page-stack {
+    .dashboard-nav {
       display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-top: 6px;
+      gap: 1.25rem;
+      font-size: 0.95rem;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      padding: 18px 18px 16px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    .dashboard-nav a {
+      position: relative;
+      padding-bottom: 0.25rem;
+      color: #4b5563;
     }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-subtle);
-      gap: 8px;
+    .dashboard-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.2s ease;
     }
 
-    .card-title {
-      font-size: 0.98rem;
+    .dashboard-nav a:hover::after {
+      width: 100%;
+    }
+
+    .dashboard-nav a.active {
+      color: var(--cs-deep-blue);
       font-weight: 600;
     }
 
-    .card-subtitle {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .card-link {
-      font-size: 0.8rem;
-      color: var(--brand-blue);
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    .card-header-actions {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-      font-size: 0.8rem;
-    }
-
-    /* HERO SECTION */
-
-    .project-hero {
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .project-artwork {
-      width: 130px;
-      height: 190px; /* portrait */
-      border-radius: 14px;
-      background: #e5e7eb;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .project-artwork img {
+    .dashboard-nav a.active::after {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: inherit;
     }
 
-    .project-main {
-      flex: 1;
-    }
-
-    .project-meta-bubbles {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-      margin-bottom: 8px;
-    }
-
-    .meta-bubble {
-      font-size: 0.78rem;
-      padding: 4px 10px;
+    .btn-login {
+      background: var(--cs-gold);
+      color: var(--cs-ink);
+      padding: 0.4rem 1rem;
       border-radius: 999px;
-      background: #eff6ff;
-      color: var(--brand-blue);
-      border: 1px solid #dbeafe;
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
+    /* BUTTONS */
 
-    .chip {
-      font-size: 0.78rem;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      background: #f9fafb;
-    }
-
-    .chip.soft {
-      border-color: rgba(10, 79, 132, 0.3);
-      color: var(--brand-blue);
-      background: #eff6ff;
-    }
-
-    /* SCORE RINGS */
-
-    .score-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      gap: 18px;
-      margin-top: 8px;
-    }
-
-    .score-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      min-width: 120px;
-    }
-
-    .score-ring {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      border-radius: 999px;
-      background: conic-gradient(#f8d418 0deg, #e5e7eb 0deg 360deg);
-      display: flex;
+    .btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .score-ring-inner {
-      width: 62px;
-      height: 62px;
       border-radius: 999px;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 650;
-      color: var(--brand-blue);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-    }
-
-    .score-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-align: center;
-      max-width: 130px;
-    }
-
-    .score-legend {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      margin-bottom: 8px;
-    }
-
-    .tier-key {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .tier-pill {
-      font-size: 0.75rem;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      background: #f9fafb;
-      color: var(--text-muted);
-    }
-
-    .tier-pill.tier-3 {
-      color: var(--success);
-      border-color: rgba(22, 163, 74, 0.5);
-    }
-
-    .tier-pill.tier-2 {
-      color: var(--warning);
-      border-color: rgba(245, 158, 11, 0.5);
-    }
-
-    .tier-pill.tier-1 {
-      border-color: rgba(148, 163, 184, 0.7);
-    }
-
-    .helper-text {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    /* BULLETS */
-
-    .bullet-list {
-      list-style-type: disc;
-      list-style-position: outside;
-      margin-left: 1.1rem;
-      margin-top: 4px;
-    }
-
-    .bullet-list li {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 900px) {
-      .project-hero {
-        flex-direction: column;
-      }
-      .score-row {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      .sidebar {
-        display: none;
-      }
-      .main {
-        padding: 20px 16px;
-      }
-      .top-header-row {
-        flex-direction: column;
-      }
-      .action-bar {
-        justify-content: flex-start;
-        flex-wrap: wrap;
-      }
-      .card-header-actions {
-        align-items: flex-start;
-      }
-    }
-
-    /* MODAL */
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 40;
-      padding: 16px;
-    }
-
-    .modal-overlay.visible {
-      display: flex;
-    }
-
-    .modal {
-      max-width: 480px;
-      width: 100%;
-      background: #ffffff;
-      border-radius: 14px;
-      border: 3px solid var(--brand-blue);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
-      padding: 18px 18px 16px;
-      position: relative;
-    }
-
-    .modal-close-btn {
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
       border: none;
-      background: transparent;
       cursor: pointer;
-      font-size: 1.1rem;
-      color: #9ca3af;
-      padding: 2px;
-      border-radius: 999px;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    .modal-close-btn:hover {
-      background: #f3f4f6;
-    }
-
-    .modal-body {
-      margin-top: 4px;
-    }
-
-    .modal-text {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 8px;
-    }
-
-    .modal-text strong {
-      color: var(--text-main);
-    }
-
-    .modal-field-group {
-      margin-top: 8px;
-      margin-bottom: 8px;
-    }
-
-    .modal-label {
-      display: block;
-      font-size: 0.78rem;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .modal-input {
-      width: 100px;
-      max-width: 40%;
-      padding: 6px 8px;
-      font-size: 0.84rem;
-      border-radius: 6px;
-      border: 1px solid var(--border-strong);
-    }
-
-    .modal-checkbox-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .modal-checkbox-row input[type="checkbox"] {
-      margin-top: 2px;
-    }
-
-    .modal-checkbox-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .modal-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-top: 14px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
     }
 
     .btn-primary {
+      background: var(--cs-deep-blue);
+      color: var(--cs-white);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--cs-deep-blue);
+      border: 1px solid #d1d5db;
+    }
+
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+
+    .btn-small {
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .icon-button {
       border: none;
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      background: transparent;
       cursor: pointer;
-      background: var(--accent);
-      color: #111827;
+      padding: 0.25rem;
+      font-size: 1.1rem;
+      line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      min-width: 110px;
+      color: #6b7280;
     }
 
-    .btn-primary:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .icon-button:hover {
+      color: var(--cs-deep-blue);
     }
 
-    .modal-policy-link {
-      font-size: 0.8rem;
-      color: var(--brand-blue);
-      cursor: pointer;
-      text-decoration: none;
+    /* PAGE LAYOUT */
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 2.5rem;
     }
 
-    .modal-policy-link:hover {
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.75rem;
+    }
+
+    .breadcrumb a {
+      color: #4b5563;
+    }
+
+    .breadcrumb a:hover {
       text-decoration: underline;
     }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title-block h1 {
+      margin: 0 0 0.25rem;
+      font-size: 1.6rem;
+    }
+
+    .page-title-block p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* MAIN CONTENT GRID */
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 1.75rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--cs-white);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    /* LEFT COLUMN – OVERVIEW */
+
+    .poster-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      align-items: stretch;
+    }
+
+    .poster-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111827;
+    }
+
+    .poster-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overview-meta h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.1rem;
+    }
+
+    .tagline {
+      margin: 0 0 0.5rem;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .meta-line {
+      margin: 0.15rem 0;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .label {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .logline-block {
+      margin-top: 0.75rem;
+    }
+
+    .logline-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 0.25rem;
+    }
+
+    .logline-text {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .section-heading {
+      font-size: 0.98rem;
+      margin: 0 0 0.35rem;
+    }
+
+    .section-body {
+      font-size: 0.88rem;
+      color: #4b5563;
+      margin: 0 0 0.6rem;
+    }
+
+    .chip-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.1rem 0 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    /* RIGHT COLUMN – RATING, FIT, MATERIALS */
+
+    .rating-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .rating-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b7280;
+      margin: 0 0 0.2rem;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .sparq-rating {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .sparq-rating-high {
+      background: var(--cs-deep-blue);
+      color: var(--cs-white);
+    }
+
+    .rating-text {
+      font-size: 0.9rem;
+      color: #111827;
+    }
+
+    .fit-line {
+      font-size: 0.84rem;
+      color: #4b5563;
+      margin: 0.2rem 0 0.5rem;
+    }
+
+    .fit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .fit-tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #166534;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .inline-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .inline-actions span {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 1.1rem 0;
+    }
+
+    .subsection {
+      margin-bottom: 1rem;
+    }
+
+    .subsection-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .subsection-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .ip-note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.75rem;
+    }
+
+    /* SPARQ LEGEND + FOOTER */
+
+    .sparq-legend {
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .legend-label {
+      font-weight: 600;
+    }
+
+    .legend-pill {
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+    }
+
+    .page-footer {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .poster-row {
+        grid-template-columns: 120px minmax(0, 1fr);
+      }
+
+      .header-actions {
+        justify-content: flex-start;
+      }
+    }
+
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-image" />
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-name">CineSparq</span>
+      </a>
+
+      <nav class="dashboard-nav">
+        <a href="industry-partner-dashboard.html" class="active">Dashboard</a>
+        <a href="#">Projects</a>
+        <a href="#">Reports</a>
+      </nav>
+
+      <a href="login.html" class="btn-login">Login</a>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    <div class="breadcrumb">
+      <a href="industry-partner-dashboard.html">Dashboard</a> › <span>As Time Goes By</span>
     </div>
 
-    <div>
-      <div class="nav-section-title">Overview</div>
-      <div class="nav-group">
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Discovery</span>
-        </div>
-        <div class="nav-item active">
-          <span class="nav-dot"></span>
-          <span class="label">Project – Industry Partner View</span>
-        </div>
+    <header class="page-header">
+      <div class="page-title-block">
+        <h1>As Time Goes By</h1>
+        <p>
+          Feature Film · Period Drama · Music & Culture · Set in Chicago (1950s–2000s)
+        </p>
       </div>
-    </div>
 
-    <div class="sidebar-footer">
-      When you choose to connect, CineSparq shares your identity and mandate with the filmmaker
-      while keeping access controls and protection of creative materials managed on-platform.
-    </div>
-  </aside>
-
-  <main class="main">
-    <header class="top-bar">
-      <div class="top-header-row">
-        <div class="top-title">
-          <span class="view-label">Industry Partner View</span>
-          <h1>As Time Goes By</h1>
-          <p>
-            Sparq-screened narrative feature. Review the project at a glance, see how it fits your
-            mandate, and decide whether to save it, pass, or move toward a connection.
-          </p>
-        </div>
-        <div class="action-bar">
-          <!-- Back -->
-          <button class="icon-btn" title="Back to projects" onclick="window.location.href='investor-dashboard.html'">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-
-          <!-- Save (bookmark) -->
-          <button class="icon-btn" title="Save to my slate">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 4h10a1 1 0 0 1 1 1v15l-6-3-6 3V5a1 1 0 0 1 1-1z"></path>
-            </svg>
-          </button>
-
-          <!-- Signal (star) -->
-          <button class="icon-btn" title="Mark as promising">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <polygon points="12 3.5 14.9 9 21 9.8 16.5 13.7 17.8 19.7 12 16.7 6.2 19.7 7.5 13.7 3 9.8 9.1 9"></polygon>
-            </svg>
-          </button>
-
-          <!-- Pass (X) -->
-          <button class="icon-btn" title="Pass — not a current fit">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <line x1="7" y1="7" x2="17" y2="17"></line>
-              <line x1="17" y1="7" x2="7" y2="17"></line>
-            </svg>
-          </button>
-
-          <!-- Connect (envelope + text) -->
-          <button class="icon-btn icon-btn-connect" title="Request introduction">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="6" width="16" height="12" rx="1.5" ry="1.5"></rect>
-              <polyline points="5 7 12 12 19 7"></polyline>
-            </svg>
-            <span>Connect</span>
-          </button>
-        </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-small" type="button">Download one-sheet</button>
+        <button class="btn btn-primary btn-small" type="button">Request introduction</button>
       </div>
     </header>
 
-    <section class="page-stack">
-      <!-- HERO: ARTWORK + META + TASTE -->
-      <div class="card">
-        <div class="project-hero">
-          <div class="project-artwork">
-            <img
-              src="as-time-goes-by-poster.png"
-              alt="As Time Goes By poster"
-            />
-          </div>
-          <div class="project-main">
-            <div class="project-meta-bubbles">
-              <div class="meta-bubble">Narrative feature</div>
-              <div class="meta-bubble">Drama</div>
-              <div class="meta-bubble">Chicago / Vietnam</div>
-              <div class="meta-bubble">120 minutes</div>
-            </div>
+    <!-- MAIN DETAIL GRID -->
+    <section class="detail-grid">
 
-            <p class="card-subtitle">
-              A beloved Chicago radio DJ must confront old ghosts, family secrets, and a lifetime
-              of “almosts” when a long-lost love re-enters his life against the backdrop of war,
-              music, and shifting politics.
+      <!-- LEFT COLUMN: PROJECT OVERVIEW -->
+      <section class="card">
+        <div class="poster-row">
+          <div class="poster-wrapper">
+            <!-- Update src to your actual thumbnail -->
+            <img src="as-time-goes-by-thumb.jpg" alt="As Time Goes By poster" />
+          </div>
+
+          <div class="overview-meta">
+            <h2>Project overview</h2>
+            <p class="tagline">
+              A sweeping, music-driven drama about love, legacy, and the sound of a changing city.
             </p>
-
-            <div class="chip-row">
-              <div class="chip soft">Taste profile: Gritty, music-driven legacy story</div>
-              <div class="chip">Tone: Grounded • Emotional • Bittersweet</div>
-              <div class="chip">Audience: Black multi-generational drama</div>
-            </div>
+            <p class="meta-line">
+              <span class="label">Format:</span> Feature Film
+            </p>
+            <p class="meta-line">
+              <span class="label">Genre:</span> Period Drama · Romantic Elements
+            </p>
+            <p class="meta-line">
+              <span class="label">Tone:</span> Intimate, emotional, hopeful
+            </p>
+            <p class="meta-line">
+              <span class="label">Primary audience:</span> Adult drama audiences; fans of music-driven stories
+            </p>
           </div>
         </div>
-      </div>
 
-      <!-- BIG SCORE RINGS -->
-      <div class="card">
-        <div class="card-header">
+        <div class="logline-block">
+          <div class="logline-label">Logline</div>
+          <p class="logline-text">
+            A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him across five decades.
+          </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <section class="subsection">
+          <h3 class="section-heading">World & story snapshot</h3>
+          <p class="section-body">
+            Set across 1950, 1955, 1962, and 2005 Chicago—with key beats during the Vietnam War—<em>As Time Goes By</em>
+            charts the evolution of Black music, radio, and community through one man’s fight to keep his voice on the air.
+          </p>
+          <ul class="chip-list">
+            <li class="chip">Multi-period Chicago</li>
+            <li class="chip">Civil rights era backdrop</li>
+            <li class="chip">Music as connective tissue</li>
+          </ul>
+        </section>
+
+        <section class="subsection">
+          <h3 class="section-heading">Positioning & audience</h3>
+          <p class="section-body">
+            This project is positioned for streamers and distributors seeking grounded, character-driven stories anchored
+            in real-world history, with a strong Black lead and a built-in music audience.
+          </p>
+          <ul class="chip-list">
+            <li class="chip">Awards-leaning drama</li>
+            <li class="chip">Music and nostalgia appeal</li>
+            <li class="chip">Cross-generational Black audiences</li>
+          </ul>
+        </section>
+      </section>
+
+      <!-- RIGHT COLUMN: RATING, FIT, MATERIALS -->
+      <aside class="card">
+
+        <!-- Sparq Rating & Fit -->
+        <div class="rating-card-header">
           <div>
-            <div class="card-title">Sparq Score Snapshot</div>
-            <div class="card-subtitle">
-              Scores are calculated on a 1–10 scale (10 = strongest alignment with your mandate).
+            <p class="rating-label">Sparq Rating</p>
+            <div class="rating-row">
+              <!-- Numeric only, no project type -->
+              <span class="sparq-rating sparq-rating-high">8.4/10</span>
+              <span class="rating-text">Strong fit for your current mandates</span>
             </div>
-          </div>
-          <div style="
-            display:inline-flex;
-            align-items:center;
-            gap:6px;
-            padding:4px 10px;
-            border-radius:999px;
-            border:1px solid #dbeafe;
-            background:#eff6ff;
-            font-size:0.8rem;
-            color:var(--brand-blue);
-          ">
-            <strong>8.4</strong>
-            <span>Overall Sparq score</span>
+            <p class="fit-line">
+              Based on your interest in music-driven, culturally grounded dramas with festival and streamer potential.
+            </p>
           </div>
         </div>
 
-        <div class="score-legend">
-          Each dimension animates from 0–10 on load so you can quickly see where this project is
-          strongest and where you may want to ask more questions.
+        <div class="fit-tags">
+          <span class="fit-tag">Music & culture</span>
+          <span class="fit-tag">Festival-ready</span>
+          <span class="fit-tag">Black lead</span>
+          <span class="fit-tag">U.S. market first</span>
         </div>
 
-        <div class="score-row">
-          <div class="score-item">
-            <div class="score-ring" data-score="8.8">
-              <div class="score-ring-inner">8.8</div>
-            </div>
-            <div class="score-label">Story &amp; craft</div>
-          </div>
-          <div class="score-item">
-            <div class="score-ring" data-score="8.2">
-              <div class="score-ring-inner">8.2</div>
-            </div>
-            <div class="score-label">Audience fit</div>
-          </div>
-          <div class="score-item">
-            <div class="score-ring" data-score="8.0">
-              <div class="score-ring-inner">8.0</div>
-            </div>
-            <div class="score-label">Production readiness</div>
-          </div>
-          <div class="score-item">
-            <div class="score-ring" data-score="7.9">
-              <div class="score-ring-inner">7.9</div>
-            </div>
-            <div class="score-label">Financial feasibility</div>
-          </div>
-          <div class="score-item">
-            <div class="score-ring" data-score="8.1">
-              <div class="score-ring-inner">8.1</div>
-            </div>
-            <div class="score-label">Team &amp; track record</div>
-          </div>
-          <div class="score-item">
-            <div class="score-ring" data-score="7.7">
-              <div class="score-ring-inner">7.7</div>
-            </div>
-            <div class="score-label">Market positioning</div>
+        <div class="actions-row">
+          <button class="btn btn-primary btn-small" type="button">Request introduction</button>
+          <button class="btn btn-secondary btn-small" type="button">Shortlist for review</button>
+          <div class="inline-actions">
+            <button class="icon-button" title="Save to watchlist">&#9733;</button>
+            <button class="icon-button" title="Mark as viewed">&#128065;</button>
+            <span>Soft interest</span>
           </div>
         </div>
 
-        <div class="tier-key">
-          <div class="tier-pill tier-3">
-            Tier 3 • Priority-ready (8.5–10) — strong fit, worth advancing now
-          </div>
-          <div class="tier-pill tier-2">
-            Tier 2 • Strong but selective (7.0–8.4) — viable with the right partner or strategy
-          </div>
-          <div class="tier-pill tier-1">
-            Tier 1 • Early-stage watchlist (&lt; 7.0) — keep an eye on future versions
-          </div>
-        </div>
+        <div class="divider"></div>
 
-        <p class="helper-text">
-          Tiers are a shorthand to help you triage: Tier 3 projects tend to move fastest, Tier 2
-          projects benefit from alignment and packaging, and Tier 1 projects are better tracked as
-          developing opportunities.
+        <!-- Package Snapshot -->
+        <section class="subsection">
+          <h3 class="section-heading">Package snapshot</h3>
+          <ul class="subsection-list">
+            <li><span class="label">Writer / Director:</span> Emerging writer-director with festival shorts</li>
+            <li><span class="label">Est. budget range:</span> $1.5M – $3M (preliminary)</li>
+            <li><span class="label">Status:</span> Script and lookbook ready; attachments in progress</li>
+            <li><span class="label">Production plan:</span> Shot digitally with controlled locations; Chicago + Southeast U.S. incentives</li>
+          </ul>
+        </section>
+
+        <!-- Materials -->
+        <section class="subsection">
+          <h3 class="section-heading">Available materials</h3>
+          <ul class="subsection-list">
+            <li>Full screenplay (secure viewer)</li>
+            <li>Lookbook & visual references</li>
+            <li>High-level budget & schedule outline</li>
+            <li>Creative statement & director’s note</li>
+          </ul>
+        </section>
+
+        <!-- Markets & Strategy -->
+        <section class="subsection">
+          <h3 class="section-heading">Market strategy</h3>
+          <p class="section-body">
+            Primarily targeting North American distributors and streamers with strong international potential in territories
+            where music-driven prestige dramas perform well.
+          </p>
+          <span class="pill">Festival launch + streamer sale</span>
+        </section>
+
+        <p class="ip-note">
+          Information on this page is shared for evaluation only. Details may evolve as the project advances through development.
         </p>
-      </div>
-
-      <!-- PACKAGE AT A GLANCE -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Package at a Glance</div>
-            <div class="card-subtitle">
-              Key materials available if you choose to move forward
-            </div>
-          </div>
-          <div class="card-header-actions">
-            <a class="card-link" onclick="openPreviewModal('packet')">View packet</a>
-            <a class="card-link" onclick="openPreviewModal('onesheet')">Download one-sheet</a>
-            <a class="card-link" onclick="openPreviewModal('preview')">View preview</a>
-          </div>
-        </div>
-
-        <div class="chip-row">
-          <div class="chip soft">Script locked v3</div>
-          <div class="chip">Director’s lookbook</div>
-          <div class="chip">Preliminary budget &amp; schedule</div>
-          <div class="chip">Audience &amp; comps deck</div>
-        </div>
-
-        <ul class="bullet-list">
-          <li>Chain of title and rights documentation have been verified at a basic level.</li>
-          <li>Budget band aligns with your preferences for $1–3M narrative features.</li>
-          <li>Materials are delivered as structured, professional review packages.</li>
-        </ul>
-      </div>
-
-      <!-- MARKET & MANDATE SIGNALS -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Market &amp; Mandate Signals</div>
-            <div class="card-subtitle">
-              How this project aligns with what you’ve told us you’re looking for
-            </div>
-          </div>
-        </div>
-
-        <ul class="bullet-list">
-          <li>
-            Strong alignment with <strong>Black prestige drama</strong> and multi-generational audiences,
-            based on tagged audience profiles and curated comps.
-          </li>
-          <li>
-            Budget band and scope match your preference for
-            <strong>$1–3M narrative features with festival and platform potential</strong>.
-          </li>
-          <li>
-            Timely themes around legacy, identity, and social change support awards and
-            impact campaign positioning.
-          </li>
-          <li>
-            Two other vetted industry partners have viewed this title in the last 30 days,
-            signaling interest without oversaturation at this stage.
-          </li>
-        </ul>
-
-        <p class="helper-text">
-          Choosing <strong>Connect</strong> signals serious interest and moves the relationship
-          from anonymous viewing into a curated conversation.
-        </p>
-      </div>
+      </aside>
     </section>
+
+    <!-- Sparq Rating Legend -->
+    <section class="sparq-legend">
+      <span class="legend-label">Sparq Rating key:</span>
+      <span class="legend-pill sparq-rating-high">8.0–10 · Strong fit</span>
+      <span class="legend-pill sparq-rating-medium">6.0–7.9 · Emerging</span>
+      <span class="legend-pill sparq-rating-low">&lt; 6.0 · Early stage</span>
+    </section>
+
+    <footer class="page-footer">
+      © <span id="year"></span> CineSparq. All rights reserved.
+    </footer>
   </main>
 
-  <!-- PREVIEW ATTESTATION MODAL (INDUSTRY PARTNERS ONLY) -->
-  <div class="modal-overlay" id="previewModal">
-    <div class="modal">
-      <button class="modal-close-btn" type="button" onclick="closePreviewModal()" aria-label="Close">
-        ×
-      </button>
-      <div class="modal-body">
-        <p class="modal-text">
-          <strong>Please confirm the following before continuing:</strong>
-        </p>
-        <p class="modal-text">
-          By selecting this box, I attest that I am using these materials exclusively to evaluate
-          the project in alignment with our standard review practices and will not share or apply
-          them outside that scope.
-        </p>
-
-        <div class="modal-field-group">
-          <label for="previewInitials" class="modal-label">Initials</label>
-          <input
-            type="text"
-            id="previewInitials"
-            class="modal-input"
-            maxlength="4"
-            autocomplete="off"
-          />
-        </div>
-
-        <div class="modal-checkbox-row">
-          <input type="checkbox" id="previewAgree" />
-          <label for="previewAgree" class="modal-checkbox-label">
-            By selecting this box, I attest that I am using these materials exclusively to evaluate
-            the project in alignment with our standard review practices and will not share or apply
-            them outside that scope.
-          </label>
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn-primary" id="previewContinueBtn" type="button" disabled>
-            Continue
-          </button>
-          <a href="#" class="modal-policy-link">View access policy</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // animate score rings
-    document.addEventListener('DOMContentLoaded', function () {
-      const rings = document.querySelectorAll('.score-ring[data-score]');
-
-      rings.forEach(function (ring) {
-        const target = parseFloat(ring.dataset.score) || 0;
-        let current = 0;
-
-        function animate() {
-          current += 0.2;
-          if (current > target) current = target;
-
-          const angle = (current / 10) * 360;
-          ring.style.background =
-            'conic-gradient(#f8d418 0 ' + angle + 'deg, #e5e7eb ' + angle + 'deg 360deg)';
-
-          if (current < target) {
-            requestAnimationFrame(animate);
-          }
-        }
-
-        ring.style.background =
-          'conic-gradient(#f8d418 0deg, #e5e7eb 0deg 360deg)';
-        requestAnimationFrame(animate);
-      });
-
-      // modal logic
-      const initialsInput = document.getElementById('previewInitials');
-      const agreeCheckbox = document.getElementById('previewAgree');
-      const continueBtn = document.getElementById('previewContinueBtn');
-
-      function updateContinueState() {
-        const hasInitials = initialsInput && initialsInput.value.trim().length > 0;
-        const agreed = agreeCheckbox && agreeCheckbox.checked;
-        if (continueBtn) {
-          continueBtn.disabled = !(hasInitials && agreed);
-        }
-      }
-
-      if (initialsInput) {
-        initialsInput.addEventListener('input', updateContinueState);
-      }
-      if (agreeCheckbox) {
-        agreeCheckbox.addEventListener('change', updateContinueState);
-      }
-
-      if (continueBtn) {
-        continueBtn.addEventListener('click', function () {
-          // In the real product, route based on lastTriggerType here.
-          closePreviewModal();
-        });
-      }
-    });
-
-    // track what triggered the modal (packet / onesheet / preview)
-    let lastTriggerType = null;
-
-    function openPreviewModal(triggerType) {
-      lastTriggerType = triggerType || null;
-      const modal = document.getElementById('previewModal');
-      const initialsInput = document.getElementById('previewInitials');
-      const agreeCheckbox = document.getElementById('previewAgree');
-      const continueBtn = document.getElementById('previewContinueBtn');
-
-      if (modal) {
-        modal.classList.add('visible');
-      }
-      if (initialsInput) {
-        initialsInput.value = '';
-      }
-      if (agreeCheckbox) {
-        agreeCheckbox.checked = false;
-      }
-      if (continueBtn) {
-        continueBtn.disabled = true;
-      }
-    }
-
-    function closePreviewModal() {
-      const modal = document.getElementById('previewModal');
-      if (modal) {
-        modal.classList.remove('visible');
-      }
-    }
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
