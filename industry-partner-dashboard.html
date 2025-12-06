@@ -293,15 +293,7 @@
       color: #9ca3af;
     }
 
-    /* OVERVIEW ROW – METRICS + RECENT ACTIVITY */
-
-    .overview-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      margin-bottom: 1.75rem;
-    }
+    /* RECENT SCORING ACTIVITY – HERO */
 
     .card {
       background: var(--cs-white);
@@ -310,57 +302,17 @@
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
     }
 
-    .metrics-card {
-      border: 1px solid #e5e7eb;
+    .recent-activity-hero {
+      max-width: 720px;
+      margin: 1.75rem auto 1.85rem;
     }
 
-    .metrics-header {
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #6b7280;
-      margin-bottom: 0.6rem;
-    }
-
-    .metrics-content {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      flex-wrap: wrap;
-    }
-
-    .metric-item {
-      text-align: center;
-      flex: 1;
-      min-width: 140px;
-    }
-
-    .metric-circle {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 0.5rem;
-      border-radius: 50%;
-      background: var(--cs-cream);
-      border: 2px solid var(--cs-deep-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--cs-deep-blue);
-    }
-
-    .metric-label {
-      font-size: 0.83rem;
-      color: #4b5563;
-    }
-
-    .recent-activity-card .card-title {
+    .recent-activity-hero .card-title {
       margin: 0;
       font-size: 1.05rem;
     }
 
-    .recent-activity-card .card-subtitle {
+    .recent-activity-hero .card-subtitle {
       margin: 0.25rem 0 0.75rem;
       font-size: 0.85rem;
       color: #6b7280;
@@ -420,10 +372,22 @@
 
     .watchlist-tools {
       display: flex;
-      gap: 0.5rem;
-      align-items: center;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-end;
       font-size: 0.8rem;
       color: #6b7280;
+    }
+
+    .pagination-controls {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .page-indicator {
+      font-size: 0.78rem;
+      color: #9ca3af;
     }
 
     .project-list {
@@ -531,11 +495,6 @@
       gap: 0.4rem;
     }
 
-    .action-label {
-      font-size: 0.76rem;
-      color: #6b7280;
-    }
-
     /* MORE PROJECTS – THUMBNAILS ONLY */
 
     .more-projects-card {
@@ -638,10 +597,6 @@
         padding-inline: 1rem;
       }
 
-      .overview-row {
-        grid-template-columns: 1fr;
-      }
-
       .project-row {
         grid-template-columns: 88px minmax(0, 1fr);
       }
@@ -678,7 +633,6 @@
           <!-- Hamburger menu for account, settings, support, logout (static in mockup) -->
           <button class="icon-button menu-button" aria-label="Open user menu">
             <div class="menu-button-bars">
-              <span></span>
               <span></span>
               <span></span>
               <span></span>
@@ -726,49 +680,30 @@
       </div>
     </section>
 
-    <!-- OVERVIEW ROW -->
-    <section class="overview-row">
+    <!-- RECENT SCORING ACTIVITY – HERO -->
+    <section class="card recent-activity-hero">
+      <h2 class="card-title">Recent scoring activity</h2>
+      <p class="card-subtitle">
+        A quick look at how you’ve engaged with projects on CineSparq.
+      </p>
 
-      <!-- METRICS PANEL -->
-      <section class="card metrics-card">
-        <div class="metrics-header">Overview</div>
-        <div class="metrics-content">
-          <div class="metric-item">
-            <div class="metric-circle">5</div>
-            <div class="metric-label">Unique projects viewed</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-circle">3</div>
-            <div class="metric-label">Saved to watchlist</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- RECENT SCORING ACTIVITY -->
-      <section class="card recent-activity-card">
-        <h2 class="card-title">Recent scoring activity</h2>
-        <p class="card-subtitle">
-          A quick look at how you’ve engaged with projects on CineSparq.
-        </p>
-
-        <ul class="activity-list">
-          <li class="activity-item">
-            <span class="activity-label">As Time Goes By</span><br />
-            Updated Sparq Rating to <strong>8.4/10</strong>.
-            <div class="timestamp">2 days ago</div>
-          </li>
-          <li class="activity-item">
-            <span class="activity-label">Learning to Fall In Love</span><br />
-            Updated Sparq Rating to <strong>5.9/10</strong>.
-            <div class="timestamp">4 days ago</div>
-          </li>
-          <li class="activity-item">
-            <span class="activity-label">Abyss of Deceptions</span><br />
-            Marked as high interest and added to watchlist.
-            <div class="timestamp">1 week ago</div>
-          </li>
-        </ul>
-      </section>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <span class="activity-label">North Star Rising</span><br />
+          Updated Sparq Rating to <strong>7.8/10</strong>.
+          <div class="timestamp">Today</div>
+        </li>
+        <li class="activity-item">
+          <span class="activity-label">Echoes of Meridian</span><br />
+          Added to watchlist and tagged for further review.
+          <div class="timestamp">2 days ago</div>
+        </li>
+        <li class="activity-item">
+          <span class="activity-label">The Last Broadcast</span><br />
+          Marked as early stage; noted for future tracking.
+          <div class="timestamp">5 days ago</div>
+        </li>
+      </ul>
     </section>
 
     <!-- WATCHLIST -->
@@ -781,7 +716,11 @@
           </p>
         </div>
         <div class="watchlist-tools">
-          <span>Showing 3 projects</span>
+          <span>Showing 1–3 of 12 projects</span>
+          <div class="pagination-controls">
+            <button class="btn-ghost btn-small" type="button">Previous</button>
+            <button class="btn-primary btn-small" type="button">Next</button>
+          </div>
         </div>
       </div>
 
@@ -790,7 +729,6 @@
         <!-- AS TIME GOES BY – STRONG FIT -->
         <li class="project-row">
           <div class="project-thumbnail">
-            <!-- Make sure the filename matches your repo exactly -->
             <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
           </div>
 
@@ -814,7 +752,6 @@
             <div class="project-actions">
               <button class="btn-text" type="button">Save</button>
               <button class="btn-text" type="button">Viewed</button>
-              <!-- Review links to project-detail-partner.html -->
               <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
             </div>
 
@@ -844,7 +781,7 @@
           </div>
 
           <div class="project-meta">
-            <!-- LOW rating – red (gives you a chance to explain in the demo) -->
+            <!-- LOW rating – red -->
             <span class="sparq-rating-pill rating-low">5.9/10</span>
 
             <div class="project-actions">
@@ -894,7 +831,7 @@
       </ul>
     </section>
 
-    <!-- MORE PROJECTS – THUMBNAILS ONLY -->
+    <!-- MORE PROJECTS – THUMBNAILS ONLY (NO DUPLICATES) -->
     <section class="card more-projects-card">
       <div class="more-projects-header">
         <h2>Based on your selections, you might also like</h2>
@@ -902,15 +839,6 @@
       </div>
 
       <div class="more-projects-strip">
-        <div class="more-poster">
-          <img src="as-time-goes-by-poster.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="learning-poster.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="abyss-poster.png" alt="Project thumbnail" />
-        </div>
         <div class="more-poster">
           <img src="placeholder-project-1.png" alt="Project thumbnail" />
         </div>
