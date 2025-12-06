@@ -8,7 +8,6 @@
     :root {
       --brand-blue: #0a4f84;
       --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.18);
       --bg-page: #f5f7fb;
       --text-main: #111827;
       --text-muted: #6b7280;
@@ -47,40 +46,39 @@
       gap: 6px;
       cursor: pointer;
       white-space: nowrap;
+      border: none;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      background: var(--accent);
       color: #111827;
-      border: none;
-      box-shadow: 0 8px 20px rgba(248, 212, 24, 0.4);
+      box-shadow: none; /* flat */
     }
 
     .btn-secondary {
       background: transparent;
       color: #ffffff;
-      border: 1px solid rgba(249, 250, 251, 0.6);
+      border: 1px solid rgba(249, 250, 251, 0.7);
+      box-shadow: none;
     }
 
     .btn-outline-blue {
       background: #ffffff;
       color: var(--brand-blue);
       border: 1px solid var(--brand-blue);
+      box-shadow: none;
     }
 
-    /* PAGE WRAPPER --------------------------------------------- */
-
-    .page-shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 16px 48px;
+    .nav-login-btn {
+      padding: 6px 12px;
+      font-size: 0.8rem;
     }
 
     /* HERO ------------------------------------------------------ */
 
     .hero {
       position: relative;
-      min-height: 80vh;
+      min-height: 90vh; /* taller hero */
       color: #f9fafb;
       display: flex;
       align-items: stretch;
@@ -102,9 +100,9 @@
       position: absolute;
       inset: 0;
       background-image: url("cinesparq-mockup-hero-image.png");
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.9);
+      background-size: cover;       /* show full image without stretching */
+      background-position: center;  /* keep image centered */
+      background-repeat: no-repeat;
       z-index: 0;
     }
 
@@ -114,7 +112,7 @@
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 18px 16px 72px;
+      padding: 24px 16px 88px;
       display: flex;
       flex-direction: column;
     }
@@ -125,7 +123,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
     }
 
     .nav-left {
@@ -143,14 +141,14 @@
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 18px;
       font-size: 0.86rem;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       color: #e5e7eb;
     }
 
@@ -178,8 +176,9 @@
     /* HERO CONTENT --------------------------------------------- */
 
     .hero-content {
-      margin-top: auto;
-      max-width: 540px;
+      margin: auto;                /* center vertically within hero */
+      max-width: 640px;
+      text-align: center;          /* center all copy */
     }
 
     .hero-kicker {
@@ -187,34 +186,34 @@
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .hero-title {
-      font-size: 2.2rem;
-      line-height: 1.15;
+      font-size: 2.8rem;           /* bigger headline */
+      line-height: 1.12;
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
     .hero-subhead {
       font-size: 0.98rem;
       color: #e5e7eb;
-      max-width: 520px;
-      line-height: 1.4;
-      margin-bottom: 18px;
+      line-height: 1.45;
+      margin-bottom: 22px;
     }
 
     .hero-subhead span.break {
       display: block;
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
     .hero-cta-row {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .hero-meta {
@@ -226,11 +225,11 @@
 
     .benefits-section {
       background: #ffffff;
-      margin-top: -32px;
+      margin-top: -24px;
       border-radius: 32px 32px 0 0;
       border-top: 1px solid var(--card-border);
       box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.15);
-      padding: 80px 0 88px;
+      padding: 100px 0 110px; /* taller */
     }
 
     .benefits-inner {
@@ -242,8 +241,8 @@
     .benefits-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-      margin-bottom: 32px;
+      gap: 32px;
+      margin-bottom: 40px;
     }
 
     .benefit-card {
@@ -252,9 +251,9 @@
     }
 
     .benefit-icon {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 14px;
+      width: 200px;   /* 3x larger icons */
+      height: 200px;
+      margin: 0 auto 18px;
       display: block;
     }
 
@@ -264,13 +263,13 @@
       text-transform: uppercase;
       font-weight: 700;
       color: var(--brand-blue);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .benefit-body {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.45;
+      line-height: 1.5;
     }
 
     .benefits-cta-row {
@@ -278,14 +277,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
-    }
-
-    .benefits-note {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
+      margin-top: 12px;
     }
 
     /* FOOTER ---------------------------------------------------- */
@@ -293,8 +285,8 @@
     .footer {
       background: var(--footer-bg);
       color: #e5e7eb;
-      padding: 52px 16px 26px;
-      margin-top: 40px;
+      padding: 60px 16px 30px; /* taller overall */
+      margin-top: 48px;
     }
 
     .footer-inner {
@@ -328,13 +320,14 @@
     .footer-links {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       font-size: 0.9rem;
     }
 
     .footer-link a {
       color: #e5e7eb;
       cursor: pointer;
+      text-decoration: underline; /* underline all links */
     }
 
     .footer-link a:hover {
@@ -349,14 +342,15 @@
     }
 
     .footer-social img {
-      width: 148px;
+      width: 190px;  /* larger social sprite */
       height: auto;
       display: block;
+      margin-top: 4px; /* directly under "Connect" */
     }
 
     .footer-bottom {
       max-width: 1120px;
-      margin: 24px auto 0;
+      margin: 28px auto 0;
       padding-top: 16px;
       border-top: 1px solid #111827;
       font-size: 0.8rem;
@@ -368,10 +362,10 @@
 
     @media (max-width: 960px) {
       .hero {
-        min-height: 82vh;
+        min-height: 88vh;
       }
       .nav-right {
-        gap: 12px;
+        gap: 10px;
       }
       .nav-links {
         display: none;
@@ -382,6 +376,10 @@
       .footer-inner {
         grid-template-columns: 1fr;
       }
+      .benefit-icon {
+        width: 160px;
+        height: 160px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -389,7 +387,7 @@
         padding-inline: 14px;
       }
       .hero-title {
-        font-size: 1.8rem;
+        font-size: 2.1rem;
       }
       .hero-content {
         max-width: 100%;
@@ -419,7 +417,8 @@
             <div class="nav-link">Add your project</div>
             <div class="nav-link">Insights</div>
           </nav>
-          <a href="#" class="btn btn-secondary">Log in</a>
+          <!-- working Login button -->
+          <a href="filmmaker-dashboard.html" class="btn btn-primary nav-login-btn">Log in</a>
         </div>
       </header>
 
@@ -441,7 +440,7 @@
 
         <div class="hero-cta-row">
           <a href="#" class="btn btn-primary">Join CineSparq</a>
-          <a href="#" class="btn btn-secondary">Log in</a>
+          <a href="filmmaker-dashboard.html" class="btn btn-secondary">Log in</a>
         </div>
 
         <p class="hero-meta">
@@ -485,12 +484,8 @@
 
       <div class="benefits-cta-row">
         <a href="#" class="btn btn-primary">Join CineSparq</a>
-        <a href="#" class="btn btn-outline-blue">Log in</a>
+        <a href="filmmaker-dashboard.html" class="btn btn-outline-blue">Log in</a>
       </div>
-
-      <p class="benefits-note">
-        This mockup illustrates the CineSparq experience — final flows and features may evolve.
-      </p>
     </div>
   </section>
 
