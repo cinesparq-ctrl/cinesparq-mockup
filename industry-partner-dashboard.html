@@ -220,6 +220,38 @@
       color: var(--cs-deep-blue);
     }
 
+    /* ICON-ONLY ACTION BUTTONS */
+
+    .icon-chip {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+
+    .icon-chip:hover {
+      background: #e5e7eb;
+      border-color: #cbd5f5;
+    }
+
+    .icon-chip svg {
+      width: 13px;
+      height: 13px;
+      display: block;
+      stroke: #4b5563;
+    }
+
+    .icon-chip.link {
+      text-decoration: none;
+    }
+
     /* PAGE LAYOUT */
 
     .page {
@@ -267,6 +299,9 @@
     .controls-bar-left {
       font-size: 0.83rem;
       color: #6b7280;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .controls-bar-right {
@@ -293,7 +328,42 @@
       color: #9ca3af;
     }
 
-    /* RECENT SCORING ACTIVITY – HERO */
+    /* INFO ICON (HOVER HELP) */
+
+    .info-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      color: #6b7280;
+      padding: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .section-subtitle {
+      margin: 0.1rem 0 0.75rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* CARDS */
 
     .card {
       background: var(--cs-white);
@@ -302,23 +372,16 @@
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
     }
 
-    .recent-activity-hero {
-      max-width: 720px;
-      margin: 1.75rem auto 1.85rem;
+    /* TOP ROW: RECENT ACTIVITY + RATING KEY */
+
+    .top-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      margin: 1.75rem 0 1.85rem;
     }
 
-    .recent-activity-hero .card-title {
-      margin: 0;
-      font-size: 1.05rem;
-    }
-
-    .recent-activity-hero .card-subtitle {
-      margin: 0.25rem 0 0.75rem;
-      font-size: 0.85rem;
-      color: #6b7280;
-    }
-
-    .activity-list {
+    .recent-activity-card .activity-list {
       list-style: none;
       margin: 0;
       padding: 0;
@@ -344,6 +407,49 @@
       margin-top: 0.15rem;
     }
 
+    .rating-key-card .band {
+      margin-bottom: 0.8rem;
+      font-size: 0.83rem;
+    }
+
+    .rating-key-card .band-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .rating-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .dot-high {
+      background: var(--rating-high-bg);
+    }
+
+    .dot-mid {
+      background: var(--rating-mid-bg);
+    }
+
+    .dot-low {
+      background: var(--rating-low-bg);
+    }
+
+    .rating-key-card .band-range {
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .rating-key-card .band-text {
+      margin: 0.25rem 0 0;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
     /* WATCHLIST */
 
     .watchlist-card {
@@ -367,7 +473,7 @@
       margin: 0.25rem 0 0;
       font-size: 0.88rem;
       color: #4b5563;
-      max-width: 34rem;
+      max-width: 100%;
     }
 
     .watchlist-tools {
@@ -492,7 +598,7 @@
     .project-actions {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     /* MORE PROJECTS – THUMBNAILS ONLY */
@@ -522,64 +628,56 @@
       max-width: 28rem;
     }
 
+    .more-strip-wrapper {
+      position: relative;
+    }
+
     .more-projects-strip {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.9rem;
       overflow-x: auto;
-      padding-bottom: 0.25rem;
+      padding: 0.35rem 2.2rem 0.35rem;
     }
 
     .more-poster {
-      flex: 0 0 84px;
+      flex: 0 0 104px;
     }
 
     .more-poster img {
-      width: 84px;
-      height: 120px;
+      width: 104px;
+      height: 150px;
       object-fit: cover;
       border-radius: 10px;
       background: #111827;
       display: block;
     }
 
-    /* SPARQ LEGEND + FOOTER */
-
-    .sparq-legend {
-      max-width: 1120px;
-      margin: 1.75rem auto 0;
-      padding: 1rem 1.5rem 0;
-      border-top: 1px solid #e5e7eb;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      font-size: 0.8rem;
-      color: #4b5563;
-    }
-
-    .legend-label {
-      font-weight: 600;
-    }
-
-    .legend-pill {
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
-      padding: 0.15rem 0.7rem;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #6b7280;
+      pointer-events: none; /* non-functional for mockup */
     }
 
-    .legend-high {
-      background: var(--rating-high-bg);
-      color: var(--rating-high-text);
+    .carousel-arrow.left {
+      left: 0;
     }
 
-    .legend-mid {
-      background: var(--rating-mid-bg);
-      color: var(--rating-mid-text);
+    .carousel-arrow.right {
+      right: 0;
     }
 
-    .legend-low {
-      background: var(--rating-low-bg);
-      color: var(--rating-low-text);
-    }
+    /* FOOTER */
 
     .page-footer {
       max-width: 1120px;
@@ -597,6 +695,10 @@
         padding-inline: 1rem;
       }
 
+      .top-row {
+        grid-template-columns: 1fr;
+      }
+
       .project-row {
         grid-template-columns: 88px minmax(0, 1fr);
       }
@@ -605,6 +707,10 @@
         grid-column: 1 / -1;
         align-items: flex-start;
         margin-top: 0.4rem;
+      }
+
+      .more-projects-strip {
+        padding-inline: 2.4rem;
       }
     }
   </style>
@@ -660,7 +766,11 @@
       <!-- Controls: search, sort, filter (static UI for demo) -->
       <div class="controls-bar">
         <div class="controls-bar-left">
-          Use search, sort, and filters to focus on the projects that matter most to you.
+          <button class="info-icon" type="button"
+            title="Use search, sort, and filters together to quickly focus on the projects that matter most.">
+            i
+          </button>
+          <span>Use search, sort, and filters to focus on the projects that matter most to you.</span>
         </div>
         <div class="controls-bar-right">
           <input class="input" type="search" placeholder="Search by title or keyword" />
@@ -672,47 +782,108 @@
           </select>
           <select class="select">
             <option>Filter by rating band</option>
-            <option>Strong fit (8.0–10)</option>
-            <option>Emerging (6.0–7.9)</option>
-            <option>Early stage (&lt; 6.0)</option>
+            <option>Investment Ready (7.5–10)</option>
+            <option>Emerging Opportunity (5.5–7.4)</option>
+            <option>Early Exploration (&lt; 5.5)</option>
           </select>
         </div>
       </div>
     </section>
 
-    <!-- RECENT SCORING ACTIVITY – HERO -->
-    <section class="card recent-activity-hero">
-      <h2 class="card-title">Recent scoring activity</h2>
-      <p class="card-subtitle">
-        A quick look at how you’ve engaged with projects on CineSparq.
-      </p>
+    <!-- TOP ROW: RECENT ACTIVITY + RATING KEY -->
+    <section class="top-row">
 
-      <ul class="activity-list">
-        <li class="activity-item">
-          <span class="activity-label">North Star Rising</span><br />
-          Updated Sparq Rating to <strong>7.8/10</strong>.
-          <div class="timestamp">Today</div>
-        </li>
-        <li class="activity-item">
-          <span class="activity-label">Echoes of Meridian</span><br />
-          Added to watchlist and tagged for further review.
-          <div class="timestamp">2 days ago</div>
-        </li>
-        <li class="activity-item">
-          <span class="activity-label">The Last Broadcast</span><br />
-          Marked as early stage; noted for future tracking.
-          <div class="timestamp">5 days ago</div>
-        </li>
-      </ul>
+      <!-- RECENT SCORING ACTIVITY -->
+      <section class="card recent-activity-card">
+        <div class="section-header">
+          <h2>Recent scoring activity</h2>
+          <button class="info-icon" type="button"
+            title="View a concise readout of your latest scoring and engagement activity across CineSparq.">
+            i
+          </button>
+        </div>
+        <p class="section-subtitle">
+          A concise readout of your project activity, scoring history, and priority focus.
+        </p>
+
+        <ul class="activity-list">
+          <li class="activity-item">
+            <span class="activity-label">North Star Rising</span><br />
+            Updated Sparq Rating to <strong>7.8/10</strong>.
+            <div class="timestamp">Today</div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-label">Echoes of Meridian</span><br />
+            Added to watchlist and tagged for further review.
+            <div class="timestamp">2 days ago</div>
+          </li>
+          <li class="activity-item">
+            <span class="activity-label">The Last Broadcast</span><br />
+            Marked as early stage; noted for future tracking.
+            <div class="timestamp">5 days ago</div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- RATING KEY / HELP CARD -->
+      <section class="card rating-key-card">
+        <div class="section-header">
+          <h2>Sparq Rating key</h2>
+          <button class="info-icon" type="button"
+            title="Use the rating bands as a directional guide. You still make the final call based on your mandate and slate strategy.">
+            i
+          </button>
+        </div>
+
+        <div class="band">
+          <div class="band-label">
+            <span class="rating-dot dot-high"></span>
+            <span>7.5–10 — Investment Ready</span>
+          </div>
+          <p class="band-text">
+            The project is fully packaged with strong materials, a credible team, validated market alignment, and a clear execution plan.
+            Risk is lower and the project is ready for partner or investor conversations.
+          </p>
+        </div>
+
+        <div class="band">
+          <div class="band-label">
+            <span class="rating-dot dot-mid"></span>
+            <span>5.5–7.4 — Emerging Opportunity</span>
+          </div>
+          <p class="band-text">
+            The project shows strong potential with partial alignment to buyer mandates. Some materials, packaging, or planning still need
+            development to reduce risk. Worth continued evaluation for the right partner as key elements mature.
+          </p>
+        </div>
+
+        <div class="band">
+          <div class="band-label">
+            <span class="rating-dot dot-low"></span>
+            <span>&lt; 5.5 — Early Exploration</span>
+          </div>
+          <p class="band-text">
+            The project is in early development with limited materials, uncertain market alignment, and higher execution risk. Significant
+            refinement is needed before it will be ready for production or investment consideration.
+          </p>
+        </div>
+      </section>
     </section>
 
     <!-- WATCHLIST -->
     <section class="card watchlist-card">
       <div class="watchlist-header">
         <div>
-          <h2>Your watchlist</h2>
+          <div class="section-header">
+            <h2>Your watchlist</h2>
+            <button class="info-icon" type="button"
+              title="Use your watchlist to track soft interest, revisit projects, and decide when to move into direct conversations.">
+              i
+            </button>
+          </div>
           <p>
-            Your watchlist indicates soft interest only. Filmmakers see your identity when—and only when—you request an introduction.
+            Keep track of the projects you’re evaluating. Sort, filter, update your list, reach out to filmmakers, and open any project to
+            review materials or download documents.
           </p>
         </div>
         <div class="watchlist-tools">
@@ -726,7 +897,7 @@
 
       <ul class="project-list">
 
-        <!-- AS TIME GOES BY – STRONG FIT -->
+        <!-- AS TIME GOES BY – HIGHEST / INVESTMENT READY -->
         <li class="project-row">
           <div class="project-thumbnail">
             <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
@@ -750,16 +921,44 @@
             <span class="sparq-rating-pill rating-high">8.4/10</span>
 
             <div class="project-actions">
-              <button class="btn-text" type="button">Save</button>
-              <button class="btn-text" type="button">Viewed</button>
-              <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
+              <!-- View -->
+              <a href="project-detail-partner.html"
+                 class="icon-chip link"
+                 title="View project details and materials"
+                 aria-label="View project details">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </a>
+
+              <!-- Remove -->
+              <button class="icon-chip"
+                type="button"
+                title="Remove from watchlist"
+                aria-label="Remove from watchlist">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 18 18 6M6 6l12 12" stroke-width="1.7" />
+                </svg>
+              </button>
+
+              <!-- Contact -->
+              <button class="icon-chip"
+                type="button"
+                title="Contact filmmaker"
+                aria-label="Contact filmmaker">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16v12H4z" stroke-width="1.7" />
+                  <path d="m4 7 8 5 8-5" stroke-width="1.7" />
+                </svg>
+              </button>
             </div>
 
             <span class="timestamp">Updated 2 days ago</span>
           </div>
         </li>
 
-        <!-- LEARNING TO FALL IN LOVE – WARNING / EARLY-STAGE SCORE -->
+        <!-- LEARNING TO FALL IN LOVE – MID / EMERGING -->
         <li class="project-row">
           <div class="project-thumbnail">
             <img src="learning-poster.png" alt="Learning to Fall In Love poster" />
@@ -781,20 +980,48 @@
           </div>
 
           <div class="project-meta">
-            <!-- LOW rating – red -->
-            <span class="sparq-rating-pill rating-low">5.9/10</span>
+            <!-- MID rating – yellow -->
+            <span class="sparq-rating-pill rating-mid">5.9/10</span>
 
             <div class="project-actions">
-              <button class="btn-text" type="button">Save</button>
-              <button class="btn-text" type="button">Viewed</button>
-              <button class="btn btn-ghost btn-small" type="button">Review</button>
+              <!-- View -->
+              <button class="icon-chip"
+                type="button"
+                title="View project details and materials"
+                aria-label="View project details">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </button>
+
+              <!-- Remove -->
+              <button class="icon-chip"
+                type="button"
+                title="Remove from watchlist"
+                aria-label="Remove from watchlist">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 18 18 6M6 6l12 12" stroke-width="1.7" />
+                </svg>
+              </button>
+
+              <!-- Contact -->
+              <button class="icon-chip"
+                type="button"
+                title="Contact filmmaker"
+                aria-label="Contact filmmaker">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16v12H4z" stroke-width="1.7" />
+                  <path d="m4 7 8 5 8-5" stroke-width="1.7" />
+                </svg>
+              </button>
             </div>
 
             <span class="timestamp">Updated 4 days ago</span>
           </div>
         </li>
 
-        <!-- ABYSS OF DECEPTIONS – EMERGING / MID SCORE -->
+        <!-- ABYSS OF DECEPTIONS – LOWEST / EARLY EXPLORATION -->
         <li class="project-row">
           <div class="project-thumbnail">
             <img src="abyss-poster.png" alt="Abyss of Deceptions vertical series poster" />
@@ -815,13 +1042,41 @@
           </div>
 
           <div class="project-meta">
-            <!-- MID rating – goldenrod -->
-            <span class="sparq-rating-pill rating-mid">7.2/10</span>
+            <!-- LOW rating – red, now the lowest score -->
+            <span class="sparq-rating-pill rating-low">5.1/10</span>
 
             <div class="project-actions">
-              <button class="btn-text" type="button">Save</button>
-              <button class="btn-text" type="button">Viewed</button>
-              <button class="btn btn-ghost btn-small" type="button">Review</button>
+              <!-- View -->
+              <button class="icon-chip"
+                type="button"
+                title="View project details and materials"
+                aria-label="View project details">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M2.5 12s3-5.5 9.5-5.5S21.5 12 21.5 12s-3 5.5-9.5 5.5S2.5 12 2.5 12Z" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="2.7" stroke-width="1.7" />
+                </svg>
+              </button>
+
+              <!-- Remove -->
+              <button class="icon-chip"
+                type="button"
+                title="Remove from watchlist"
+                aria-label="Remove from watchlist">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 18 18 6M6 6l12 12" stroke-width="1.7" />
+                </svg>
+              </button>
+
+              <!-- Contact -->
+              <button class="icon-chip"
+                type="button"
+                title="Contact filmmaker"
+                aria-label="Contact filmmaker">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16v12H4z" stroke-width="1.7" />
+                  <path d="m4 7 8 5 8-5" stroke-width="1.7" />
+                </svg>
+              </button>
             </div>
 
             <span class="timestamp">Updated 1 week ago</span>
@@ -834,37 +1089,47 @@
     <!-- MORE PROJECTS – THUMBNAILS ONLY (NO DUPLICATES) -->
     <section class="card more-projects-card">
       <div class="more-projects-header">
-        <h2>Based on your selections, you might also like</h2>
+        <div class="section-header">
+          <h2>Based on your selections, you might also like</h2>
+          <button class="info-icon" type="button"
+            title="Quick visual browse of additional projects that may match your interests. Click any poster to explore.">
+            i
+          </button>
+        </div>
         <p>Click to explore.</p>
       </div>
 
-      <div class="more-projects-strip">
-        <div class="more-poster">
-          <img src="placeholder-project-1.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="placeholder-project-2.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="placeholder-project-3.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="placeholder-project-4.png" alt="Project thumbnail" />
-        </div>
-        <div class="more-poster">
-          <img src="placeholder-project-5.png" alt="Project thumbnail" />
+      <div class="more-strip-wrapper">
+        <!-- Fake, non-functional arrows for visual familiarity -->
+        <div class="carousel-arrow left">‹</div>
+        <div class="carousel-arrow right">›</div>
+
+        <div class="more-projects-strip">
+          <div class="more-poster">
+            <img src="placeholder-project-1.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-2.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-3.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-4.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-5.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-6.png" alt="Project thumbnail" />
+          </div>
+          <div class="more-poster">
+            <img src="placeholder-project-7.png" alt="Project thumbnail" />
+          </div>
         </div>
       </div>
     </section>
   </main>
-
-  <!-- SPARQ RATING LEGEND -->
-  <section class="sparq-legend">
-    <span class="legend-label">Sparq Rating key:</span>
-    <span class="legend-pill legend-high">8.0–10 · Strong fit</span>
-    <span class="legend-pill legend-mid">6.0–7.9 · Emerging</span>
-    <span class="legend-pill legend-low">&lt; 6.0 · Early stage</span>
-  </section>
 
   <footer class="page-footer">
     © <span id="year"></span> CineSparq. All rights reserved.
