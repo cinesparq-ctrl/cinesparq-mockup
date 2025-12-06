@@ -139,32 +139,19 @@
       gap: 24px;
     }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border-subtle);
-    }
+    <header class="top-bar">
+  <div class="top-title">
+    <h1>Filmmaker Dashboard</h1>
+    <p>Track investor signals, IP-protected views, and Sparq readiness across all projects.</p>
+  </div>
+  ...
+</header>
 
-    .top-title {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .top-title h1 {
-      font-size: 1.5rem;
-      font-weight: 650;
-      letter-spacing: 0.01em;
-    }
-
-    .top-title p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 520px;
-    }
+    <div class="top-title">
+  <span class="view-label">Filmmaker Dashboard</span>
+  <h1>Welcome back, Steve</h1>
+  <p>Here’s how your slate is performing this week.</p>
+</div>
 
     .top-actions {
       display: flex;
