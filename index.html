@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – The Trust Engine for Investment-Ready Stories</title>
+  <title>CineSparq – Changing the Way Projects Are Discovered, Qualified and Funded</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
       --brand-blue: #0a4f84;
-      --brand-blue-soft: #e5f1fb;
       --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.15);
+      --accent-soft: rgba(248, 212, 24, 0.18);
       --bg-page: #f5f7fb;
       --text-main: #111827;
       --text-muted: #6b7280;
       --card-border: #e5e7eb;
+      --footer-bg: #05060b;
     }
 
     * {
@@ -34,12 +34,89 @@
       color: inherit;
     }
 
-    /* SHELL ----------------------------------------------------- */
+    /* GENERIC BUTTONS ------------------------------------------- */
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      color: #111827;
+      border: none;
+      box-shadow: 0 8px 20px rgba(248, 212, 24, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid rgba(249, 250, 251, 0.6);
+    }
+
+    .btn-outline-blue {
+      background: #ffffff;
+      color: var(--brand-blue);
+      border: 1px solid var(--brand-blue);
+    }
+
+    /* PAGE WRAPPER --------------------------------------------- */
 
     .page-shell {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 18px 16px 40px;
+      padding: 0 16px 48px;
+    }
+
+    /* HERO ------------------------------------------------------ */
+
+    .hero {
+      position: relative;
+      min-height: 80vh;
+      color: #f9fafb;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(5, 6, 11, 0.6), rgba(5, 6, 11, 0.9)),
+        linear-gradient(to right, rgba(5, 6, 11, 0.85), rgba(5, 6, 11, 0.3));
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("cinesparq-mockup-hero-image.png");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.9);
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 72px;
+      display: flex;
+      flex-direction: column;
     }
 
     /* NAV ------------------------------------------------------- */
@@ -48,7 +125,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 10px;
+      margin-bottom: 32px;
     }
 
     .nav-left {
@@ -58,458 +135,398 @@
     }
 
     .nav-logo {
-      height: 38px;
+      height: 40px;
       width: auto;
       display: block;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.86rem;
+    }
+
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 18px;
-      margin-left: 26px;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+      color: #e5e7eb;
     }
 
     .nav-link {
       cursor: pointer;
-    }
-
-    .nav-link span {
-      border-bottom: 1px solid transparent;
+      position: relative;
       padding-bottom: 2px;
     }
 
-    .nav-link:hover span {
-      border-bottom-color: rgba(15, 23, 42, 0.18);
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: rgba(249, 250, 251, 0.7);
+      transition: width 0.15s ease;
     }
 
-    .nav-right {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    .nav-link:hover::after {
+      width: 100%;
     }
 
-    .nav-login {
-      font-size: 0.85rem;
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      cursor: pointer;
+    /* HERO CONTENT --------------------------------------------- */
+
+    .hero-content {
+      margin-top: auto;
+      max-width: 540px;
     }
 
-    .nav-cta {
-      font-size: 0.86rem;
-      padding: 7px 16px;
-      border-radius: 999px;
-      border: none;
-      background: var(--brand-blue);
-      color: #ffffff;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-cta span.icon {
-      font-size: 0.9rem;
-    }
-
-    /* HERO ------------------------------------------------------ */
-
-    .hero-card {
-      margin-top: 20px;
-      background: #ffffff;
-      border-radius: 22px;
-      border: 1px solid var(--card-border);
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 0;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
-    }
-
-    .hero-left {
-      padding: 26px 28px 26px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 16px;
-    }
-
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.76rem;
+    .hero-kicker {
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--brand-blue);
-      background: var(--brand-blue-soft);
-      border-radius: 999px;
-      padding: 4px 10px;
-    }
-
-    .hero-pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
     .hero-title {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       line-height: 1.15;
       font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    .hero-title span {
-      color: var(--brand-blue);
+    .hero-subhead {
+      font-size: 0.98rem;
+      color: #e5e7eb;
+      max-width: 520px;
+      line-height: 1.4;
+      margin-bottom: 18px;
     }
 
-    .hero-subtitle {
-      font-size: 0.96rem;
-      color: var(--text-muted);
-      max-width: 460px;
-    }
-
-    .hero-subtitle strong {
-      color: var(--text-main);
+    .hero-subhead span.break {
+      display: block;
+      margin-top: 3px;
     }
 
     .hero-cta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 6px;
-    }
-
-    .btn-primary {
-      border-radius: 999px;
-      border: none;
-      padding: 10px 18px;
-      font-size: 0.94rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--accent), #fbbf24);
-      color: #111827;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 12px 24px rgba(248, 212, 24, 0.4);
-    }
-
-    .btn-secondary {
-      border-radius: 999px;
-      border: 1px solid var(--brand-blue);
-      padding: 9px 18px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      background: #ffffff;
-      color: var(--brand-blue);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-secondary span.icon {
-      font-size: 1rem;
+      margin-bottom: 16px;
     }
 
     .hero-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
+      font-size: 0.82rem;
+      color: #9ca3af;
     }
 
-    .hero-meta strong {
-      color: var(--brand-blue);
+    /* ICON / BENEFITS SECTION ---------------------------------- */
+
+    .benefits-section {
+      background: #ffffff;
+      margin-top: -32px;
+      border-radius: 32px 32px 0 0;
+      border-top: 1px solid var(--card-border);
+      box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.15);
+      padding: 80px 0 88px;
     }
 
-    .hero-right {
-      position: relative;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(248, 212, 24, 0.35) 0, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(10, 79, 132, 0.6) 0, rgba(10, 79, 132, 0.95) 60%),
-        radial-gradient(circle at 40% 110%, rgba(15, 23, 42, 1) 0, #020617 70%);
-      color: #eff6ff;
-      padding: 20px 22px 22px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+    .benefits-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
     }
 
-    .hero-visual-frame {
-      width: 100%;
-      max-width: 430px;
-      border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.85);
-      padding: 14px 14px 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-tagline {
-      font-size: 0.8rem;
-      color: #c7d2fe;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 8px;
-    }
-
-    .hero-visual-title {
-      font-size: 1.02rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .hero-visual-sub {
-      font-size: 0.78rem;
-      color: #e5e7eb;
-      margin-bottom: 10px;
-      max-width: 310px;
-    }
-
-    .hero-sparq-row {
+    .benefits-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-bottom: 10px;
+      gap: 24px;
+      margin-bottom: 32px;
     }
 
-    .hero-sparq-card {
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 8px 8px 7px;
-      font-size: 0.72rem;
+    .benefit-card {
+      text-align: center;
+      padding: 0 10px;
     }
 
-    .hero-sparq-label {
-      color: #9ca3af;
-      margin-bottom: 2px;
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 14px;
+      display: block;
     }
 
-    .hero-sparq-value {
+    .benefit-title {
+      font-size: 0.86rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--brand-blue);
+      margin-bottom: 8px;
+    }
+
+    .benefit-body {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .benefits-cta-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .benefits-note {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER ---------------------------------------------------- */
+
+    .footer {
+      background: var(--footer-bg);
+      color: #e5e7eb;
+      padding: 52px 16px 26px;
+      margin-top: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      margin-bottom: 16px;
+    }
+
+    .footer-text {
       font-size: 0.9rem;
-      font-weight: 600;
+      color: #d1d5db;
+      max-width: 420px;
+    }
+
+    .footer-heading {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #f9fafb;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    .footer-link a {
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    .footer-link a:hover {
       color: var(--accent);
     }
 
-    .hero-legend {
-      font-size: 0.72rem;
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .footer-social img {
+      width: 148px;
+      height: auto;
+      display: block;
+    }
+
+    .footer-bottom {
+      max-width: 1120px;
+      margin: 24px auto 0;
+      padding-top: 16px;
+      border-top: 1px solid #111827;
+      font-size: 0.8rem;
       color: #9ca3af;
-      margin-top: 4px;
-    }
-
-    /* FEATURE STRIP --------------------------------------------- */
-
-    .feature-strip {
-      margin-top: 26px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .feature-card {
-      background: #ffffff;
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-      padding: 14px 14px 16px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
-    }
-
-    .feature-kicker {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--brand-blue);
-      margin-bottom: 6px;
-    }
-
-    .feature-title {
-      font-size: 0.96rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .feature-body {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+      text-align: center;
     }
 
     /* RESPONSIVE ------------------------------------------------ */
 
     @media (max-width: 960px) {
-      .hero-card {
+      .hero {
+        min-height: 82vh;
+      }
+      .nav-right {
+        gap: 12px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .benefits-grid {
         grid-template-columns: 1fr;
       }
-      .hero-right {
-        order: -1;
-      }
-      .hero-left {
-        padding: 20px 18px 22px;
-      }
-      .hero-right {
-        padding: 18px 18px 20px;
-      }
-      .hero-visual-frame {
-        max-width: 100%;
-      }
-      .feature-strip {
+      .footer-inner {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .nav-links {
-        display: none;
-      }
-      .page-shell {
+      .hero-inner {
         padding-inline: 14px;
       }
       .hero-title {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
       }
-      .hero-card {
-        border-radius: 18px;
+      .hero-content {
+        max-width: 100%;
+      }
+      .benefits-inner {
+        padding-inline: 14px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <!-- NAVBAR -->
-    <header class="nav">
-      <div class="nav-left">
-        <img
-          src="CS_Logo_light%20bg.png"
-          alt="CineSparq logo"
-          class="nav-logo"
-        />
-        <nav class="nav-links">
-          <div class="nav-link"><span>How it works</span></div>
-          <div class="nav-link"><span>For filmmakers</span></div>
-          <div class="nav-link"><span>For industry partners</span></div>
-        </nav>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
 
-      <div class="nav-right">
-        <a class="nav-login" href="filmmaker-dashboard.html">Filmmaker login</a>
-        <a class="nav-cta" href="industry-partner-dashboard.html">
-          <span class="icon">⬤</span>
-          <span>Partner login</span>
-        </a>
-      </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero-card">
-      <!-- LEFT: COPY & CTAS -->
-      <div class="hero-left">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          <span>Creative production trust layer</span>
+    <div class="hero-inner">
+      <!-- NAVBAR -->
+      <header class="nav">
+        <div class="nav-left">
+          <img src="CSLogo_dark_bg.png" alt="CineSparq logo" class="nav-logo" />
         </div>
 
+        <div class="nav-right">
+          <nav class="nav-links">
+            <div class="nav-link">Creators</div>
+            <div class="nav-link">Industry Partners</div>
+            <div class="nav-link">Add your project</div>
+            <div class="nav-link">Insights</div>
+          </nav>
+          <a href="#" class="btn btn-secondary">Log in</a>
+        </div>
+      </header>
+
+      <!-- HERO COPY -->
+      <div class="hero-content">
+        <div class="hero-kicker">The trust engine for investment-ready stories</div>
+
         <h1 class="hero-title">
-          The trust engine for <span>investment-ready stories.</span>
+          Changing the way projects are discovered, qualified and funded
         </h1>
 
-        <p class="hero-subtitle">
-          CineSparq helps scripted and unscripted projects move out of limbo by
-          translating creative readiness into <strong>clear, investor-aligned signals</strong> that
-          filmmakers and industry partners can finally agree on.
+        <p class="hero-subhead">
+          Creators rise. Partners win. Projects move.
+          <span class="break">
+            CineSparq transforms emerging stories into market-ready opportunities that accelerate
+            momentum and success.
+          </span>
         </p>
 
         <div class="hero-cta-row">
-          <a href="filmmaker-dashboard.html" class="btn-primary">
-            <span>Filmmaker login</span>
-          </a>
-
-          <a href="industry-partner-dashboard.html" class="btn-secondary">
-            <span class="icon">▹</span>
-            <span>Industry partner login</span>
-          </a>
+          <a href="#" class="btn btn-primary">Join CineSparq</a>
+          <a href="#" class="btn btn-secondary">Log in</a>
         </div>
 
         <p class="hero-meta">
-          One platform. Two workspaces. <strong>Filmmakers see signals.</strong> Partners see
-          <strong>curated, mandate-matched opportunities.</strong>
+          A shared language for readiness that respects creative vision and investor reality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS / ICON SECTION -->
+  <section class="benefits-section">
+    <div class="benefits-inner">
+      <div class="benefits-grid">
+        <!-- Icon 1 -->
+        <article class="benefit-card">
+          <img src="icon-one.png" alt="AI-powered clarity icon" class="benefit-icon" />
+          <div class="benefit-title">AI-POWERED CLARITY</div>
+          <p class="benefit-body">
+            Creators get clear, actionable guidance grounded in real industry expectations.
+          </p>
+        </article>
+
+        <!-- Icon 2 -->
+        <article class="benefit-card">
+          <img src="icon-two.png" alt="Human-centered evaluation icon" class="benefit-icon" />
+          <div class="benefit-title">HUMAN-CENTERED EVALUATION</div>
+          <p class="benefit-body">
+            Assess projects with context, nuance, and confidence; not guesswork.
+          </p>
+        </article>
+
+        <!-- Icon 3 -->
+        <article class="benefit-card">
+          <img src="icon-three.png" alt="Momentum that moves people icon" class="benefit-icon" />
+          <div class="benefit-title">MOMENTUM THAT MOVES PEOPLE</div>
+          <p class="benefit-body">
+            Stories advance faster because humans stay at the heart of every decision.
+          </p>
+        </article>
+      </div>
+
+      <div class="benefits-cta-row">
+        <a href="#" class="btn btn-primary">Join CineSparq</a>
+        <a href="#" class="btn btn-outline-blue">Log in</a>
+      </div>
+
+      <p class="benefits-note">
+        This mockup illustrates the CineSparq experience — final flows and features may evolve.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <!-- Left: logo + description -->
+      <div>
+        <img src="CSLogo_dark_bg.png" alt="CineSparq logo" class="footer-logo" />
+        <p class="footer-text">
+          CineSparq connects creators and industry partners around fundable film and television projects
+          through clarity, transparency, and a smarter deal ecosystem.
         </p>
       </div>
 
-      <!-- RIGHT: CINEMATIC / DATA VISUAL -->
-      <div class="hero-right">
-        <div class="hero-visual-frame">
-          <div class="hero-tagline">Live slate snapshot</div>
-          <div class="hero-visual-title">Sparq-screened opportunities at a glance</div>
-          <p class="hero-visual-sub">
-            Your dashboard surfaces projects that match your format, budget, and market
-            focus — with readiness scored on a 10-point scale.
-          </p>
-
-          <div class="hero-sparq-row">
-            <div class="hero-sparq-card">
-              <div class="hero-sparq-label">Portfolio readiness</div>
-              <div class="hero-sparq-value">8.3 / 10</div>
-              <div class="hero-legend">Weighted across active titles</div>
-            </div>
-            <div class="hero-sparq-card">
-              <div class="hero-sparq-label">Mandate fit</div>
-              <div class="hero-sparq-value">92%</div>
-              <div class="hero-legend">Scripted • Urban drama • $250–500K</div>
-            </div>
-            <div class="hero-sparq-card">
-              <div class="hero-sparq-label">IP-safe previews</div>
-              <div class="hero-sparq-value">134</div>
-              <div class="hero-legend">Watermarked, device-bound sessions</div>
-            </div>
-          </div>
-
-          <div class="hero-legend">
-            Scores are directional, not prescriptive. You choose what to back — CineSparq
-            simply reduces the noise.
-          </div>
+      <!-- Middle: links -->
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <div class="footer-link"><a href="#">About Us</a></div>
+          <div class="footer-link"><a href="#">Careers</a></div>
+          <div class="footer-link"><a href="#">Blog</a></div>
+          <div class="footer-link"><a href="#">Privacy Policy</a></div>
         </div>
       </div>
-    </section>
 
-    <!-- FEATURE STRIP -->
-    <section class="feature-strip">
-      <article class="feature-card">
-        <div class="feature-kicker">Standardized readiness</div>
-        <h3 class="feature-title">A shared language for greenlighting</h3>
-        <p class="feature-body">
-          Move beyond vague praise and pitch decks. CineSparq benchmarks projects across
-          development, packaging, production viability, and market signals so everybody
-          knows where a title stands.
-        </p>
-      </article>
+      <!-- Right: socials -->
+      <div class="footer-social">
+        <div class="footer-heading">Connect</div>
+        <img src="social-icons.png" alt="Social media icons" />
+      </div>
+    </div>
 
-      <article class="feature-card">
-        <div class="feature-kicker">Investor-aligned discovery</div>
-        <h3 class="feature-title">See more of what fits your mandate</h3>
-        <p class="feature-body">
-          Filter by format (feature, series, vertical), budget, audience, and strategic
-          goals. Our scoring highlights the opportunities that actually match what you’re
-          tasked to find.
-        </p>
-      </article>
-
-      <article class="feature-card">
-        <div class="feature-kicker">IP-aware access</div>
-        <h3 class="feature-title">Confidence for both sides of the table</h3>
-        <p class="feature-body">
-          Device-bound previews, time-boxed materials, and clear attestations protect
-          filmmakers’ work while giving partners a clean audit trail for how projects were
-          evaluated.
-        </p>
-      </article>
-    </section>
-  </div>
+    <div class="footer-bottom">
+      © 2025 CineSparq. All rights reserved.
+    </div>
+  </footer>
 </body>
 </html>
