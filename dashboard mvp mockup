@@ -1,0 +1,767 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CineSparq – Filmmaker Dashboard (Mockup)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05060b;
+      --bg-soft: #0e1018;
+      --card: #141824;
+      --accent: #f8d418;
+      --accent-soft: rgba(248, 212, 24, 0.15);
+      --text-main: #f7f7f7;
+      --text-muted: #a1a6b3;
+      --border-subtle: #242838;
+      --danger: #ff5a5f;
+      --success: #4ade80;
+      --warning: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #141824 0, #05060b 45%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: linear-gradient(to bottom, #05060b, #05060b 40%, #05060b);
+      border-right: 1px solid var(--border-subtle);
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, #f8d418 40%, #f97316 80%);
+      box-shadow: 0 0 18px rgba(248, 212, 24, 0.6);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    .logo-text-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .nav-section-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-item.active {
+      background: var(--accent-soft);
+      color: var(--text-main);
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .nav-item span.label {
+      flex: 1;
+    }
+
+    .nav-item span.badge {
+      font-size: 0.72rem;
+      background: #1f2937;
+      padding: 2px 6px;
+      border-radius: 999px;
+      color: var(--accent);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 10px;
+    }
+
+    .sidebar-footer strong {
+      color: var(--accent);
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 22px;
+      gap: 18px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .top-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .top-title h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .top-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #111827;
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #f8d418, #f97316);
+      color: #05060b;
+      font-weight: 600;
+    }
+
+    .avatar-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: #0b1120;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #1a1f30 0, #111321 55%);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+      padding: 14px 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .card-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .card-link {
+      font-size: 0.78rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Metrics row */
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric-card {
+      background: #050816;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 10px 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .metric-ring {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: conic-gradient(var(--accent) 0 240deg, #1f2937 240deg 360deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-ring-inner {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .metric-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .metric-tag {
+      font-size: 0.7rem;
+      color: var(--accent);
+    }
+
+    /* Project table */
+
+    .projects-table {
+      width: 100%;
+      margin-top: 12px;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .projects-table thead {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+    }
+
+    .projects-table th,
+    .projects-table td {
+      padding: 8px 4px;
+      border-bottom: 1px solid #111827;
+    }
+
+    .projects-table th:first-child,
+    .projects-table td:first-child {
+      padding-left: 0;
+    }
+
+    .projects-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .project-name {
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .project-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(148, 163, 184, 0.14);
+      color: var(--text-muted);
+    }
+
+    .rating-pill {
+      color: var(--accent);
+      background: rgba(248, 212, 24, 0.1);
+    }
+
+    .status-pill--inreview {
+      color: var(--warning);
+    }
+
+    .status-pill--ready {
+      color: var(--success);
+    }
+
+    .link-subtle {
+      font-size: 0.78rem;
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Activity / IP column */
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      font-size: 0.78rem;
+    }
+
+    .timeline-dot {
+      margin-top: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .timeline-body {
+      flex: 1;
+    }
+
+    .timeline-label {
+      color: var(--text-main);
+    }
+
+    .timeline-meta {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      color: var(--text-muted);
+    }
+
+    .chip.alert {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .chip.soft {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .watermark-preview {
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px dashed #4b5563;
+      padding: 8px;
+      font-size: 0.76rem;
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .watermark-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 999px;
+      background: rgba(248, 212, 24, 0.1);
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    @media (max-width: 960px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        display: none;
+      }
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div>
+          <div class="logo-text-main">CINESPARQ</div>
+          <div class="logo-text-sub">Filmmaker Workspace</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="nav-section-title">Overview</div>
+      <div class="nav-group">
+        <div class="nav-item active">
+          <span class="nav-dot"></span>
+          <span class="label">Dashboard</span>
+          <span class="badge">MVP</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-dot" style="opacity:0;"></span>
+          <span class="label">Projects</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-dot" style="opacity:0;"></span>
+          <span class="label">Sparq Reports</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="nav-section-title">Signals</div>
+      <div class="nav-group">
+        <div class="nav-item">
+          <span class="nav-dot" style="opacity:0;"></span>
+          <span class="label">Investor Activity</span>
+          <span class="badge">3</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-dot" style="opacity:0;"></span>
+          <span class="label">Access Events</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      Sparq rating and access logs are informational only.  
+      <strong>Investors choose when to reveal themselves.</strong>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="top-title">
+        <h1>Filmmaker Dashboard</h1>
+        <p>Track investor signals, IP-protected views, and Sparq readiness across all projects.</p>
+      </div>
+      <div class="top-actions">
+        <button class="btn">View as Investor</button>
+        <button class="btn btn-primary">Upload New Project</button>
+        <div class="avatar-circle"></div>
+      </div>
+    </header>
+
+    <section class="content-grid">
+      <!-- Left: Metrics + Projects -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Portfolio Signals</div>
+            <div class="card-subtitle">Last 30 days across active projects</div>
+          </div>
+          <div class="card-link">View full log</div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-ring">
+              <div class="metric-ring-inner">3</div>
+            </div>
+            <div class="metric-labels">
+              <div class="metric-label">Active Projects</div>
+              <div class="metric-value">3</div>
+              <div class="metric-tag">MVP • per slate</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-ring">
+              <div class="metric-ring-inner">12</div>
+            </div>
+            <div class="metric-labels">
+              <div class="metric-label">Qualified Views</div>
+              <div class="metric-value">12</div>
+              <div class="metric-tag">Investors only</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-ring">
+              <div class="metric-ring-inner">5</div>
+            </div>
+            <div class="metric-labels">
+              <div class="metric-label">Projects Saved</div>
+              <div class="metric-value">5</div>
+              <div class="metric-tag">Soft interest</div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-ring">
+              <div class="metric-ring-inner">2</div>
+            </div>
+            <div class="metric-labels">
+              <div class="metric-label">Access Thresholds</div>
+              <div class="metric-value">2</div>
+              <div class="metric-tag">Contact suggested</div>
+            </div>
+          </div>
+        </div>
+
+        <table class="projects-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Sparq Score</th>
+              <th>Investor Activity</th>
+              <th>IP Events</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="project-name">As Time Goes By</div>
+                <div class="project-pill status-pill--ready">Ready for outreach</div>
+              </td>
+              <td>
+                <div class="project-pill rating-pill">
+                  <span>8.4</span>
+                  <span>• Narrative feature</span>
+                </div>
+              </td>
+              <td>
+                <div>7 views • 3 saves</div>
+                <div class="card-subtitle">Last touch: 2 days ago</div>
+              </td>
+              <td>
+                <div>1 threshold hit</div>
+                <div class="card-subtitle">1 investor reached max views</div>
+              </td>
+              <td>
+                <span class="link-subtle">View access log →</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="project-name">Southside Bloom</div>
+                <div class="project-pill status-pill--inreview">In Sparq review</div>
+              </td>
+              <td>
+                <div class="project-pill rating-pill">
+                  <span>—</span>
+                  <span>score pending</span>
+                </div>
+              </td>
+              <td>
+                <div>3 views • 1 save</div>
+                <div class="card-subtitle">Last touch: 5 days ago</div>
+              </td>
+              <td>
+                <div>0 thresholds</div>
+                <div class="card-subtitle">Safe access window</div>
+              </td>
+              <td>
+                <span class="link-subtle">View access log →</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="project-name">Vertical Series Pilot</div>
+                <div class="project-pill status-pill--ready">Ready for outreach</div>
+              </td>
+              <td>
+                <div class="project-pill rating-pill">
+                  <span>7.2</span>
+                  <span>• Microdrama</span>
+                </div>
+              </td>
+              <td>
+                <div>2 views • 1 save</div>
+                <div class="card-subtitle">Last touch: 7 days ago</div>
+              </td>
+              <td>
+                <div>0 thresholds</div>
+                <div class="card-subtitle">Within preview limits</div>
+              </td>
+              <td>
+                <span class="link-subtle">View access log →</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right: Activity & IP preview -->
+      <div class="stack">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Recent Investor Activity</div>
+              <div class="card-subtitle">Anonymized until contact is requested</div>
+            </div>
+            <div class="card-link">Download one-sheets</div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  Unnamed investor <strong>reached max view threshold</strong> on
+                  <em>As Time Goes By</em>
+                </div>
+                <div class="timeline-meta">
+                  2 hours ago • 5/5 views used • Based in North America
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  New investor <strong>saved</strong> <em>Southside Bloom</em> to watchlist
+                </div>
+                <div class="timeline-meta">
+                  Yesterday • 2 views • Sparq-approved buyer profile
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  Returning investor <strong>previewed</strong> <em>Vertical Series Pilot</em>
+                </div>
+                <div class="timeline-meta">
+                  3 days ago • single-device access • watermarked screener
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chip-row">
+            <div class="chip soft">3 active investors</div>
+            <div class="chip">2 new in last 7 days</div>
+            <div class="chip alert">2 projects at threshold</div>
+          </div>
+
+          <p class="helper-text">
+            Threshold hits do <strong>not</strong> reveal investor identity. They simply signal it’s time
+            to move the conversation off platform.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">IP Protection Snapshot</div>
+              <div class="card-subtitle">How your work is being accessed this week</div>
+            </div>
+            <div class="card-link">Full IP report →</div>
+          </div>
+
+          <div class="watermark-preview">
+            <div class="watermark-tag">Tier 1 • Watermarked screener</div>
+            <div>
+              • Device-bound access  
+              • Time-boxed previews  
+              • On-screen watermark: project ID + anonymized buyer ID
+            </div>
+          </div>
+
+          <p class="helper-text">
+            In the MVP, you’ll see <strong>counts and patterns</strong> here, not names:
+            daily views, devices used, and when an investor hits your configured limit.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
