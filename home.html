@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CineSparq – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --brand-blue: #0a4f84;
+      --accent: #f8d418;
+      --accent-soft: rgba(248, 212, 24, 0.12);
+      --bg-dark: #020617;
+      --bg-soft: #0b1120;
+      --card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top left, #1f2937 0, #020617 45%, #020617 100%),
+        linear-gradient(135deg, #020617, #020617);
+      color: #f9fafb;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: 32px auto;
+      padding: 0 16px;
+      display: flex;
+      gap: 28px;
+    }
+
+    /* LEFT: CINEMATIC PANE */
+
+    .left-pane {
+      flex: 1.1;
+      border-radius: 18px;
+      padding: 22px 22px 20px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(248, 212, 24, 0.18) 0, transparent 50%),
+        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.9) 0, #020617 75%);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow:
+        0 24px 80px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .logo-img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    .tag-pill {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+    }
+
+    .hero-copy {
+      max-width: 420px;
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(226, 232, 240, 0.8);
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: 1.9rem;
+      line-height: 1.2;
+      font-weight: 650;
+      margin-bottom: 10px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.92rem;
+      color: #e5e7eb;
+      max-width: 380px;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .hero-chip {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-chip.highlight {
+      border-color: rgba(248, 212, 24, 0.6);
+      background: rgba(248, 212, 24, 0.12);
+      color: var(--accent);
+    }
+
+    .hero-footer {
+      font-size: 0.8rem;
+      color: rgba(209, 213, 219, 0.9);
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+      padding-top: 10px;
+      margin-top: 18px;
+      max-width: 420px;
+    }
+
+    .hero-footer strong {
+      color: var(--accent);
+    }
+
+    /* RIGHT: LOGIN CARD */
+
+    .right-pane {
+      flex: 0.9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      color: var(--text-main);
+      border-radius: 18px;
+      padding: 22px 22px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
+    }
+
+    .login-header {
+      margin-bottom: 16px;
+    }
+
+    .login-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .login-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .login-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .role-toggle-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+      margin-bottom: 16px;
+    }
+
+    .role-card {
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 10px 9px;
+      cursor: pointer;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      font-size: 0.82rem;
+    }
+
+    .role-card.active {
+      border-color: rgba(10, 79, 132, 0.6);
+      background: #eff6ff;
+      box-shadow: 0 0 0 1px rgba(10, 79, 132, 0.3);
+    }
+
+    .role-label {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .role-desc {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .field-input {
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    .field-input:focus {
+      border-color: rgba(10, 79, 132, 0.7);
+      box-shadow: 0 0 0 1px rgba(10, 79, 132, 0.25);
+    }
+
+    .login-btn {
+      width: 100%;
+      margin-top: 6px;
+      border: none;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      color: #111827;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 10px 24px rgba(248, 212, 24, 0.35);
+    }
+
+    .login-btn:hover {
+      filter: brightness(1.03);
+    }
+
+    .login-meta {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .login-meta strong {
+      color: var(--brand-blue);
+    }
+
+    .helper-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.78rem;
+    }
+
+    .helper-link {
+      color: var(--brand-blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .helper-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 960px) {
+      .shell {
+        flex-direction: column;
+        max-width: 640px;
+      }
+      .left-pane {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        margin: 16px auto;
+      }
+      .left-pane {
+        padding: 18px 16px 16px;
+      }
+      .hero-title {
+        font-size: 1.6rem;
+      }
+      .login-card {
+        padding: 18px 16px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <!-- LEFT: CINEMATIC BRAND PANEL -->
+    <section class="left-pane">
+      <div>
+        <div class="logo-row">
+          <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-img" />
+          <div class="tag-pill">Creative production discovery • In beta</div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="hero-eyebrow">For filmmakers &amp; industry partners</div>
+          <h1 class="hero-title">
+            Turn <span>investment-ready stories</span> into moves on the board.
+          </h1>
+          <p class="hero-subtitle">
+            CineSparq connects scripted and unscripted projects to buyers and investors, using
+            a shared language of risk, readiness, and market fit.
+          </p>
+
+          <div class="hero-chips">
+            <div class="hero-chip highlight">Scripted &amp; Unscripted</div>
+            <div class="hero-chip">Features • Series • Vertical</div>
+            <div class="hero-chip">Discovery that respects your time</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-footer">
+        One login. Two perspectives. <strong>Filmmakers see signals.</strong> Industry partners
+        see <strong>curated, Sparq-screened opportunities</strong> matched to their mandates.
+      </div>
+    </section>
+
+    <!-- RIGHT: ROLE-BASED LOGIN CARD -->
+    <section class="right-pane">
+      <div class="login-card">
+        <header class="login-header">
+          <div class="login-eyebrow">Welcome</div>
+          <div class="login-title">Sign in to CineSparq</div>
+          <p class="login-subtitle">
+            Choose your role and use your email to access your personalized dashboard.
+          </p>
+        </header>
+
+        <div class="role-toggle-row">
+          <button
+            type="button"
+            class="role-card active"
+            data-role="filmmaker"
+            onclick="selectRole('filmmaker')"
+          >
+            <div class="role-label">Filmmaker</div>
+            <div class="role-desc">Upload projects, track signals, see Sparq scores.</div>
+          </button>
+
+          <button
+            type="button"
+            class="role-card"
+            data-role="partner"
+            onclick="selectRole('partner')"
+          >
+            <div class="role-label">Industry Partner</div>
+            <div class="role-desc">
+              Discover scripted, unscripted, and vertical projects that match your mandate.
+            </div>
+          </button>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="email">Work email</label>
+          <input
+            id="email"
+            class="field-input"
+            type="email"
+            placeholder="you@company.com"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="password">Password</label>
+          <input
+            id="password"
+            class="field-input"
+            type="password"
+            placeholder="••••••••"
+            autocomplete="off"
+          />
+        </div>
+
+        <button type="button" class="login-btn" onclick="handleLogin()">
+          Continue
+        </button>
+
+        <div class="helper-row">
+          <span class="helper-link">Forgot password?</span>
+          <span class="helper-link">New here? Request access</span>
+        </div>
+
+        <p class="login-meta">
+          Filmmakers and partners see different workspaces, but share the same trusted data.
+          Your view is tailored to the role you select above.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let currentRole = 'filmmaker';
+
+    function selectRole(role) {
+      currentRole = role;
+      const cards = document.querySelectorAll('.role-card');
+      cards.forEach(card => {
+        const r = card.getAttribute('data-role');
+        if (r === role) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    }
+
+    function handleLogin() {
+      // In the real app, you'd authenticate then route by role.
+      // For the mockup, we just send them to the correct dashboard.
+      if (currentRole === 'partner') {
+        window.location.href = 'investor-dashboard.html';
+      } else {
+        // Filmmaker
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>
