@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CineSparq – Project View (Filmmaker)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
+
+      --rating-high-bg: #16a34a;
+      --rating-high-text: #f0fdf4;
+
+      --rating-mid-bg: #d4a017;
+      --rating-mid-text: #171717;
+
+      --rating-low-bg: #dc2626;
+      --rating-low-text: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .dashboard-nav a {
+      position: relative;
+      padding-bottom: 0.2rem;
+      color: #4b5563;
+    }
+
+    .dashboard-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.2s ease;
+    }
+
+    .dashboard-nav a:hover::after {
+      width: 100%;
+    }
+
+    .dashboard-nav a.active {
+      color: var(--cs-deep-blue);
+      font-weight: 600;
+    }
+
+    .dashboard-nav a.active::after {
+      width: 100%;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .icon-button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-button {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+    }
+
+    .menu-button-bars {
+      width: 14px;
+      height: 10px;
+      position: relative;
+    }
+
+    .menu-button-bars span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #4b5563;
+      border-radius: 999px;
+    }
+
+    .menu-button-bars span:nth-child(1) { top: 0; }
+    .menu-button-bars span:nth-child(2) { top: 4px; }
+    .menu-button-bars span:nth-child(3) { top: 8px; }
+
+    .info-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: default;
+      color: #6b7280;
+      padding: 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .section-subtitle {
+      margin: 0.1rem 0 0.75rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.6rem 1.5rem 2.5rem;
+      flex: 1;
+    }
+
+    .breadcrumbs {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.3rem;
+    }
+
+    .breadcrumbs a {
+      color: #6b7280;
+      text-decoration: underline;
+    }
+
+    .page-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title-row h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .page-title-row p {
+      margin: 0.25rem 0 0;
+      font-size: 0.96rem;
+      color: #4b5563;
+    }
+
+    .card {
+      background: var(--cs-white);
+      border-radius: 18px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: 124px minmax(0, 1fr);
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+
+    .hero-poster img {
+      width: 124px;
+      height: 184px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #111827;
+      display: block;
+    }
+
+    .hero-content h2 {
+      margin: 0 0 0.2rem;
+      font-size: 1.25rem;
+    }
+
+    .hero-meta-line {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-logline {
+      font-size: 0.9rem;
+      color: #374151;
+      margin: 0 0 0.6rem;
+    }
+
+    .chip-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.1rem 0 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .hero-footer-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    .sparq-rating-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .rating-high {
+      background: var(--rating-high-bg);
+      color: var(--rating-high-text);
+    }
+
+    .visibility-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .visibility-pill.private {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .toggle-note {
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .rating-number {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0.2rem 0 0.1rem;
+    }
+
+    .rating-caption {
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin-bottom: 0.9rem;
+    }
+
+    .pillar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .pillar-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar-label {
+      font-weight: 600;
+    }
+
+    .rating-note {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0.9rem;
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+
+    .meta-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .meta-label {
+      font-weight: 600;
+    }
+
+    .materials-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.3rem 0 0.5rem;
+      font-size: 0.88rem;
+    }
+
+    .materials-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .doc-link {
+      color: var(--cs-deep-blue);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .materials-note {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    .roadmap-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.35rem 0 0.9rem;
+      font-size: 0.86rem;
+      color: #374151;
+    }
+
+    .roadmap-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .roadmap-tag {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .matches-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.35rem 0 0;
+      font-size: 0.86rem;
+    }
+
+    .matches-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    .match-name {
+      font-weight: 600;
+    }
+
+    .match-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.05rem 0.45rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      font-size: 0.74rem;
+      margin-left: 0.3rem;
+    }
+
+    .page-footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .header-inner {
+        padding-inline: 1rem;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="CS_Logo_light bg.png" alt="CineSparq logo" class="brand-logo" />
+      </div>
+
+      <div class="header-right">
+        <nav class="dashboard-nav">
+          <a href="filmmaker-dashboard.html" class="active">Dashboard</a>
+          <a href="#">Projects</a>
+          <a href="#">Reports</a>
+        </nav>
+
+        <div class="header-user">
+          <span style="font-size:0.86rem; color:#4b5563;">Jay</span>
+          <div class="user-avatar" aria-label="Jay profile">J</div>
+          <button class="icon-button menu-button" aria-label="Open user menu">
+            <div class="menu-button-bars">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE -->
+  <main class="page">
+    <section>
+      <div class="breadcrumbs">
+        <a href="filmmaker-dashboard.html">Dashboard</a> › Project View
+      </div>
+
+      <div class="page-title-row">
+        <div>
+          <h1>As Time Goes By</h1>
+          <p>
+            Your CineSparq project view—score, roadmap, and aligned partners in one place.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERO + SCORE SUMMARY -->
+    <section class="grid grid-2" style="margin-bottom:1.75rem;">
+      <article class="card">
+        <div class="hero-main">
+          <div class="hero-poster">
+            <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
+          </div>
+          <div class="hero-content">
+            <h2>As Time Goes By</h2>
+            <div class="hero-meta-line">
+              Feature Film · Period Drama · Chicago · 120 minutes
+            </div>
+            <p class="hero-logline">
+              In 1950s Chicago, an ambitious young DJ risks everything to protect his sound, his city, and the woman he loves—setting in motion a love story that echoes through their family for decades.
+            </p>
+
+            <ul class="chip-list">
+              <li class="chip">Multi-decade romance</li>
+              <li class="chip">Music & culture</li>
+              <li class="chip">Black love</li>
+              <li class="chip">Chicago history</li>
+            </ul>
+
+            <div class="hero-footer-line">
+              <span class="sparq-rating-pill rating-high">8.4/10 · Investment Ready</span>
+              <span class="visibility-pill">Public · Visible To Partners</span>
+              <span class="toggle-note">
+                Visibility can be adjusted from your dashboard if you want to pause partner access.
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2>Sparq Rating Overview</h2>
+          <button class="info-icon" type="button"
+            title="Your rating is based on your current materials. Updated assets can be submitted for a new evaluation.">
+            i
+          </button>
+        </div>
+        <div class="rating-number">8.4 / 10</div>
+        <p class="rating-caption">
+          This project is scoring in the <strong>Investment Ready</strong> band for your target lane.
+        </p>
+
+        <ul class="pillar-list">
+          <li>
+            <span class="pillar-label">Packaging & Materials:</span> Comprehensive deck, script, and budget clearly communicate story, scope, and execution.
+          </li>
+          <li>
+            <span class="pillar-label">Market Alignment:</span> Strong—multi-generational Black love story with festival and streaming potential.
+          </li>
+          <li>
+            <span class="pillar-label">Execution Feasibility:</span> Moderate risk—multi-period production with defined locations and a realistic budget anchor.
+          </li>
+          <li>
+            <span class="pillar-label">Team & Track Record:</span> Solid—vision is cohesive and the team shows emerging strength.
+          </li>
+        </ul>
+
+        <p class="rating-note">
+          When you significantly update your materials, you can request a new evaluation so your Sparq Rating keeps pace with the project.
+        </p>
+      </article>
+    </section>
+
+    <!-- PROJECT DETAILS + MATERIALS -->
+    <section class="grid grid-2" style="margin-bottom:1.75rem;">
+      <article class="card">
+        <div class="section-header">
+          <h2>Project Details</h2>
+          <button class="info-icon" type="button"
+            title="A quick recap of how this project is positioned inside CineSparq.">
+            i
+          </button>
+        </div>
+
+        <ul class="meta-list">
+          <li><span class="meta-label">Format:</span> Feature Film · Digital</li>
+          <li><span class="meta-label">Primary Location:</span> Chicago, IL (multiple decades)</li>
+          <li><span class="meta-label">Estimated Budget:</span> $125,000 (production estimate)</li>
+          <li><span class="meta-label">Estimated Runtime:</span> 120 minutes</li>
+          <li><span class="meta-label">Current Status:</span> Public · Eligible for partner discovery</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2>Review Package Assets</h2>
+          <button class="info-icon" type="button"
+            title="These are the materials partners see when they choose to view or download your project assets.">
+            i
+          </button>
+        </div>
+
+        <ul class="materials-list">
+          <li><span class="doc-link">Pitch Deck (PDF)</span></li>
+          <li><span class="doc-link">Script – Feature Draft</span></li>
+          <li><span class="doc-link">Topline Budget & Schedule</span></li>
+          <li><span class="doc-link">Lookbook / Visual References</span></li>
+          <li><span class="doc-link">Market & Audience Snapshot</span></li>
+        </ul>
+
+        <p class="materials-note">
+          In the live platform, opening any document for the first time will trigger a light-weight viewing agreement so your IP is protected as partners evaluate your work.
+        </p>
+      </article>
+    </section>
+
+    <!-- ROADMAP + MATCHED PARTNERS -->
+    <section class="grid grid-2">
+      <article class="card">
+        <div class="section-header">
+          <h2>Project Elevation Roadmap</h2>
+          <button class="info-icon" type="button"
+            title="Targeted suggestions based on how similar projects are packaged and financed in the current market.">
+            i
+          </button>
+        </div>
+        <p class="section-subtitle">
+          You’re already in the investment-ready band. These refinements can help you hold attention and move faster through partner conversations.
+        </p>
+
+        <ul class="roadmap-list">
+          <li>
+            <span class="roadmap-tag">Clarify music strategy:</span>
+            Add a one-page summary of music rights approach and budget allocation to reinforce execution confidence.
+          </li>
+          <li>
+            <span class="roadmap-tag">Tighten comps:</span>
+            Highlight 3–4 recent films with similar tone and budget that performed well on streaming and at festivals.
+          </li>
+          <li>
+            <span class="roadmap-tag">Strengthen festival plan:</span>
+            Include a short list of target festivals and a high-level outreach timeline to demonstrate launch strategy.
+          </li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="section-header">
+          <h2>Aligned Partners</h2>
+          <button class="info-icon" type="button"
+            title="A sample of partners whose mandates align with this project’s genre, budget, and region.">
+            i
+          </button>
+        </div>
+        <p class="section-subtitle">
+          These matches are based on mandate signals and recent activity. In the full platform, you’ll be able to request introductions directly from this view.
+        </p>
+
+        <ul class="matches-list">
+          <li>
+            <span class="match-name">Atlas Street Pictures</span>
+            <span class="match-pill">Drama · US · $250K–$1M</span><br />
+            Strong alignment with period and music-driven stories featuring Black leads.
+          </li>
+          <li>
+            <span class="match-name">Harborline Collective</span>
+            <span class="match-pill">Festival-First · Character-Driven</span><br />
+            Actively reviewing projects with multigenerational arcs and cultural specificity.
+          </li>
+          <li>
+            <span class="match-name">South Loop Originals</span>
+            <span class="match-pill">Chicago-Based · Emerging Voices</span><br />
+            Focused on Chicago narratives and partnerships with local crews and locations.
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    © <span id="year"></span> CineSparq. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
