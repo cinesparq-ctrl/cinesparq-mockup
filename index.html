@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Login</title>
+  <title>CineSparq – The Trust Engine for Investment-Ready Stories</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
       --brand-blue: #0a4f84;
+      --brand-blue-soft: #e5f1fb;
       --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.12);
-      --bg-dark: #020617;
-      --bg-soft: #0b1120;
-      --card: #ffffff;
-      --text-main: #0f172a;
+      --accent-soft: rgba(248, 212, 24, 0.15);
+      --bg-page: #f5f7fb;
+      --text-main: #111827;
       --text-muted: #6b7280;
-      --border-subtle: #e5e7eb;
+      --card-border: #e5e7eb;
     }
 
     * {
@@ -25,447 +24,492 @@
     }
 
     body {
+      background: var(--bg-page);
+      color: var(--text-main);
       min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      background:
-        radial-gradient(circle at top left, #1f2937 0, #020617 45%, #020617 100%),
-        linear-gradient(135deg, #020617, #020617);
-      color: #f9fafb;
     }
 
-    .shell {
-      width: 100%;
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* SHELL ----------------------------------------------------- */
+
+    .page-shell {
       max-width: 1120px;
-      margin: 32px auto;
-      padding: 0 16px;
-      display: flex;
-      gap: 28px;
+      margin: 0 auto;
+      padding: 18px 16px 40px;
     }
 
-    /* LEFT: CINEMATIC PANE */
+    /* NAV ------------------------------------------------------- */
 
-    .left-pane {
-      flex: 1.1;
-      border-radius: 18px;
-      padding: 22px 22px 20px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(248, 212, 24, 0.18) 0, transparent 50%),
-        radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.9) 0, #020617 75%);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      box-shadow:
-        0 24px 80px rgba(15, 23, 42, 0.9),
-        0 0 0 1px rgba(15, 23, 42, 0.8);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .logo-row {
+    .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 40px;
+      padding-bottom: 10px;
     }
 
-    .logo-img {
-      height: 44px;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo {
+      height: 38px;
       width: auto;
       display: block;
     }
 
-    .tag-pill {
-      font-size: 0.78rem;
-      padding: 4px 10px;
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      margin-left: 26px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .nav-link {
+      cursor: pointer;
+    }
+
+    .nav-link span {
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+
+    .nav-link:hover span {
+      border-bottom-color: rgba(15, 23, 42, 0.18);
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .nav-login {
+      font-size: 0.85rem;
+      padding: 7px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.8);
-      color: #e5e7eb;
+      border: 1px solid var(--card-border);
+      background: #ffffff;
+      cursor: pointer;
     }
 
-    .hero-copy {
-      max-width: 420px;
-      margin-bottom: 28px;
+    .nav-cta {
+      font-size: 0.86rem;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--brand-blue);
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .hero-eyebrow {
-      font-size: 0.78rem;
+    .nav-cta span.icon {
+      font-size: 0.9rem;
+    }
+
+    /* HERO ------------------------------------------------------ */
+
+    .hero-card {
+      margin-top: 20px;
+      background: #ffffff;
+      border-radius: 22px;
+      border: 1px solid var(--card-border);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 0;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+    }
+
+    .hero-left {
+      padding: 26px 28px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(226, 232, 240, 0.8);
-      margin-bottom: 8px;
+      letter-spacing: 0.14em;
+      color: var(--brand-blue);
+      background: var(--brand-blue-soft);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .hero-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
     }
 
     .hero-title {
-      font-size: 1.9rem;
-      line-height: 1.2;
-      font-weight: 650;
-      margin-bottom: 10px;
+      font-size: 2.1rem;
+      line-height: 1.15;
+      font-weight: 700;
     }
 
     .hero-title span {
-      color: var(--accent);
+      color: var(--brand-blue);
     }
 
     .hero-subtitle {
-      font-size: 0.92rem;
-      color: #e5e7eb;
-      max-width: 380px;
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 460px;
     }
 
-    .hero-chips {
+    .hero-subtitle strong {
+      color: var(--text-main);
+    }
+
+    .hero-cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 6px;
     }
 
-    .hero-chip {
-      font-size: 0.78rem;
-      padding: 4px 10px;
+    .btn-primary {
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      color: #e5e7eb;
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    .hero-chip.highlight {
-      border-color: rgba(248, 212, 24, 0.6);
-      background: rgba(248, 212, 24, 0.12);
-      color: var(--accent);
-    }
-
-    .hero-footer {
-      font-size: 0.8rem;
-      color: rgba(209, 213, 219, 0.9);
-      border-top: 1px dashed rgba(148, 163, 184, 0.4);
-      padding-top: 10px;
-      margin-top: 18px;
-      max-width: 420px;
-    }
-
-    .hero-footer strong {
-      color: var(--accent);
-    }
-
-    /* RIGHT: LOGIN CARD */
-
-    .right-pane {
-      flex: 0.9;
-      display: flex;
+      border: none;
+      padding: 10px 18px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      color: #111827;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
+      gap: 6px;
+      box-shadow: 0 12px 24px rgba(248, 212, 24, 0.4);
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      border: 1px solid var(--brand-blue);
+      padding: 9px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: #ffffff;
+      color: var(--brand-blue);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary span.icon {
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hero-meta strong {
+      color: var(--brand-blue);
+    }
+
+    .hero-right {
+      position: relative;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(248, 212, 24, 0.35) 0, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(10, 79, 132, 0.6) 0, rgba(10, 79, 132, 0.95) 60%),
+        radial-gradient(circle at 40% 110%, rgba(15, 23, 42, 1) 0, #020617 70%);
+      color: #eff6ff;
+      padding: 20px 22px 22px;
+      display: flex;
+      align-items: flex-end;
       justify-content: center;
     }
 
-    .login-card {
+    .hero-visual-frame {
       width: 100%;
-      max-width: 420px;
-      background: var(--card);
-      color: var(--text-main);
+      max-width: 430px;
       border-radius: 18px;
-      padding: 22px 22px 20px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.85);
+      padding: 14px 14px 16px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .login-header {
-      margin-bottom: 16px;
-    }
-
-    .login-eyebrow {
-      font-size: 0.78rem;
+    .hero-tagline {
+      font-size: 0.8rem;
+      color: #c7d2fe;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-visual-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-visual-sub {
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+      max-width: 310px;
+    }
+
+    .hero-sparq-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .hero-sparq-card {
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 8px 8px 7px;
+      font-size: 0.72rem;
+    }
+
+    .hero-sparq-label {
+      color: #9ca3af;
+      margin-bottom: 2px;
+    }
+
+    .hero-sparq-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .hero-legend {
+      font-size: 0.72rem;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    /* FEATURE STRIP --------------------------------------------- */
+
+    .feature-strip {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      padding: 14px 14px 16px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .feature-kicker {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--brand-blue);
       margin-bottom: 6px;
     }
 
-    .login-title {
-      font-size: 1.2rem;
+    .feature-title {
+      font-size: 0.96rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
 
-    .login-subtitle {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .role-toggle-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 14px;
-      margin-bottom: 16px;
-    }
-
-    .role-card {
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      padding: 10px 10px 9px;
-      cursor: pointer;
-      background: #f9fafb;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      transition: border 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    .feature-body {
       font-size: 0.82rem;
-    }
-
-    .role-card.active {
-      border-color: rgba(10, 79, 132, 0.6);
-      background: #eff6ff;
-      box-shadow: 0 0 0 1px rgba(10, 79, 132, 0.3);
-    }
-
-    .role-label {
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .role-desc {
-      color: var(--text-muted);
-      font-size: 0.78rem;
-    }
-
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 10px;
-    }
-
-    .field-label {
-      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    .field-input {
-      padding: 7px 9px;
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      font-size: 0.86rem;
-      outline: none;
-    }
-
-    .field-input:focus {
-      border-color: rgba(10, 79, 132, 0.7);
-      box-shadow: 0 0 0 1px rgba(10, 79, 132, 0.25);
-    }
-
-    .login-btn {
-      width: 100%;
-      margin-top: 6px;
-      border: none;
-      border-radius: 999px;
-      padding: 9px 14px;
-      font-size: 0.94rem;
-      font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--accent), #fbbf24);
-      color: #111827;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow: 0 10px 24px rgba(248, 212, 24, 0.35);
-    }
-
-    .login-btn:hover {
-      filter: brightness(1.03);
-    }
-
-    .login-meta {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .login-meta strong {
-      color: var(--brand-blue);
-    }
-
-    .helper-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      font-size: 0.78rem;
-    }
-
-    .helper-link {
-      color: var(--brand-blue);
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .helper-link:hover {
-      text-decoration: underline;
-    }
+    /* RESPONSIVE ------------------------------------------------ */
 
     @media (max-width: 960px) {
-      .shell {
-        flex-direction: column;
-        max-width: 640px;
+      .hero-card {
+        grid-template-columns: 1fr;
       }
-      .left-pane {
+      .hero-right {
         order: -1;
+      }
+      .hero-left {
+        padding: 20px 18px 22px;
+      }
+      .hero-right {
+        padding: 18px 18px 20px;
+      }
+      .hero-visual-frame {
+        max-width: 100%;
+      }
+      .feature-strip {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 640px) {
-      .shell {
-        margin: 16px auto;
+      .nav-links {
+        display: none;
       }
-      .left-pane {
-        padding: 18px 16px 16px;
+      .page-shell {
+        padding-inline: 14px;
       }
       .hero-title {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
       }
-      .login-card {
-        padding: 18px 16px 16px;
+      .hero-card {
+        border-radius: 18px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <!-- LEFT: CINEMATIC BRAND PANEL -->
-    <section class="left-pane">
-      <div>
-        <div class="logo-row">
-          <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-img" />
-          <div class="tag-pill">Creative production discovery • In beta</div>
+  <div class="page-shell">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="nav-left">
+        <img
+          src="CS_Logo_light%20bg.png"
+          alt="CineSparq logo"
+          class="nav-logo"
+        />
+        <nav class="nav-links">
+          <div class="nav-link"><span>How it works</span></div>
+          <div class="nav-link"><span>For filmmakers</span></div>
+          <div class="nav-link"><span>For industry partners</span></div>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <a class="nav-login" href="filmmaker-dashboard.html">Filmmaker login</a>
+        <a class="nav-cta" href="industry-partner-dashboard.html">
+          <span class="icon">⬤</span>
+          <span>Partner login</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero-card">
+      <!-- LEFT: COPY & CTAS -->
+      <div class="hero-left">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Creative production trust layer</span>
         </div>
 
-        <div class="hero-copy">
-          <div class="hero-eyebrow">For filmmakers &amp; industry partners</div>
-          <h1 class="hero-title">
-            Turn <span>investment-ready stories</span> into moves on the board.
-          </h1>
-          <p class="hero-subtitle">
-            CineSparq connects scripted and unscripted projects to buyers and investors, using
-            a shared language of risk, readiness, and market fit.
+        <h1 class="hero-title">
+          The trust engine for <span>investment-ready stories.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          CineSparq helps scripted and unscripted projects move out of limbo by
+          translating creative readiness into <strong>clear, investor-aligned signals</strong> that
+          filmmakers and industry partners can finally agree on.
+        </p>
+
+        <div class="hero-cta-row">
+          <a href="filmmaker-dashboard.html" class="btn-primary">
+            <span>Filmmaker login</span>
+          </a>
+
+          <a href="industry-partner-dashboard.html" class="btn-secondary">
+            <span class="icon">▹</span>
+            <span>Industry partner login</span>
+          </a>
+        </div>
+
+        <p class="hero-meta">
+          One platform. Two workspaces. <strong>Filmmakers see signals.</strong> Partners see
+          <strong>curated, mandate-matched opportunities.</strong>
+        </p>
+      </div>
+
+      <!-- RIGHT: CINEMATIC / DATA VISUAL -->
+      <div class="hero-right">
+        <div class="hero-visual-frame">
+          <div class="hero-tagline">Live slate snapshot</div>
+          <div class="hero-visual-title">Sparq-screened opportunities at a glance</div>
+          <p class="hero-visual-sub">
+            Your dashboard surfaces projects that match your format, budget, and market
+            focus — with readiness scored on a 10-point scale.
           </p>
 
-          <div class="hero-chips">
-            <div class="hero-chip highlight">Scripted &amp; Unscripted</div>
-            <div class="hero-chip">Features • Series • Vertical</div>
-            <div class="hero-chip">Discovery that respects your time</div>
+          <div class="hero-sparq-row">
+            <div class="hero-sparq-card">
+              <div class="hero-sparq-label">Portfolio readiness</div>
+              <div class="hero-sparq-value">8.3 / 10</div>
+              <div class="hero-legend">Weighted across active titles</div>
+            </div>
+            <div class="hero-sparq-card">
+              <div class="hero-sparq-label">Mandate fit</div>
+              <div class="hero-sparq-value">92%</div>
+              <div class="hero-legend">Scripted • Urban drama • $250–500K</div>
+            </div>
+            <div class="hero-sparq-card">
+              <div class="hero-sparq-label">IP-safe previews</div>
+              <div class="hero-sparq-value">134</div>
+              <div class="hero-legend">Watermarked, device-bound sessions</div>
+            </div>
+          </div>
+
+          <div class="hero-legend">
+            Scores are directional, not prescriptive. You choose what to back — CineSparq
+            simply reduces the noise.
           </div>
         </div>
       </div>
-
-      <div class="hero-footer">
-        One login. Two perspectives. <strong>Filmmakers see signals.</strong> Industry partners
-        see <strong>curated, Sparq-screened opportunities</strong> matched to their mandates.
-      </div>
     </section>
 
-    <!-- RIGHT: ROLE-BASED LOGIN CARD -->
-    <section class="right-pane">
-      <div class="login-card">
-        <header class="login-header">
-          <div class="login-eyebrow">Welcome</div>
-          <div class="login-title">Sign in to CineSparq</div>
-          <p class="login-subtitle">
-            Choose your role and use your email to access your personalized dashboard.
-          </p>
-        </header>
-
-        <div class="role-toggle-row">
-          <button
-            type="button"
-            class="role-card active"
-            data-role="filmmaker"
-            onclick="selectRole('filmmaker')"
-          >
-            <div class="role-label">Filmmaker</div>
-            <div class="role-desc">Upload projects, track signals, see Sparq scores.</div>
-          </button>
-
-          <button
-            type="button"
-            class="role-card"
-            data-role="partner"
-            onclick="selectRole('partner')"
-          >
-            <div class="role-label">Industry Partner</div>
-            <div class="role-desc">
-              Discover scripted, unscripted, and vertical projects that match your mandate.
-            </div>
-          </button>
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="email">Work email</label>
-          <input
-            id="email"
-            class="field-input"
-            type="email"
-            placeholder="you@company.com"
-            autocomplete="off"
-          />
-        </div>
-
-        <div class="field-group">
-          <label class="field-label" for="password">Password</label>
-          <input
-            id="password"
-            class="field-input"
-            type="password"
-            placeholder="••••••••"
-            autocomplete="off"
-          />
-        </div>
-
-        <button type="button" class="login-btn" onclick="handleLogin()">
-          Continue
-        </button>
-
-        <div class="helper-row">
-          <span class="helper-link">Forgot password?</span>
-          <span class="helper-link">New here? Request access</span>
-        </div>
-
-        <p class="login-meta">
-          Filmmakers and partners see different workspaces, but share the same trusted data.
-          Your view is tailored to the role you select above.
+    <!-- FEATURE STRIP -->
+    <section class="feature-strip">
+      <article class="feature-card">
+        <div class="feature-kicker">Standardized readiness</div>
+        <h3 class="feature-title">A shared language for greenlighting</h3>
+        <p class="feature-body">
+          Move beyond vague praise and pitch decks. CineSparq benchmarks projects across
+          development, packaging, production viability, and market signals so everybody
+          knows where a title stands.
         </p>
-      </div>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-kicker">Investor-aligned discovery</div>
+        <h3 class="feature-title">See more of what fits your mandate</h3>
+        <p class="feature-body">
+          Filter by format (feature, series, vertical), budget, audience, and strategic
+          goals. Our scoring highlights the opportunities that actually match what you’re
+          tasked to find.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-kicker">IP-aware access</div>
+        <h3 class="feature-title">Confidence for both sides of the table</h3>
+        <p class="feature-body">
+          Device-bound previews, time-boxed materials, and clear attestations protect
+          filmmakers’ work while giving partners a clean audit trail for how projects were
+          evaluated.
+        </p>
+      </article>
     </section>
   </div>
-
-  <script>
-    let currentRole = 'filmmaker';
-
-    function selectRole(role) {
-      currentRole = role;
-      const cards = document.querySelectorAll('.role-card');
-      cards.forEach(card => {
-        const r = card.getAttribute('data-role');
-        if (r === role) {
-          card.classList.add('active');
-        } else {
-          card.classList.remove('active');
-        }
-      });
-    }
-
-    function handleLogin() {
-      // In the real app, you'd authenticate then route by role.
-      // For the mockup, we just send them to the correct dashboard.
-      if (currentRole === 'partner') {
-        window.location.href = 'investor-dashboard.html';
-      } else {
-        // Filmmaker
-        window.location.href = 'index.html';
-      }
-    }
-  </script>
 </body>
 </html>
