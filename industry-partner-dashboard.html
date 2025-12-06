@@ -35,6 +35,12 @@
       color: var(--cs-ink);
     }
 
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -258,6 +264,7 @@
       max-width: 1120px;
       margin: 0 auto;
       padding: 1.6rem 1.5rem 2.5rem;
+      flex: 1;
     }
 
     .page-header {
@@ -283,6 +290,12 @@
       margin: 0.25rem 0 0;
       font-size: 0.96rem;
       color: #4b5563;
+    }
+
+    .welcome-text {
+      font-size: 0.88rem;
+      color: #6b7280;
+      margin-bottom: 0.1rem;
     }
 
     /* CONTROLS BAR */
@@ -389,7 +402,7 @@
     }
 
     .activity-item {
-      padding: 0.45rem 0;
+      padding: 0.7rem 0;
       border-bottom: 1px solid #f3f4f6;
     }
 
@@ -398,7 +411,12 @@
     }
 
     .activity-label {
-      font-weight: 500;
+      font-weight: 600;
+      text-decoration: underline;
+      display: inline-block;
+      margin-bottom: 0.1rem;
+      color: var(--cs-deep-blue);
+      cursor: pointer;
     }
 
     .timestamp {
@@ -439,11 +457,6 @@
       background: var(--rating-low-bg);
     }
 
-    .rating-key-card .band-range {
-      font-size: 0.8rem;
-      color: #4b5563;
-    }
-
     .rating-key-card .band-text {
       margin: 0.25rem 0 0;
       font-size: 0.8rem;
@@ -464,6 +477,11 @@
       margin-bottom: 0.75rem;
     }
 
+    .watchlist-text {
+      flex: 1;
+      max-width: 38rem;
+    }
+
     .watchlist-header h2 {
       margin: 0;
       font-size: 1.15rem;
@@ -473,7 +491,6 @@
       margin: 0.25rem 0 0;
       font-size: 0.88rem;
       color: #4b5563;
-      max-width: 100%;
     }
 
     .watchlist-tools {
@@ -522,7 +539,7 @@
     .project-thumbnail img {
       width: 88px;
       height: 124px;
-      object-fit: cover;   /* PORTRAIT posters */
+      object-fit: cover;
       border-radius: 10px;
       background: #111827;
       display: block;
@@ -604,8 +621,7 @@
     /* MORE PROJECTS – THUMBNAILS ONLY */
 
     .more-projects-card {
-      padding-top: 1.2rem;
-      padding-bottom: 1.2rem;
+      padding: 1.6rem 1.5rem 1.6rem;
     }
 
     .more-projects-header {
@@ -613,7 +629,7 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 1rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.9rem;
     }
 
     .more-projects-header h2 {
@@ -630,22 +646,27 @@
 
     .more-strip-wrapper {
       position: relative;
+      padding: 0.3rem 0;
     }
 
     .more-projects-strip {
       display: flex;
-      gap: 0.9rem;
+      gap: 1.1rem;
       overflow-x: auto;
-      padding: 0.35rem 2.2rem 0.35rem;
+      padding: 0.5rem 2.6rem 0.7rem;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .more-poster {
-      flex: 0 0 104px;
+      flex: 0 0 120px;
+      display: flex;
+      justify-content: center;
     }
 
     .more-poster img {
-      width: 104px;
-      height: 150px;
+      width: 120px;
+      height: 174px;
       object-fit: cover;
       border-radius: 10px;
       background: #111827;
@@ -656,8 +677,8 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 999px;
       border: 1px solid #d1d5db;
       background: #f9fafb;
@@ -677,12 +698,34 @@
       right: 0;
     }
 
+    /* BACK TO TOP BUTTON */
+
+    .back-to-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      border-radius: 999px;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.78rem;
+      background: #111827;
+      color: #f9fafb;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+      opacity: 0.85;
+      z-index: 50;
+    }
+
+    .back-to-top:hover {
+      opacity: 1;
+    }
+
     /* FOOTER */
 
     .page-footer {
       max-width: 1120px;
       margin: 1.25rem auto 0;
-      padding: 0 1.5rem;
+      padding: 0 1.5rem 1.25rem;
       font-size: 0.8rem;
       color: #9ca3af;
       text-align: center;
@@ -710,12 +753,12 @@
       }
 
       .more-projects-strip {
-        padding-inline: 2.4rem;
+        padding-inline: 2.8rem;
       }
     }
   </style>
 </head>
-<body>
+<body id="top">
 
   <!-- HEADER – LOGGED-IN -->
   <header class="site-header">
@@ -734,7 +777,7 @@
 
         <div class="header-user">
           <!-- Logged-in user avatar (initial only) -->
-          <div class="user-avatar" aria-label="User profile">A</div>
+          <div class="user-avatar" aria-label="Olivia profile">O</div>
 
           <!-- Hamburger menu for account, settings, support, logout (static in mockup) -->
           <button class="icon-button menu-button" aria-label="Open user menu">
@@ -756,6 +799,7 @@
     <section class="page-header">
       <div class="page-header-top">
         <div class="page-title-block">
+          <div class="welcome-text">Welcome back, Olivia.</div>
           <h1>Industry Partner Dashboard</h1>
           <p>
             A clear view of the projects you’ve engaged with, how you’ve scored them, and where your attention is going.
@@ -873,7 +917,7 @@
     <!-- WATCHLIST -->
     <section class="card watchlist-card">
       <div class="watchlist-header">
-        <div>
+        <div class="watchlist-text">
           <div class="section-header">
             <h2>Your watchlist</h2>
             <button class="info-icon" type="button"
@@ -1130,6 +1174,12 @@
       </div>
     </section>
   </main>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" type="button"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+    Top
+  </button>
 
   <footer class="page-footer">
     © <span id="year"></span> CineSparq. All rights reserved.
