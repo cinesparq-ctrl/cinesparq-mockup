@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CineSparq – Project Detail (Mockup)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --bg-soft: #e5e7eb;
+      --sidebar-bg: #ffffff;
+      --card: #ffffff;
+      --brand-blue: #0a4f84;
+      --accent: #f8d418;
+      --accent-soft: rgba(248, 212, 24, 0.18);
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border-subtle: #e5e7eb;
+      --border-strong: #d1d5db;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --warning: #d97706;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      background: radial-gradient(circle at top left, #ffffff 0, #f3f4f6 40%, #e5e7eb 100%);
+      color: var(--text-main);
+    }
+
+    .sidebar {
+      width: 260px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-subtle);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .logo-image {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-section-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .nav-item:hover {
+      background: #f9fafb;
+    }
+
+    .nav-item.active {
+      background: var(--accent-soft);
+      color: var(--text-main);
+      border: 1px solid rgba(248, 212, 24, 0.6);
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .nav-item span.label {
+      flex: 1;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+      line-height: 1.4;
+    }
+
+    .sidebar-footer strong {
+      color: var(--brand-blue);
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 32px;
+      gap: 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .top-title {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .top-title h1 {
+      font-size: 1.5rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    .top-title p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      color: var(--brand-blue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: #f9fafb;
+    }
+
+    .btn-primary {
+      border-color: transparent;
+      background: linear-gradient(135deg, #f8d418 0%, #f8d418 40%, #0a4f84 100%);
+      color: #111827;
+      font-weight: 600;
+      box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.18),
+        0 0 0 1px rgba(248, 212, 24, 0.25);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 16px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .card-title {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+      margin-bottom: 18px;
+    }
+
+    .metric-card {
+      background: #f9fafb;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      padding: 10px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .metric-ring {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: conic-gradient(
+        #f8d418 0 240deg,
+        #0a4f84 240deg 280deg,
+        #e5e7eb 280deg 360deg
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .metric-ring-inner {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--brand-blue);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .metric-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .metric-value {
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .metric-tag {
+      font-size: 0.72rem;
+      color: var(--brand-blue);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 0.74rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      background: #f9fafb;
+    }
+
+    .chip.soft {
+      border-color: rgba(10, 79, 132, 0.3);
+      color: var(--brand-blue);
+      background: #eff6ff;
+    }
+
+    .watermark-preview {
+      margin-top: 10px;
+      border-radius: 12px;
+      border: 1px dashed var(--border-strong);
+      padding: 10px;
+      font-size: 0.78rem;
+      background: #f9fafb;
+    }
+
+    .watermark-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      border-radius: 999px;
+      background: #fffbeb;
+      color: var(--warning);
+      margin-bottom: 5px;
+      border: 1px solid #fef3c7;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      font-size: 0.8rem;
+    }
+
+    .timeline-dot {
+      margin-top: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .timeline-body {
+      flex: 1;
+    }
+
+    .timeline-label {
+      color: var(--text-main);
+    }
+
+    .timeline-meta {
+      color: var(--text-muted);
+      font-size: 0.74rem;
+    }
+
+    .helper-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        display: none;
+      }
+      .main {
+        padding: 20px 16px;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-image" />
+    </div>
+
+    <div>
+      <div class="nav-section-title">Overview</div>
+      <div class="nav-group">
+        <div class="nav-item">
+          <span class="nav-dot" style="opacity:0;"></span>
+          <span class="label">Discovery Dashboard</span>
+        </div>
+        <div class="nav-item active">
+          <span class="nav-dot"></span>
+          <span class="label">Project Detail</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      When you request an intro, CineSparq shares your identity and mandate with the filmmaker
+      while keeping screeners and access controls managed on-platform.
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="top-title">
+        <h1>As Time Goes By — Project Detail</h1>
+        <p>
+          Sparq-screened narrative feature. Review score breakdown, market fit, and secure
+          access before deciding whether to move into conversation.
+        </p>
+      </div>
+      <div class="top-actions">
+        <a href="investor-dashboard.html" class="btn">Back to projects</a>
+        <button class="btn">Add to slate</button>
+        <button class="btn btn-primary">Request intro</button>
+      </div>
+    </header>
+
+    <section class="content-grid">
+      <!-- Left: Overview + scores + package -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Overview</div>
+              <div class="card-subtitle">
+                Narrative feature • Drama • Chicago / Vietnam • 120 min
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <div style="
+                display:inline-flex;
+                align-items:center;
+                gap:6px;
+                padding:4px 10px;
+                border-radius:999px;
+                border:1px solid #dbeafe;
+                background:#eff6ff;
+                font-size:0.8rem;
+                color:var(--brand-blue);
+              ">
+                <strong>8.4</strong>
+                <span>Overall Sparq score</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-subtitle" style="margin-bottom:10px;">
+            A beloved Chicago radio DJ must confront old ghosts, family secrets, and a lifetime
+            of “almosts” when a long-lost love re-enters his life against the backdrop of war,
+            music, and shifting politics.
+          </p>
+
+          <!-- Score breakdown -->
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-ring">
+                <div class="metric-ring-inner">8.8</div>
+              </div>
+              <div class="metric-labels">
+                <div class="metric-label">Story & craft</div>
+                <div class="metric-value">8.8</div>
+                <div class="metric-tag">Reader & panel consensus</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-ring">
+                <div class="metric-ring-inner">8.2</div>
+              </div>
+              <div class="metric-labels">
+                <div class="metric-label">Audience fit</div>
+                <div class="metric-value">8.2</div>
+                <div class="metric-tag">Black multi-gen drama</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-ring">
+                <div class="metric-ring-inner">8.0</div>
+              </div>
+              <div class="metric-labels">
+                <div class="metric-label">Production readiness</div>
+                <div class="metric-value">8.0</div>
+                <div class="metric-tag">Package nearly complete</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-ring">
+                <div class="metric-ring-inner">7.9</div>
+              </div>
+              <div class="metric-labels">
+                <div class="metric-label">Financial feasibility</div>
+                <div class="metric-value">7.9</div>
+                <div class="metric-tag">Budget vs comps</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Package snapshot -->
+          <div class="card" style="margin-top:8px;">
+            <div class="card-header" style="margin-bottom:6px;">
+              <div class="card-title">Package at a glance</div>
+              <a class="card-link">Download full packet</a>
+            </div>
+            <div class="chip-row">
+              <div class="chip soft">Script locked v3</div>
+              <div class="chip">Lookbook</div>
+              <div class="chip">Prelim budget & schedule</div>
+              <div class="chip">Audience & comps deck</div>
+            </div>
+            <p class="helper-text">
+              In the live product, these links would open secure, watermarked PDFs with device- and
+              account-level access logs.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: screener + mandate signals -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Watermarked screener</div>
+              <div class="card-subtitle">
+                Tier 1 access • 5 views total • this account: 3 remaining
+              </div>
+            </div>
+            <a class="card-link">View access policy</a>
+          </div>
+
+          <div class="watermark-preview">
+            <div class="watermark-tag">Preview: Screener player (mock)</div>
+            <div>
+              • Your anonymized buyer ID appears as a moving watermark over the image.<br />
+              • Playback is tied to this device and your account.<br />
+              • Current session would be logged for the filmmaker’s IP report.
+            </div>
+          </div>
+
+          <p class="helper-text">
+            In the MVP, pressing play would log your IP, device, and timestamp to the filmmaker’s
+            access log without revealing your identity until you request an intro.
+          </p>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Market & mandate signals</div>
+              <div class="card-subtitle">
+                How this project aligns with your stated preferences
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  Strong alignment with <strong>Black prestige drama</strong> and multi-generational audiences.
+                </div>
+                <div class="timeline-meta">
+                  Based on tagged audience profiles and curated comps.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  Budget band matches your preference for
+                  <strong>$1–3M narrative features</strong>.
+                </div>
+                <div class="timeline-meta">
+                  Pulled from your CineSparq mandate profile.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-body">
+                <div class="timeline-label">
+                  2 other vetted buyers have viewed this title in the last 30 days.
+                </div>
+                <div class="timeline-meta">
+                  Competitive but not saturated at this stage.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="helper-text">
+            Requesting an intro will signal serious interest, share your basic mandate with the
+            filmmaker, and move the relationship out of “anonymous data” into curated conversation.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
