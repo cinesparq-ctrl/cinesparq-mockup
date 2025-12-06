@@ -17,7 +17,6 @@
       --text-muted: #6b7280;
       --border-subtle: #e5e7eb;
       --border-strong: #d1d5db;
-      --danger: #dc2626;
       --success: #16a34a;
       --warning: #d97706;
     }
@@ -257,6 +256,7 @@
       margin-bottom: 12px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border-subtle);
+      gap: 8px;
     }
 
     .card-title {
@@ -280,6 +280,14 @@
       text-decoration: underline;
     }
 
+    .card-header-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      font-size: 0.8rem;
+    }
+
     /* HERO SECTION */
 
     .project-hero {
@@ -292,16 +300,16 @@
       width: 130px;
       height: 190px; /* portrait */
       border-radius: 14px;
-      background: linear-gradient(135deg, #0a4f84, #f8d418);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.78rem;
-      font-weight: 650;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      background: #e5e7eb;
+      overflow: hidden;
       flex-shrink: 0;
+    }
+
+    .project-artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
     }
 
     .project-main {
@@ -421,13 +429,13 @@
     }
 
     .tier-pill.tier-3 {
-      border-color: rgba(22, 163, 74, 0.5);
       color: var(--success);
+      border-color: rgba(22, 163, 74, 0.5);
     }
 
     .tier-pill.tier-2 {
-      border-color: rgba(245, 158, 11, 0.5);
       color: var(--warning);
+      border-color: rgba(245, 158, 11, 0.5);
     }
 
     .tier-pill.tier-1 {
@@ -457,63 +465,6 @@
       line-height: 1.5;
     }
 
-    /* WATERMARK / IP */
-
-    .watermark-preview {
-      margin-top: 10px;
-      border-radius: 12px;
-      border: 1px dashed var(--border-strong);
-      padding: 10px;
-      font-size: 0.78rem;
-      background: #f9fafb;
-    }
-
-    .watermark-tag {
-      display: inline-block;
-      padding: 3px 8px;
-      font-size: 0.72rem;
-      border-radius: 999px;
-      background: #fffbeb;
-      color: var(--warning);
-      margin-bottom: 5px;
-      border: 1px solid #fef3c7;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 10px;
-      font-size: 0.8rem;
-    }
-
-    .timeline-dot {
-      margin-top: 4px;
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .timeline-body {
-      flex: 1;
-    }
-
-    .timeline-label {
-      color: var(--text-main);
-    }
-
-    .timeline-meta {
-      color: var(--text-muted);
-      font-size: 0.74rem;
-    }
-
     @media (max-width: 900px) {
       .project-hero {
         flex-direction: column;
@@ -540,6 +491,147 @@
         justify-content: flex-start;
         flex-wrap: wrap;
       }
+      .card-header-actions {
+        align-items: flex-start;
+      }
+    }
+
+    /* MODAL */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      padding: 16px;
+    }
+
+    .modal-overlay.visible {
+      display: flex;
+    }
+
+    .modal {
+      max-width: 480px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 3px solid var(--brand-blue);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+      padding: 18px 18px 16px;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: #9ca3af;
+      padding: 2px;
+      border-radius: 999px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .modal-close-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .modal-body {
+      margin-top: 4px;
+    }
+
+    .modal-text {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .modal-text strong {
+      color: var(--text-main);
+    }
+
+    .modal-field-group {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .modal-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .modal-input {
+      width: 100px;
+      max-width: 40%;
+      padding: 6px 8px;
+      font-size: 0.84rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+    }
+
+    .modal-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .modal-checkbox-row input[type="checkbox"] {
+      margin-top: 2px;
+    }
+
+    .modal-checkbox-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--accent);
+      color: #111827;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 110px;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .modal-policy-link {
+      font-size: 0.8rem;
+      color: var(--brand-blue);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .modal-policy-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -565,7 +657,7 @@
 
     <div class="sidebar-footer">
       When you choose to connect, CineSparq shares your identity and mandate with the filmmaker
-      while keeping access controls and IP protection managed on-platform.
+      while keeping access controls and protection of creative materials managed on-platform.
     </div>
   </aside>
 
@@ -627,7 +719,10 @@
       <div class="card">
         <div class="project-hero">
           <div class="project-artwork">
-            TITLE ART
+            <img
+              src="as-time-goes-by-poster.png"
+              alt="As Time Goes By poster"
+            />
           </div>
           <div class="project-main">
             <div class="project-meta-bubbles">
@@ -749,7 +844,11 @@
               Key materials available if you choose to move forward
             </div>
           </div>
-          <a class="card-link">Download packet</a>
+          <div class="card-header-actions">
+            <a class="card-link" onclick="openPreviewModal('packet')">View packet</a>
+            <a class="card-link" onclick="openPreviewModal('onesheet')">Download one-sheet</a>
+            <a class="card-link" onclick="openPreviewModal('preview')">View preview</a>
+          </div>
         </div>
 
         <div class="chip-row">
@@ -762,36 +861,8 @@
         <ul class="bullet-list">
           <li>Chain of title and rights documentation have been verified at a basic level.</li>
           <li>Budget band aligns with your preferences for $1–3M narrative features.</li>
-          <li>Materials are delivered as secure, watermarked PDFs with access logging.</li>
+          <li>Materials are delivered as structured, professional review packages.</li>
         </ul>
-      </div>
-
-      <!-- SCREENING / IP PROTECTION -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Screening &amp; IP Protection</div>
-            <div class="card-subtitle">
-              How access to this project is structured on CineSparq
-            </div>
-          </div>
-          <a class="card-link">View access policy</a>
-        </div>
-
-        <div class="watermark-preview">
-          <div class="watermark-tag">Tier 1 • Watermarked screener</div>
-          <div>
-            • Your anonymized partner ID appears as a moving watermark over the image.<br />
-            • Playback is tied to this device and your account.<br />
-            • Each viewing session is logged to the filmmaker’s access report without
-              exposing your identity until you choose to connect.
-          </div>
-        </div>
-
-        <p class="helper-text">
-          The goal is to protect the filmmaker’s IP while giving you enough room to evaluate
-          whether this project fits your slate.
-        </p>
       </div>
 
       <!-- MARKET & MANDATE SIGNALS -->
@@ -825,15 +896,61 @@
         </ul>
 
         <p class="helper-text">
-          Choosing <strong>Connect</strong> signals serious interest, shares your basic mandate with the
-          filmmaker, and moves the relationship from anonymous viewing into a curated conversation.
+          Choosing <strong>Connect</strong> signals serious interest and moves the relationship
+          from anonymous viewing into a curated conversation.
         </p>
       </div>
     </section>
   </main>
 
+  <!-- PREVIEW ATTESTATION MODAL (INDUSTRY PARTNERS ONLY) -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal">
+      <button class="modal-close-btn" type="button" onclick="closePreviewModal()" aria-label="Close">
+        ×
+      </button>
+      <div class="modal-body">
+        <p class="modal-text">
+          <strong>Please confirm the following before continuing:</strong>
+        </p>
+        <p class="modal-text">
+          By selecting this box, I attest that I am using these materials exclusively to evaluate
+          the project in alignment with our standard review practices and will not share or apply
+          them outside that scope.
+        </p>
+
+        <div class="modal-field-group">
+          <label for="previewInitials" class="modal-label">Initials</label>
+          <input
+            type="text"
+            id="previewInitials"
+            class="modal-input"
+            maxlength="4"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="modal-checkbox-row">
+          <input type="checkbox" id="previewAgree" />
+          <label for="previewAgree" class="modal-checkbox-label">
+            By selecting this box, I attest that I am using these materials exclusively to evaluate
+            the project in alignment with our standard review practices and will not share or apply
+            them outside that scope.
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-primary" id="previewContinueBtn" type="button" disabled>
+            Continue
+          </button>
+          <a href="#" class="modal-policy-link">View access policy</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Animate score rings from 0 -> target (out of 10)
+    // animate score rings
     document.addEventListener('DOMContentLoaded', function () {
       const rings = document.querySelectorAll('.score-ring[data-score]');
 
@@ -842,7 +959,7 @@
         let current = 0;
 
         function animate() {
-          current += 0.2; // adjust speed here
+          current += 0.2;
           if (current > target) current = target;
 
           const angle = (current / 10) * 360;
@@ -858,7 +975,65 @@
           'conic-gradient(#f8d418 0deg, #e5e7eb 0deg 360deg)';
         requestAnimationFrame(animate);
       });
+
+      // modal logic
+      const initialsInput = document.getElementById('previewInitials');
+      const agreeCheckbox = document.getElementById('previewAgree');
+      const continueBtn = document.getElementById('previewContinueBtn');
+
+      function updateContinueState() {
+        const hasInitials = initialsInput && initialsInput.value.trim().length > 0;
+        const agreed = agreeCheckbox && agreeCheckbox.checked;
+        if (continueBtn) {
+          continueBtn.disabled = !(hasInitials && agreed);
+        }
+      }
+
+      if (initialsInput) {
+        initialsInput.addEventListener('input', updateContinueState);
+      }
+      if (agreeCheckbox) {
+        agreeCheckbox.addEventListener('change', updateContinueState);
+      }
+
+      if (continueBtn) {
+        continueBtn.addEventListener('click', function () {
+          // In the real product, route based on lastTriggerType here.
+          closePreviewModal();
+        });
+      }
     });
+
+    // track what triggered the modal (packet / onesheet / preview)
+    let lastTriggerType = null;
+
+    function openPreviewModal(triggerType) {
+      lastTriggerType = triggerType || null;
+      const modal = document.getElementById('previewModal');
+      const initialsInput = document.getElementById('previewInitials');
+      const agreeCheckbox = document.getElementById('previewAgree');
+      const continueBtn = document.getElementById('previewContinueBtn');
+
+      if (modal) {
+        modal.classList.add('visible');
+      }
+      if (initialsInput) {
+        initialsInput.value = '';
+      }
+      if (agreeCheckbox) {
+        agreeCheckbox.checked = false;
+      }
+      if (continueBtn) {
+        continueBtn.disabled = true;
+      }
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('previewModal');
+      if (modal) {
+        modal.classList.remove('visible');
+      }
+    }
   </script>
 </body>
 </html>
