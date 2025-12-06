@@ -2,737 +2,709 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Investor Dashboard (Mockup)</title>
+  <title>CineSparq – Industry Partner Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Inline styles so you don't have to chase a separate CSS file -->
   <style>
     :root {
-      --bg: #f3f4f6;
-      --bg-soft: #e5e7eb;
-      --sidebar-bg: #ffffff;
-      --card: #ffffff;
-      --brand-blue: #0a4f84;
-      --accent: #f8d418;
-      --accent-soft: rgba(248, 212, 24, 0.18);
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border-subtle: #e5e7eb;
-      --border-strong: #d1d5db;
-      --danger: #dc2626;
-      --success: #16a34a;
-      --warning: #d97706;
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      background: radial-gradient(circle at top left, #ffffff 0, #f3f4f6 40%, #e5e7eb 100%);
-      color: var(--text-main);
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* SIDEBAR */
+    /* HEADER */
 
-    .sidebar {
-      width: 260px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border-subtle);
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .logo-image {
-      height: 36px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-section-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .nav-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .nav-item:hover {
-      background: #f9fafb;
-    }
-
-    .nav-item.active {
-      background: var(--accent-soft);
-      color: var(--text-main);
-      border: 1px solid rgba(248, 212, 24, 0.6);
-    }
-
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .nav-item span.label {
-      flex: 1;
-    }
-
-    .nav-item span.badge {
-      font-size: 0.72rem;
-      background: #eff6ff;
-      padding: 2px 8px;
-      border-radius: 999px;
-      color: var(--brand-blue);
-      border: 1px solid #dbeafe;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 12px;
-      line-height: 1.4;
-    }
-
-    .sidebar-footer strong {
-      color: var(--brand-blue);
-    }
-
-    /* MAIN LAYOUT */
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 28px 32px;
-      gap: 24px;
-    }
-
-    .top-bar {
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
     }
 
-    .top-title {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .top-title h1 {
-      font-size: 1.5rem;
-      font-weight: 650;
-      letter-spacing: 0.01em;
-    }
-
-    .top-title p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      max-width: 560px;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .btn {
-      border: 1px solid var(--border-strong);
-      border-radius: 999px;
-      padding: 9px 16px;
-      font-size: 0.9rem;
-      cursor: pointer;
+    .brand {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #ffffff;
-      color: var(--brand-blue);
-      text-decoration: none;
-      white-space: nowrap;
+      gap: 0.5rem;
     }
 
-    .btn:hover {
-      background: #f9fafb;
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--cs-gold);
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .dashboard-nav a {
+      position: relative;
+      padding-bottom: 0.25rem;
+      color: #4b5563;
+    }
+
+    .dashboard-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.2s ease;
+    }
+
+    .dashboard-nav a:hover::after {
+      width: 100%;
+    }
+
+    .dashboard-nav a.active {
+      color: var(--cs-deep-blue);
+      font-weight: 600;
+    }
+
+    .dashboard-nav a.active::after {
+      width: 100%;
+    }
+
+    .btn-login {
+      background: var(--cs-gold);
+      color: var(--cs-ink);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* BUTTONS */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     .btn-primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #f8d418 0%, #f8d418 40%, #0a4f84 100%);
-      color: #111827;
-      font-weight: 600;
-      box-shadow:
-        0 8px 20px rgba(15, 23, 42, 0.18),
-        0 0 0 1px rgba(248, 212, 24, 0.25);
+      background: var(--cs-deep-blue);
+      color: var(--cs-white);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
     }
 
-    .avatar-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: #e5e7eb;
-      border: 1px solid var(--border-subtle);
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     }
 
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1.9fr 1.3fr;
-      gap: 24px;
-      align-items: flex-start;
+    .btn-ghost {
+      background: transparent;
+      color: var(--cs-deep-blue);
     }
+
+    .btn-small {
+      padding: 0.45rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .icon-button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.25rem;
+      font-size: 1.1rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+    }
+
+    .icon-button:hover {
+      color: var(--cs-deep-blue);
+    }
+
+    /* LAYOUT */
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 2.5rem;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+      margin: 0.35rem 0 0;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    /* METRICS */
+
+    .metrics-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .metric-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--cs-cream);
+      border: 2px solid var(--cs-deep-blue);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    .metric-number {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--cs-deep-blue);
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: #4b5563;
+      margin-top: 0.35rem;
+    }
+
+    /* CARDS */
 
     .card {
-      background: var(--card);
-      border-radius: 14px;
-      border: 1px solid var(--border-subtle);
-      padding: 18px 18px 16px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
-    }
-
-    .card + .card {
-      margin-top: 12px;
+      background: var(--cs-white);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     }
 
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .card-title {
-      font-size: 0.96rem;
-      font-weight: 600;
+      margin: 0;
+      font-size: 1.1rem;
     }
 
     .card-subtitle {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+      margin: 0;
+      font-size: 0.9rem;
+      color: #4b5563;
     }
 
-    .card-link {
-      font-size: 0.8rem;
-      color: var(--brand-blue);
-      cursor: pointer;
-      text-decoration: none;
-    }
+    /* MAIN GRID: WATCHLIST + ACTIVITY + QUALIFIED PROJECTS */
 
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    /* METRIC FILTERS */
-
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-      margin-bottom: 18px;
-    }
-
-    .metric-card {
-      background: #f9fafb;
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      padding: 10px 10px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .metric-labels {
+    .main-grid {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 1.5rem;
     }
 
-    .metric-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .metric-value {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .metric-tag {
-      font-size: 0.72rem;
-      color: var(--brand-blue);
-    }
-
-    /* PROJECT CARDS */
-
-    .project-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      padding: 14px 14px 12px;
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
+    .top-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+      gap: 1.5rem;
       align-items: flex-start;
-      margin-bottom: 6px;
     }
 
-    .project-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-      margin-bottom: 2px;
+    /* TABLE / LIST STYLING */
+
+    .project-list {
+      list-style: none;
+      margin: 0.75rem 0 0;
+      padding: 0;
     }
 
-    .project-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .project-pill {
-      display: inline-flex;
+    .project-row {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1.6fr) auto;
+      gap: 1rem;
       align-items: center;
-      gap: 4px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      background: #eff6ff;
-      color: var(--brand-blue);
-      border: 1px solid #dbeafe;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f3f4f6;
     }
 
-    .chip-row {
+    .project-row:last-child {
+      border-bottom: none;
+    }
+
+    .project-thumbnail img {
+      width: 80px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #111827;
+    }
+
+    .project-main h3 {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .project-main .project-type {
+      margin: 0.1rem 0 0.25rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .logline {
+      margin: 0.25rem 0 0.4rem;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
+    .chip-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 0.35rem;
     }
 
     .chip {
-      font-size: 0.74rem;
-      padding: 3px 9px;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      background: #f9fafb;
-    }
-
-    .chip.soft {
-      border-color: rgba(10, 79, 132, 0.3);
-      color: var(--brand-blue);
-      background: #eff6ff;
-    }
-
-    .chip.alert {
-      border-color: rgba(220, 38, 38, 0.35);
-      color: var(--danger);
-      background: #fef2f2;
-    }
-
-    .project-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
+      background: #e5e7eb;
+      color: #374151;
     }
 
     .project-meta {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* RIGHT COLUMN */
-
-    .stack {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-    }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 10px;
+      align-items: flex-end;
+      gap: 0.4rem;
       font-size: 0.8rem;
     }
 
-    .timeline-dot {
-      margin-top: 4px;
-      width: 7px;
-      height: 7px;
+    .sparq-rating {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.75rem;
       border-radius: 999px;
-      background: var(--accent);
-      flex-shrink: 0;
+      font-weight: 600;
+      font-size: 0.8rem;
     }
 
-    .timeline-body {
-      flex: 1;
+    .sparq-rating-high {
+      background: var(--cs-deep-blue);
+      color: var(--cs-white);
     }
 
-    .timeline-label {
-      color: var(--text-main);
+    .sparq-rating-medium {
+      background: var(--cs-gold);
+      color: var(--cs-ink);
     }
 
-    .timeline-meta {
-      color: var(--text-muted);
-      font-size: 0.74rem;
+    .sparq-rating-low {
+      background: #fecaca;
+      color: var(--cs-ink);
     }
 
-    .helper-text {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      line-height: 1.5;
+    .project-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
-    @media (max-width: 1024px) {
-      .content-grid {
+    .timestamp {
+      color: #9ca3af;
+      font-size: 0.75rem;
+    }
+
+    /* RECENT ACTIVITY LIST */
+
+    .activity-list {
+      list-style: none;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      font-size: 0.85rem;
+    }
+
+    .activity-item {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-label {
+      font-weight: 500;
+    }
+
+    /* QUALIFIED PROJECTS SECTION */
+
+    .qualified-projects .card-subtitle {
+      max-width: 32rem;
+    }
+
+    /* LEGEND */
+
+    .sparq-legend {
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .legend-label {
+      font-weight: 600;
+    }
+
+    .legend-pill {
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+    }
+
+    /* FOOTER */
+
+    .page-footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .top-row {
         grid-template-columns: 1fr;
       }
-    }
 
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
+      .project-row {
+        grid-template-columns: 70px minmax(0, 1fr);
+        grid-template-rows: auto auto;
       }
-      .sidebar {
-        display: none;
-      }
-      .main {
-        padding: 20px 16px;
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .top-actions {
-        justify-content: flex-start;
+
+      .project-meta {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.5rem;
+        grid-column: 1 / -1;
       }
     }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="CS_Logo_light%20bg.png" alt="CineSparq logo" class="logo-image" />
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-name">CineSparq</span>
+      </a>
+
+      <nav class="dashboard-nav">
+        <!-- No (MVP) label, and Dashboard goes to THIS page -->
+        <a href="industry-partner-dashboard.html" class="active">Dashboard</a>
+        <a href="#">Projects</a>
+        <a href="#">Reports</a>
+      </nav>
+
+      <a href="login.html" class="btn-login">Login</a>
     </div>
+  </header>
 
-    <div>
-      <div class="nav-section-title">Overview</div>
-      <div class="nav-group">
-        <div class="nav-item active">
-          <span class="nav-dot"></span>
-          <span class="label">Discovery Dashboard</span>
-          <span class="badge">MVP</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Watchlist</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Access & Compliance</span>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="nav-section-title">Signals</div>
-      <div class="nav-group">
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Mandate Fit</span>
-          <span class="badge">Updated</span>
-        </div>
-        <div class="nav-item">
-          <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Recent Screeners</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      Your views and saves are shared with filmmakers as <strong>signals</strong>, not names,
-      until you request an introduction.
-    </div>
-  </aside>
-
-  <main class="main">
-    <header class="top-bar">
-  <div class="top-title">
-    <span class="view-label">Industry Partner Dashboard</span>
-    <h1>Welcome back, Steve</h1>
-    <p>Your curated matches and mandate-ready opportunities are below.</p>
-  </div>
-</header>
-
-    <section class="content-grid">
-      <!-- Left: Filters + project feed -->
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    <header class="page-header">
       <div>
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Qualified Projects</div>
-              <div class="card-subtitle">Filtered to your current mandate</div>
-            </div>
-            <a class="card-link">Reset filters</a>
-          </div>
-
-          <!-- Filters row -->
-          <div class="metrics-row">
-            <div class="metric-card">
-              <div class="metric-labels">
-                <div class="metric-label">Format</div>
-                <div class="metric-value">Features • Series • Verticals</div>
-                <div class="metric-tag">Tap to refine (mock)</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-labels">
-                <div class="metric-label">Budget band</div>
-                <div class="metric-value">&lt; $5M • $5–15M</div>
-                <div class="metric-tag">Capped for MVP</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-labels">
-                <div class="metric-label">Region</div>
-                <div class="metric-value">US • UK • Global</div>
-                <div class="metric-tag">Festival-ready only</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-labels">
-                <div class="metric-label">Sparq range</div>
-                <div class="metric-value">7.0 – 9.5</div>
-                <div class="metric-tag">Pre-screened</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project cards -->
-          <div class="project-card">
-            <div class="project-header">
-              <div>
-                <div class="project-title">As Time Goes By</div>
-                <div class="project-subtitle">
-                  Grounded period drama • Feature • Chicago / Vietnam
-                </div>
-              </div>
-              <div class="project-pill">
-                <span>8.4</span>
-                <span>• Narrative feature</span>
-              </div>
-            </div>
-
-            <p class="card-subtitle" style="margin-bottom:8px;">
-              A Chicago radio legend fights for love, legacy, and survival across decades of social change.
-            </p>
-
-            <div class="chip-row">
-              <div class="chip soft">Audience: Black multi-gen drama</div>
-              <div class="chip">Budget band: $1–3M</div>
-              <div class="chip">Status: Packaging complete</div>
-            </div>
-
-            <div class="project-footer">
-              <div class="project-meta">
-                3 prior views • 2 saves • Strong US streamer comps
-              </div>
-              <div style="display:flex;gap:8px;">
-                <a href="project-detail.html" class="btn">Open details</a>
-                <button class="btn btn-primary">Save</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-header">
-              <div>
-                <div class="project-title">Southside Bloom</div>
-                <div class="project-subtitle">
-                  Coming-of-age • Feature • South Side Chicago
-                </div>
-              </div>
-              <div class="project-pill">
-                <span>—</span>
-                <span>score pending</span>
-              </div>
-            </div>
-
-            <p class="card-subtitle" style="margin-bottom:8px;">
-              A teen florist-turned-hustler navigates love, loyalty, and gentrification on Chicago’s South Side.
-            </p>
-
-            <div class="chip-row">
-              <div class="chip soft">Audience: Gen Z + Millennial</div>
-              <div class="chip">Budget band: Sub-$1M</div>
-              <div class="chip">Status: In Sparq review</div>
-            </div>
-
-            <div class="project-footer">
-              <div class="project-meta">
-                1 view • 1 save • Ideal for regional funds
-              </div>
-              <div style="display:flex;gap:8px;">
-                <a href="project-detail.html" class="btn">Open details</a>
-                <button class="btn">Pass</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-header">
-              <div>
-                <div class="project-title">Vertical Series Pilot</div>
-                <div class="project-subtitle">
-                  Microdrama • Vertical series • Social-first
-                </div>
-              </div>
-              <div class="project-pill">
-                <span>7.2</span>
-                <span>• Microdrama</span>
-              </div>
-            </div>
-
-            <p class="card-subtitle" style="margin-bottom:8px;">
-              A 10-part vertical series following a junior exec trying to greenlight the stories she never sees on screen.
-            </p>
-
-            <div class="chip-row">
-              <div class="chip soft">Audience: Creator economy</div>
-              <div class="chip">Budget band: Micro-budget</div>
-              <div class="chip">Status: Ready for pilots</div>
-            </div>
-
-            <div class="project-footer">
-              <div class="project-meta">
-                2 views • 1 save • Vertical-first buyers flagged
-              </div>
-              <div style="display:flex;gap:8px;">
-                <a href="project-detail.html" class="btn">Open details</a>
-                <button class="btn btn-primary">Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h1 class="page-title">Industry Partner Dashboard</h1>
+        <p class="page-subtitle">
+          See the projects you’ve engaged with, what’s on your watchlist, and which titles are most aligned with your mandates.
+        </p>
       </div>
+      <button class="btn btn-primary btn-small">Download project one-sheet</button>
+    </header>
 
-      <!-- Right: Watchlist + screening activity -->
-      <div class="stack">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Your Watchlist</div>
-              <div class="card-subtitle">Projects you’ve signaled interest in</div>
-            </div>
-            <a class="card-link">Open all</a>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  <strong>As Time Goes By</strong> moved to
-                  <em>High interest</em> for your fund.
-                </div>
-                <div class="timeline-meta">
-                  Today • Internal notes added • Screener viewed 2/5 times
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  <strong>Vertical Series Pilot</strong> saved to
-                  <em>Digital originals</em> slate.
-                </div>
-                <div class="timeline-meta">
-                  Yesterday • 1 of 3 execs on your team has viewed
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p class="helper-text">
-            In the MVP, your watchlist represents <strong>soft interest</strong>. Filmmakers only see
-            that a vetted buyer has saved their project — not who — until you request an intro.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Recent Screening Activity</div>
-              <div class="card-subtitle">How you’ve used your access this week</div>
-            </div>
-            <a class="card-link">View access report →</a>
-          </div>
-
-          <div class="chip-row">
-            <div class="chip soft">5 unique projects viewed</div>
-            <div class="chip">3 saved to watchlist</div>
-            <div class="chip alert">1 project at view threshold</div>
-          </div>
-
-          <p class="helper-text">
-            View thresholds help you avoid “burning” a relationship with a project by over-watching
-            before you’re ready to move the conversation forward.
-          </p>
-        </div>
+    <!-- METRICS -->
+    <section class="metrics-row">
+      <div class="metric-circle">
+        <span class="metric-number">5</span>
+        <span class="metric-label">Unique projects viewed</span>
+      </div>
+      <div class="metric-circle">
+        <span class="metric-number">3</span>
+        <span class="metric-label">Saved to watchlist</span>
       </div>
     </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+
+      <!-- TOP ROW: WATCHLIST + RECENT ACTIVITY -->
+      <div class="top-row">
+
+        <!-- WATCHLIST -->
+        <section class="card watchlist">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Your Watchlist</h2>
+              <p class="card-subtitle">
+                Your watchlist indicates soft interest. Filmmakers only learn your identity when you request an introduction.
+              </p>
+            </div>
+          </div>
+
+          <ul class="project-list">
+
+            <!-- AS TIME GOES BY -->
+            <li class="project-row">
+              <div class="project-thumbnail">
+                <!-- Update src to your actual thumbnail path -->
+                <img src="as-time-goes-by-thumb.jpg" alt="As Time Goes By poster" />
+              </div>
+
+              <div class="project-main">
+                <h3>As Time Goes By</h3>
+                <p class="project-type">Feature Film · Period Drama</p>
+                <p class="logline">
+                  A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him.
+                </p>
+                <ul class="chip-list">
+                  <li class="chip">1950s–2000s Chicago</li>
+                  <li class="chip">Music & culture</li>
+                  <li class="chip">Character-driven</li>
+                </ul>
+              </div>
+
+              <div class="project-meta">
+                <!-- Sparq Rating: no project type, just numeric -->
+                <span class="sparq-rating sparq-rating-high">8.4/10</span>
+
+                <div class="project-actions">
+                  <!-- Simple icon-style buttons instead of "Pass" -->
+                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
+                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
+
+                  <!-- REVIEW button navigates to project-detail-partner.html -->
+                  <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
+                </div>
+
+                <span class="timestamp">Updated 2 days ago</span>
+              </div>
+            </li>
+
+            <!-- LEARNING TO FALL IN LOVE -->
+            <li class="project-row">
+              <div class="project-thumbnail">
+                <img src="learning-to-fall-in-love-thumb.jpg" alt="Learning to Fall In Love poster" />
+              </div>
+
+              <div class="project-main">
+                <h3>Learning to Fall In Love</h3>
+                <p class="project-type">Feature Film · Romantic Comedy · Asian Market</p>
+                <p class="logline">
+                  After a major setback, a successful retiree trades love for ambition until life forces him to learn how to open his heart again.
+                </p>
+                <ul class="chip-list">
+                  <li class="chip">Romantic Comedy</li>
+                  <li class="chip">Witty</li>
+                  <li class="chip">Light-hearted</li>
+                  <li class="chip">Touching</li>
+                  <li class="chip">Asian talent & locations</li>
+                </ul>
+              </div>
+
+              <div class="project-meta">
+                <span class="sparq-rating sparq-rating-medium">7.6/10</span>
+                <div class="project-actions">
+                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
+                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
+                  <button class="btn btn-ghost btn-small" type="button">Review</button>
+                </div>
+                <span class="timestamp">Updated 5 days ago</span>
+              </div>
+            </li>
+
+            <!-- ABYSS OF DECEPTIONS (VERTICAL SERIES MICRODRAMA) -->
+            <li class="project-row">
+              <div class="project-thumbnail">
+                <img src="abyss-poster.jpg" alt="Abyss of Deceptions vertical series poster" />
+              </div>
+
+              <div class="project-main">
+                <h3>Abyss of Deceptions</h3>
+                <p class="project-type">Microdrama · Vertical Series · Coming-of-age Psychological Thriller</p>
+                <p class="logline">
+                  When a guarded teen escapes into a secret vertical video account, he uncovers anonymous posts exposing his friends’ darkest truths—and realizes somebody is scripting his breakdown in real time.
+                </p>
+                <ul class="chip-list">
+                  <li class="chip">Vertical series</li>
+                  <li class="chip">Coming-of-age</li>
+                  <li class="chip">Psychological thriller</li>
+                  <li class="chip">Social suspense</li>
+                </ul>
+              </div>
+
+              <div class="project-meta">
+                <span class="sparq-rating sparq-rating-high">8.1/10</span>
+                <div class="project-actions">
+                  <button class="icon-button" title="Save to watchlist">&#9733;</button>
+                  <button class="icon-button" title="Mark as viewed">&#128065;</button>
+                  <button class="btn btn-ghost btn-small" type="button">Review</button>
+                </div>
+                <span class="timestamp">Updated 1 day ago</span>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- RECENT SCORING ACTIVITY -->
+        <section class="card recent-activity">
+          <div class="card-header">
+            <h2 class="card-title">Recent scoring activity</h2>
+          </div>
+
+          <ul class="activity-list">
+            <li class="activity-item">
+              <span class="activity-label">As Time Goes By</span><br />
+              Updated readiness score to <strong>8.4/10</strong>
+              <div class="timestamp">2 days ago</div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-label">Learning to Fall In Love</span><br />
+              Added to watchlist
+              <div class="timestamp">5 days ago</div>
+            </li>
+            <li class="activity-item">
+              <span class="activity-label">Abyss of Deceptions</span><br />
+              Marked as high interest
+              <div class="timestamp">1 week ago</div>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- QUALIFIED PROJECTS -->
+      <section class="card qualified-projects">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Qualified projects for your mandates</h2>
+            <p class="card-subtitle">
+              Projects that meet or exceed your Sparq Rating threshold based on your stated interests, markets, and financial parameters.
+            </p>
+          </div>
+        </div>
+
+        <ul class="project-list">
+          <!-- You can repeat similar rows here or keep it simple for the demo -->
+          <li class="project-row">
+            <div class="project-thumbnail">
+              <img src="as-time-goes-by-thumb.jpg" alt="As Time Goes By poster" />
+            </div>
+            <div class="project-main">
+              <h3>As Time Goes By</h3>
+              <p class="project-type">Feature Film · Period Drama</p>
+              <p class="logline">
+                A gifted DJ fights to protect his sound, his city, and the love of his life as Chicago transforms around him.
+              </p>
+            </div>
+            <div class="project-meta">
+              <span class="sparq-rating sparq-rating-high">8.4/10</span>
+              <div class="project-actions">
+                <button class="icon-button" title="Save to watchlist">&#9733;</button>
+                <button class="icon-button" title="Mark as viewed">&#128065;</button>
+                <a href="project-detail-partner.html" class="btn btn-ghost btn-small">Review</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- SPARQ RATING LEGEND -->
+    <section class="sparq-legend">
+      <span class="legend-label">Sparq Rating key:</span>
+      <span class="legend-pill sparq-rating-high">8.0–10 · Strong fit</span>
+      <span class="legend-pill sparq-rating-medium">6.0–7.9 · Emerging</span>
+      <span class="legend-pill sparq-rating-low">&lt; 6.0 · Early stage</span>
+    </section>
+
+    <footer class="page-footer">
+      © <span id="year"></span> CineSparq. All rights reserved.
+    </footer>
   </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
