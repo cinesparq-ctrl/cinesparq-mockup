@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Project Detail (Mockup)</title>
+  <title>CineSparq – Industry Partner View</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -36,6 +36,8 @@
       color: var(--text-main);
     }
 
+    /* SIDEBAR */
+
     .sidebar {
       width: 260px;
       background: var(--sidebar-bg);
@@ -53,7 +55,7 @@
     }
 
     .logo-image {
-      height: 36px;
+      height: 44px; /* bigger logo */
       width: auto;
       display: block;
     }
@@ -118,6 +120,8 @@
       color: var(--brand-blue);
     }
 
+    /* MAIN */
+
     .main {
       flex: 1;
       display: flex;
@@ -150,7 +154,15 @@
     .top-title p {
       font-size: 0.9rem;
       color: var(--text-muted);
-      max-width: 600px;
+      max-width: 640px;
+    }
+
+    .top-title span.view-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--brand-blue);
+      font-weight: 600;
     }
 
     .top-actions {
@@ -162,7 +174,6 @@
     }
 
     .btn {
-      border: 1px solid var(--border-strong);
       border-radius: 999px;
       padding: 9px 16px;
       font-size: 0.9rem;
@@ -170,10 +181,11 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #ffffff;
-      color: var(--brand-blue);
       text-decoration: none;
       white-space: nowrap;
+      border: 1px solid var(--border-strong);
+      background: #ffffff;
+      color: var(--brand-blue);
     }
 
     .btn:hover {
@@ -181,20 +193,29 @@
     }
 
     .btn-primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #f8d418 0%, #f8d418 40%, #0a4f84 100%);
+      background: var(--accent);
       color: #111827;
+      border-color: var(--accent);
       font-weight: 600;
-      box-shadow:
-        0 8px 20px rgba(15, 23, 42, 0.18),
-        0 0 0 1px rgba(248, 212, 24, 0.25);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
     }
 
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1.8fr 1.2fr;
-      gap: 24px;
-      align-items: flex-start;
+    .btn-neutral {
+      background: #ffffff;
+      color: var(--brand-blue);
+    }
+
+    .btn-danger {
+      background: #ffffff;
+      color: var(--danger);
+      border-color: rgba(220, 38, 38, 0.4);
+    }
+
+    .page-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 6px;
     }
 
     .card {
@@ -224,72 +245,60 @@
       color: var(--text-muted);
     }
 
-    .metrics-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 4px;
-      margin-bottom: 18px;
+    .card-link {
+      font-size: 0.8rem;
+      color: var(--brand-blue);
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    .metric-card {
-      background: #f9fafb;
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+    /* HERO SECTION */
+
+    .project-hero {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .project-artwork {
+      width: 150px;
+      height: 90px;
       border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      padding: 10px 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .metric-ring {
-      position: relative;
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      background: conic-gradient(
-        #f8d418 0 240deg,
-        #0a4f84 240deg 280deg,
-        #e5e7eb 280deg 360deg
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .metric-ring-inner {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: #ffffff;
+      background: linear-gradient(135deg, #0a4f84, #f8d418);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--brand-blue);
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-weight: 650;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
     }
 
-    .metric-labels {
+    .project-main {
+      flex: 1;
+    }
+
+    .project-meta-bubbles {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      margin-bottom: 8px;
     }
 
-    .metric-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .metric-value {
-      font-size: 0.96rem;
-      font-weight: 600;
-    }
-
-    .metric-tag {
-      font-size: 0.72rem;
+    .meta-bubble {
+      font-size: 0.74rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
       color: var(--brand-blue);
+      border: 1px solid #dbeafe;
     }
 
     .chip-row {
@@ -313,6 +322,77 @@
       color: var(--brand-blue);
       background: #eff6ff;
     }
+
+    /* LARGE SCORE RINGS */
+
+    .score-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: flex-start;
+    }
+
+    .score-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 110px;
+    }
+
+    .score-ring {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      border-radius: 999px;
+      background: conic-gradient(
+        #f8d418 0 240deg,
+        #0a4f84 240deg 270deg,
+        #e5e7eb 270deg 360deg
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-ring-inner {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 650;
+      color: var(--brand-blue);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .score-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      max-width: 120px;
+    }
+
+    /* BULLETS WITH CLEAN WRAP */
+
+    .bullet-list {
+      list-style-type: disc;
+      list-style-position: outside;
+      margin-left: 1.1rem;
+      margin-top: 4px;
+    }
+
+    .bullet-list li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    /* WATERMARK / IP */
 
     .watermark-preview {
       margin-top: 10px;
@@ -376,9 +456,12 @@
       line-height: 1.5;
     }
 
-    @media (max-width: 1024px) {
-      .content-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      .project-hero {
+        flex-direction: column;
+      }
+      .score-row {
+        justify-content: center;
       }
     }
 
@@ -413,218 +496,215 @@
       <div class="nav-group">
         <div class="nav-item">
           <span class="nav-dot" style="opacity:0;"></span>
-          <span class="label">Discovery Dashboard</span>
+          <span class="label">Discovery</span>
         </div>
         <div class="nav-item active">
           <span class="nav-dot"></span>
-          <span class="label">Project Detail</span>
+          <span class="label">Project – Industry Partner View</span>
         </div>
       </div>
     </div>
 
     <div class="sidebar-footer">
-      When you request an intro, CineSparq shares your identity and mandate with the filmmaker
-      while keeping screeners and access controls managed on-platform.
+      When you request a meeting, CineSparq shares your identity and mandate with the filmmaker
+      while keeping access controls and IP protection managed on-platform.
     </div>
   </aside>
 
   <main class="main">
     <header class="top-bar">
       <div class="top-title">
-        <h1>As Time Goes By — Project Detail</h1>
+        <span class="view-label">Industry Partner View</span>
+        <h1>As Time Goes By</h1>
         <p>
-          Sparq-screened narrative feature. Review score breakdown, market fit, and secure
-          access before deciding whether to move into conversation.
+          Sparq-screened narrative feature. Review the project at a glance, see how it fits your
+          mandate, and decide whether to save it, pass, or move toward a meeting.
         </p>
       </div>
       <div class="top-actions">
-        <a href="investor-dashboard.html" class="btn">Back to projects</a>
-        <button class="btn">Add to slate</button>
-        <button class="btn btn-primary">Request intro</button>
+        <a href="investor-dashboard.html" class="btn btn-neutral">Back to projects</a>
+        <button class="btn btn-primary">Save (favorites)</button>
+        <button class="btn btn-danger">Pass</button>
+        <button class="btn btn-primary">Request meeting</button>
       </div>
     </header>
 
-    <section class="content-grid">
-      <!-- Left: Overview + scores + package -->
-      <div>
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Overview</div>
-              <div class="card-subtitle">
-                Narrative feature • Drama • Chicago / Vietnam • 120 min
-              </div>
-            </div>
-            <div style="text-align:right;">
-              <div style="
-                display:inline-flex;
-                align-items:center;
-                gap:6px;
-                padding:4px 10px;
-                border-radius:999px;
-                border:1px solid #dbeafe;
-                background:#eff6ff;
-                font-size:0.8rem;
-                color:var(--brand-blue);
-              ">
-                <strong>8.4</strong>
-                <span>Overall Sparq score</span>
-              </div>
-            </div>
+    <section class="page-stack">
+      <!-- HERO: ARTWORK + META + TASTE -->
+      <div class="card">
+        <div class="project-hero">
+          <div class="project-artwork">
+            TITLE ART
           </div>
+          <div class="project-main">
+            <div class="project-meta-bubbles">
+              <div class="meta-bubble">Narrative feature</div>
+              <div class="meta-bubble">Drama</div>
+              <div class="meta-bubble">Chicago / Vietnam</div>
+              <div class="meta-bubble">120 minutes</div>
+            </div>
 
-          <p class="card-subtitle" style="margin-bottom:10px;">
-            A beloved Chicago radio DJ must confront old ghosts, family secrets, and a lifetime
-            of “almosts” when a long-lost love re-enters his life against the backdrop of war,
-            music, and shifting politics.
-          </p>
-
-          <!-- Score breakdown -->
-          <div class="metrics-row">
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">8.8</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Story & craft</div>
-                <div class="metric-value">8.8</div>
-                <div class="metric-tag">Reader & panel consensus</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">8.2</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Audience fit</div>
-                <div class="metric-value">8.2</div>
-                <div class="metric-tag">Black multi-gen drama</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">8.0</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Production readiness</div>
-                <div class="metric-value">8.0</div>
-                <div class="metric-tag">Package nearly complete</div>
-              </div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-ring">
-                <div class="metric-ring-inner">7.9</div>
-              </div>
-              <div class="metric-labels">
-                <div class="metric-label">Financial feasibility</div>
-                <div class="metric-value">7.9</div>
-                <div class="metric-tag">Budget vs comps</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Package snapshot -->
-          <div class="card" style="margin-top:8px;">
-            <div class="card-header" style="margin-bottom:6px;">
-              <div class="card-title">Package at a glance</div>
-              <a class="card-link">Download full packet</a>
-            </div>
-            <div class="chip-row">
-              <div class="chip soft">Script locked v3</div>
-              <div class="chip">Lookbook</div>
-              <div class="chip">Prelim budget & schedule</div>
-              <div class="chip">Audience & comps deck</div>
-            </div>
-            <p class="helper-text">
-              In the live product, these links would open secure, watermarked PDFs with device- and
-              account-level access logs.
+            <p class="card-subtitle">
+              A beloved Chicago radio DJ must confront old ghosts, family secrets, and a lifetime
+              of “almosts” when a long-lost love re-enters his life against the backdrop of war,
+              music, and shifting politics.
             </p>
+
+            <div class="chip-row">
+              <div class="chip soft">Taste profile: Gritty, music-driven legacy story</div>
+              <div class="chip">Tone: Grounded • Emotional • Bittersweet</div>
+              <div class="chip">Audience: Black multi-generational drama</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Right: screener + mandate signals -->
-      <div>
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Watermarked screener</div>
-              <div class="card-subtitle">
-                Tier 1 access • 5 views total • this account: 3 remaining
-              </div>
-            </div>
-            <a class="card-link">View access policy</a>
-          </div>
-
-          <div class="watermark-preview">
-            <div class="watermark-tag">Preview: Screener player (mock)</div>
-            <div>
-              • Your anonymized buyer ID appears as a moving watermark over the image.<br />
-              • Playback is tied to this device and your account.<br />
-              • Current session would be logged for the filmmaker’s IP report.
+      <!-- BIG SCORE RINGS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Sparq Score Snapshot</div>
+            <div class="card-subtitle">
+              Overall rating and key dimensions for this project
             </div>
           </div>
-
-          <p class="helper-text">
-            In the MVP, pressing play would log your IP, device, and timestamp to the filmmaker’s
-            access log without revealing your identity until you request an intro.
-          </p>
+          <div style="
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            padding:4px 10px;
+            border-radius:999px;
+            border:1px solid #dbeafe;
+            background:#eff6ff;
+            font-size:0.8rem;
+            color:var(--brand-blue);
+          ">
+            <strong>8.4</strong>
+            <span>Overall Sparq score</span>
+          </div>
         </div>
 
-        <div class="card" style="margin-top:16px;">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Market & mandate signals</div>
-              <div class="card-subtitle">
-                How this project aligns with your stated preferences
-              </div>
+        <div class="score-row">
+          <div class="score-item">
+            <div class="score-ring">
+              <div class="score-ring-inner">8.8</div>
             </div>
+            <div class="score-label">Story &amp; craft</div>
           </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  Strong alignment with <strong>Black prestige drama</strong> and multi-generational audiences.
-                </div>
-                <div class="timeline-meta">
-                  Based on tagged audience profiles and curated comps.
-                </div>
-              </div>
+          <div class="score-item">
+            <div class="score-ring">
+              <div class="score-ring-inner">8.2</div>
             </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  Budget band matches your preference for
-                  <strong>$1–3M narrative features</strong>.
-                </div>
-                <div class="timeline-meta">
-                  Pulled from your CineSparq mandate profile.
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-body">
-                <div class="timeline-label">
-                  2 other vetted buyers have viewed this title in the last 30 days.
-                </div>
-                <div class="timeline-meta">
-                  Competitive but not saturated at this stage.
-                </div>
-              </div>
-            </div>
+            <div class="score-label">Audience fit</div>
           </div>
-
-          <p class="helper-text">
-            Requesting an intro will signal serious interest, share your basic mandate with the
-            filmmaker, and move the relationship out of “anonymous data” into curated conversation.
-          </p>
+          <div class="score-item">
+            <div class="score-ring">
+              <div class="score-ring-inner">8.0</div>
+            </div>
+            <div class="score-label">Production readiness</div>
+          </div>
+          <div class="score-item">
+            <div class="score-ring">
+              <div class="score-ring-inner">7.9</div>
+            </div>
+            <div class="score-label">Financial feasibility</div>
+          </div>
         </div>
+
+        <p class="helper-text">
+          Score breakdowns are designed to give you a quick sense of strengths and risk areas without
+          replacing your own judgment or due diligence.
+        </p>
+      </div>
+
+      <!-- PACKAGE AT A GLANCE -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Package at a Glance</div>
+            <div class="card-subtitle">
+              Key materials available if you choose to move forward
+            </div>
+          </div>
+          <a class="card-link">Download packet</a>
+        </div>
+
+        <div class="chip-row">
+          <div class="chip soft">Script locked v3</div>
+          <div class="chip">Director’s lookbook</div>
+          <div class="chip">Preliminary budget &amp; schedule</div>
+          <div class="chip">Audience &amp; comps deck</div>
+        </div>
+
+        <ul class="bullet-list">
+          <li>Chain of title and rights documentation have been verified at a basic level.</li>
+          <li>Budget band aligns with your stated preferences for $1–3M narrative features.</li>
+          <li>Materials are delivered as secure, watermarked PDFs with access logging.</li>
+        </ul>
+      </div>
+
+      <!-- SCREENING / IP PROTECTION -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Screening &amp; IP Protection</div>
+            <div class="card-subtitle">
+              How access to this project is structured on CineSparq
+            </div>
+          </div>
+          <a class="card-link">View access policy</a>
+        </div>
+
+        <div class="watermark-preview">
+          <div class="watermark-tag">Tier 1 • Watermarked screener</div>
+          <div>
+            • Your anonymized partner ID appears as a moving watermark over the image.<br />
+            • Playback is tied to this device and your account.<br />
+            • Each viewing session is logged to the filmmaker’s access report without
+              exposing your identity until you request a meeting.
+          </div>
+        </div>
+
+        <p class="helper-text">
+          The goal is to protect the filmmaker’s IP while giving you enough room to evaluate
+          whether this project fits your slate.
+        </p>
+      </div>
+
+      <!-- MARKET & MANDATE SIGNALS -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Market &amp; Mandate Signals</div>
+            <div class="card-subtitle">
+              How this project aligns with what you’ve told us you’re looking for
+            </div>
+          </div>
+        </div>
+
+        <ul class="bullet-list">
+          <li>
+            Strong alignment with <strong>Black prestige drama</strong> and multi-generational audiences
+            based on tagged audience profiles and curated comps.
+          </li>
+          <li>
+            Budget band and scope match your preference for
+            <strong>$1–3M narrative features with festival and platform potential</strong>.
+          </li>
+          <li>
+            Timely themes around legacy, identity, and social change support awards and
+            impact campaign positioning.
+          </li>
+          <li>
+            Two other vetted industry partners have viewed this title in the last 30 days,
+            signaling interest without oversaturation at this stage.
+          </li>
+        </ul>
+
+        <p class="helper-text">
+          Requesting a meeting will signal serious interest, share your basic mandate with the
+          filmmaker, and move the relationship from anonymous viewing into a curated conversation.
+        </p>
       </div>
     </section>
   </main>
