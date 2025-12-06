@@ -2,526 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CineSparq – Changing the Way Projects Are Discovered, Qualified and Funded</title>
+  <title>CineSparq – Changing how projects are discovered, qualified, and funded</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --brand-blue: #0a4f84;
-      --accent: #f8d418;
-      --bg-page: #f5f7fb;
-      --text-main: #111827;
-      --text-muted: #6b7280;
-      --card-border: #e5e7eb;
-      --footer-bg: #05060b;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-    }
-
-    body {
-      background: var(--bg-page);
-      color: var(--text-main);
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* GENERIC BUTTONS ------------------------------------------- */
-
-    .btn {
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #111827;
-      box-shadow: none; /* flat */
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #ffffff;
-      border: 1px solid rgba(249, 250, 251, 0.7);
-      box-shadow: none;
-    }
-
-    .btn-outline-blue {
-      background: #ffffff;
-      color: var(--brand-blue);
-      border: 1px solid var(--brand-blue);
-      box-shadow: none;
-    }
-
-    .nav-login-btn {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-    }
-
-    /* HERO ------------------------------------------------------ */
-
-    .hero {
-      position: relative;
-      min-height: 90vh; /* taller hero */
-      color: #f9fafb;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(5, 6, 11, 0.6), rgba(5, 6, 11, 0.9)),
-        linear-gradient(to right, rgba(5, 6, 11, 0.85), rgba(5, 6, 11, 0.3));
-      z-index: 1;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url("cinesparq-mockup-hero-image.png");
-      background-size: cover;       /* show full image without stretching */
-      background-position: center;  /* keep image centered */
-      background-repeat: no-repeat;
-      z-index: 0;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 88px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* NAV ------------------------------------------------------- */
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 40px;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo {
-      height: 40px;
-      width: auto;
-      display: block;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 0.86rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      color: #e5e7eb;
-    }
-
-    .nav-link {
-      cursor: pointer;
-      position: relative;
-      padding-bottom: 2px;
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: rgba(249, 250, 251, 0.7);
-      transition: width 0.15s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    /* HERO CONTENT --------------------------------------------- */
-
-    .hero-content {
-      margin: auto;                /* center vertically within hero */
-      max-width: 640px;
-      text-align: center;          /* center all copy */
-    }
-
-    .hero-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: 2.8rem;           /* bigger headline */
-      line-height: 1.12;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .hero-subhead {
-      font-size: 0.98rem;
-      color: #e5e7eb;
-      line-height: 1.45;
-      margin-bottom: 22px;
-    }
-
-    .hero-subhead span.break {
-      display: block;
-      margin-top: 4px;
-    }
-
-    .hero-cta-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .hero-meta {
-      font-size: 0.82rem;
-      color: #9ca3af;
-    }
-
-    /* ICON / BENEFITS SECTION ---------------------------------- */
-
-    .benefits-section {
-      background: #ffffff;
-      margin-top: -24px;
-      border-radius: 32px 32px 0 0;
-      border-top: 1px solid var(--card-border);
-      box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.15);
-      padding: 100px 0 110px; /* taller */
-    }
-
-    .benefits-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 32px;
-      margin-bottom: 40px;
-    }
-
-    .benefit-card {
-      text-align: center;
-      padding: 0 10px;
-    }
-
-    .benefit-icon {
-      width: 200px;   /* 3x larger icons */
-      height: 200px;
-      margin: 0 auto 18px;
-      display: block;
-    }
-
-    .benefit-title {
-      font-size: 0.86rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--brand-blue);
-      margin-bottom: 10px;
-    }
-
-    .benefit-body {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .benefits-cta-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    /* FOOTER ---------------------------------------------------- */
-
-    .footer {
-      background: var(--footer-bg);
-      color: #e5e7eb;
-      padding: 60px 16px 30px; /* taller overall */
-      margin-top: 48px;
-    }
-
-    .footer-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr;
-      gap: 32px;
-      align-items: flex-start;
-    }
-
-    .footer-logo {
-      height: 40px;
-      width: auto;
-      margin-bottom: 16px;
-    }
-
-    .footer-text {
-      font-size: 0.9rem;
-      color: #d1d5db;
-      max-width: 420px;
-    }
-
-    .footer-heading {
-      font-size: 1.02rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #f9fafb;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.9rem;
-    }
-
-    .footer-link a {
-      color: #e5e7eb;
-      cursor: pointer;
-      text-decoration: underline; /* underline all links */
-    }
-
-    .footer-link a:hover {
-      color: var(--accent);
-    }
-
-    .footer-social {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .footer-social img {
-      width: 190px;  /* larger social sprite */
-      height: auto;
-      display: block;
-      margin-top: 4px; /* directly under "Connect" */
-    }
-
-    .footer-bottom {
-      max-width: 1120px;
-      margin: 28px auto 0;
-      padding-top: 16px;
-      border-top: 1px solid #111827;
-      font-size: 0.8rem;
-      color: #9ca3af;
-      text-align: center;
-    }
-
-    /* RESPONSIVE ------------------------------------------------ */
-
-    @media (max-width: 960px) {
-      .hero {
-        min-height: 88vh;
-      }
-      .nav-right {
-        gap: 10px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .benefits-grid {
-        grid-template-columns: 1fr;
-      }
-      .footer-inner {
-        grid-template-columns: 1fr;
-      }
-      .benefit-icon {
-        width: 160px;
-        height: 160px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero-inner {
-        padding-inline: 14px;
-      }
-      .hero-title {
-        font-size: 2.1rem;
-      }
-      .hero-content {
-        max-width: 100%;
-      }
-      .benefits-inner {
-        padding-inline: 14px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
+<body class="home">
 
-    <div class="hero-inner">
-      <!-- NAVBAR -->
-      <header class="nav">
-        <div class="nav-left">
-          <img src="CSLogo_dark_bg.png" alt="CineSparq logo" class="nav-logo" />
-        </div>
+  <!-- Top Navigation -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark"></span>
+        <span class="brand-name">CineSparq</span>
+      </a>
 
-        <div class="nav-right">
-          <nav class="nav-links">
-            <div class="nav-link">Creators</div>
-            <div class="nav-link">Industry Partners</div>
-            <div class="nav-link">Add your project</div>
-            <div class="nav-link">Insights</div>
-          </nav>
-          <!-- working Login button -->
-         <a href="login.html" class="btn btn-primary nav-login-btn">Log in</a>
-        </div>
-      </header>
+      <nav class="main-nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#benefits">For creators</a>
+        <a href="#partners">For partners</a>
+        <a href="#beta" class="nav-cta">Join beta</a>
+      </nav>
 
-      <!-- HERO COPY -->
-      <div class="hero-content">
-        <div class="hero-kicker">The trust engine for investment-ready stories</div>
-
-        <h1 class="hero-title">
-          Changing the way projects are discovered, qualified and funded
-        </h1>
-
-        <p class="hero-subhead">
-          Creators rise. Partners win. Projects move.
-          <span class="break">
-            CineSparq transforms emerging stories into market-ready opportunities that accelerate
-            momentum and success.
-          </span>
-        </p>
-
-        <div class="hero-cta-row">
-          <a href="#" class="btn btn-primary">Join CineSparq</a>
-          <a href="filmmaker-dashboard.html" class="btn btn-secondary">Log in</a>
-        </div>
-
-        <p class="hero-meta">
-          A shared language for readiness that respects creative vision and investor reality.
-        </p>
-      </div>
+      <a href="login.html" class="btn btn-login">Login</a>
     </div>
-  </section>
+  </header>
 
-  <!-- BENEFITS / ICON SECTION -->
-  <section class="benefits-section">
-    <div class="benefits-inner">
+  <!-- MAIN CONTENT -->
+  <main class="home-main">
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+
+        <div class="hero-copy">
+          <p class="eyebrow">AI-powered · Human-centered</p>
+
+          <h1>Changing how projects are discovered, qualified, and funded.</h1>
+
+          <p class="hero-subtitle">
+            Creators rise. Partners win. Projects move. CineSparq turns emerging stories
+            into market-ready opportunities.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#how-it-works" class="btn btn-primary">Explore CineSparq</a>
+            <a href="#beta" class="btn btn-secondary">Join the early beta</a>
+          </div>
+
+          <p class="hero-support">
+            Built for creators who are done waiting for permission—and partners who need
+            qualified, investment-ready projects.
+          </p>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <!-- Use your actual hero file path here -->
+          <img
+            src="assets/images/hero-dashboard.jpg"
+            alt="CineSparq dashboard showing project ratings and matches"
+            class="hero-image"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section class="home-section benefits" id="benefits">
+      <div class="section-header">
+        <h2>What CineSparq makes possible</h2>
+        <p>We don’t replace your taste. We standardize the path to readiness.</p>
+      </div>
+
       <div class="benefits-grid">
-        <!-- Icon 1 -->
         <article class="benefit-card">
-          <img src="icon-one.png" alt="AI-powered clarity icon" class="benefit-icon" />
-          <div class="benefit-title">AI-POWERED CLARITY</div>
-          <p class="benefit-body">
-            Creators get clear, actionable guidance grounded in real industry expectations.
+          <h3>Stand out instantly</h3>
+          <p>
+            Turn your project into a clear, investor-ready package—without needing
+            insider connections or complex tools.
           </p>
         </article>
 
-        <!-- Icon 2 -->
         <article class="benefit-card">
-          <img src="icon-two.png" alt="Human-centered evaluation icon" class="benefit-icon" />
-          <div class="benefit-title">HUMAN-CENTERED EVALUATION</div>
-          <p class="benefit-body">
-            Assess projects with context, nuance, and confidence; not guesswork.
+          <h3>Move with confidence</h3>
+          <p>
+            See strengths, gaps, and risk signals before you pitch so your next move
+            is strategic, not hopeful.
           </p>
         </article>
 
-        <!-- Icon 3 -->
         <article class="benefit-card">
-          <img src="icon-three.png" alt="Momentum that moves people icon" class="benefit-icon" />
-          <div class="benefit-title">MOMENTUM THAT MOVES PEOPLE</div>
-          <p class="benefit-body">
-            Stories advance faster because humans stay at the heart of every decision.
+          <h3>Build better relationships</h3>
+          <p>
+            Creators and partners connect around aligned mandates and shared data,
+            not endless cold outreach.
           </p>
         </article>
       </div>
+    </section>
 
-      <div class="benefits-cta-row">
-        <a href="#" class="btn btn-primary">Join CineSparq</a>
-        <a href="filmmaker-dashboard.html" class="btn btn-outline-blue">Log in</a>
+    <!-- HOW IT WORKS SECTION -->
+    <section class="home-section how-it-works" id="how-it-works">
+      <div class="section-header">
+        <h2>How CineSparq works</h2>
+        <p>One shared view of readiness—for creators, investors, and industry partners.</p>
       </div>
-    </div>
-  </section>
+
+      <ol class="how-grid">
+        <li class="how-step">
+          <h3>1. Upload your project</h3>
+          <p>
+            Securely share your materials. Your IP stays protected and visible only
+            to verified partners.
+          </p>
+        </li>
+
+        <li class="how-step">
+          <h3>2. Get a readiness snapshot</h3>
+          <p>
+            See where your project shines, where it needs work, and how it aligns with
+            real-world mandates.
+          </p>
+        </li>
+
+        <li class="how-step">
+          <h3>3. Connect with aligned partners</h3>
+          <p>
+            Investors and industry partners discover projects based on fit, not noise—
+            and move faster when the match is right.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- PARTNERS SECTION -->
+    <section class="home-section partners" id="partners">
+      <div class="section-header">
+        <h2>Built for both sides of the table</h2>
+        <p>Creators get clarity. Partners get confidence. The ecosystem gets stronger.</p>
+      </div>
+
+      <div class="two-column">
+        <div>
+          <h3>For creators</h3>
+          <ul class="bullet-list">
+            <li>Clarify your value and positioning before you pitch.</li>
+            <li>See how your project maps to actual investment criteria.</li>
+            <li>Track interest, engagement, and investor-introductions in one place.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>For partners & investors</h3>
+          <ul class="bullet-list">
+            <li>Quickly surface aligned, investment-ready projects.</li>
+            <li>Reduce risk with transparent, standardized project data.</li>
+            <li>Spend less time sifting, more time closing the right deals.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BETA CTA SECTION -->
+    <section class="home-section beta-cta" id="beta">
+      <div class="beta-inner">
+        <h2>Be part of the first wave.</h2>
+        <p>
+          We’re inviting a small group of creators and partners to help shape the
+          CineSparq experience before launch.
+        </p>
+        <a href="beta-signup.html" class="btn btn-primary">Request early access</a>
+      </div>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="site-footer">
     <div class="footer-inner">
-      <!-- Left: logo + description -->
-      <div>
-        <img src="CSLogo_dark_bg.png" alt="CineSparq logo" class="footer-logo" />
-        <p class="footer-text">
-          CineSparq connects creators and industry partners around fundable film and television projects
-          through clarity, transparency, and a smarter deal ecosystem.
+      <div class="footer-left">
+        <p class="footer-brand">CineSparq</p>
+        <p class="footer-tagline">
+          Changing how projects are discovered, qualified, and funded.
         </p>
       </div>
 
-      <!-- Middle: links -->
-      <div>
-        <div class="footer-heading">Quick Links</div>
-        <div class="footer-links">
-          <div class="footer-link"><a href="#">About Us</a></div>
-          <div class="footer-link"><a href="#">Careers</a></div>
-          <div class="footer-link"><a href="#">Blog</a></div>
-          <div class="footer-link"><a href="#">Privacy Policy</a></div>
+      <div class="footer-links">
+        <div>
+          <h4>Quick links</h4>
+          <ul>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#benefits">For creators</a></li>
+            <li><a href="#partners">For partners</a></li>
+            <li><a href="#beta">Join beta</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Connect</h4>
+          <div class="social-row">
+            <a href="#" aria-label="LinkedIn" class="social-icon">in</a>
+            <a href="#" aria-label="Instagram" class="social-icon">IG</a>
+            <a href="#" aria-label="X" class="social-icon">X</a>
+          </div>
         </div>
       </div>
-
-      <!-- Right: socials -->
-      <div class="footer-social">
-        <div class="footer-heading">Connect</div>
-        <img src="social-icons.png" alt="Social media icons" />
-      </div>
     </div>
 
-    <div class="footer-bottom">
-      © 2025 CineSparq. All rights reserved.
-    </div>
+    <p class="footer-meta">
+      © <span id="year"></span> CineSparq. All rights reserved.
+    </p>
   </footer>
+
+  <script>
+    // Simple current-year for footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
