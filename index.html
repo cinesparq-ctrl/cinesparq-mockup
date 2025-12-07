@@ -142,31 +142,35 @@
 
     /* HERO */
 
-    .hero {
-      background: var(--cs-bg-light);
-      padding: 4.8rem 0 4.2rem;
-    }
+.hero {
+  background: #000;              /* or var(--cs-charcoal) */
+  padding: 0;                    /* remove outer padding */
+}
 
-    .hero-inner {
-      max-width: var(--cs-max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+.hero-inner {
+  max-width: none;               /* let it span full width */
+  margin: 0;
+  padding: 0;
+}
 
-    .hero-card {
-      position: relative;
-      border-radius: 2.3rem;
-      overflow: hidden;
-      min-height: 420px;
-      background-image: url("assets/img/cinesparq-mockup-hero-image.png");
-      background-size: cover;          /* keeps aspect ratio, no stretch */
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: var(--cs-shadow-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.hero-card {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  background-image: url("assets/img/cinesparq-mockup-hero-image.png");
+  background-size: cover;        /* keeps aspect ratio, no stretch */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* remove card styling so it feels like a full hero */
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
     .hero-card::before {
       content: "";
