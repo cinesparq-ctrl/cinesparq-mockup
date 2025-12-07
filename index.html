@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>CineSparq | Changing how projects are discovered, qualified and funded</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="icon" href="assets/icons/favicon-32x32.png" type="image/png">
+  <meta charset="UTF-8" />
+  <title>CineSparq | Insight-Driven Project Alignment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --cs-bg: #020617;
-      --cs-surface: #020617;
-      --cs-white: #f9f5ef;
+      --cs-navy: #0a4f84;
+      --cs-bg-light: #f3f4f6; /* very light grey */
+      --cs-bg-dark: #000000;
       --cs-yellow: #f8d418;
-      --cs-text: #e5e7eb;
-      --cs-muted: #9ca3af;
+      --cs-charcoal: #1c1f26;
+      --cs-white: #ffffff;
+      --cs-muted: #a0a7b3;
+      --cs-radius-lg: 1.5rem;
+      --cs-radius-md: 1rem;
+      --cs-radius-pill: 999px;
+      --cs-shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.3);
       --cs-max-width: 1120px;
     }
 
@@ -24,13 +31,16 @@
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000000 100%);
-      color: var(--cs-text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--cs-bg-light);
+      color: var(--cs-charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     a {
@@ -38,288 +48,400 @@
       text-decoration: none;
     }
 
-    main {
-      flex: 1;
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* LAYOUT WRAPPER */
-
-    .page-inner {
+    .container {
+      width: 100%;
       max-width: var(--cs-max-width);
       margin: 0 auto;
-      padding: 1.6rem 1.2rem 3rem;
+      padding: 0 1.5rem;
+    }
+
+    /* SECTION BACKGROUND MODES */
+
+    .section-light {
+      background: var(--cs-bg-light);
+      color: var(--cs-charcoal);
+    }
+
+    .section-dark {
+      background: var(--cs-bg-dark);
+      color: var(--cs-white);
     }
 
     /* HEADER */
 
     .site-header {
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      background: rgba(2, 6, 23, 0.95);
-      backdrop-filter: blur(18px);
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.65);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .header-inner {
-      max-width: var(--cs-max-width);
-      margin: 0 auto;
-      padding: 0.8rem 1.2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      padding: 0.9rem 1.5rem;
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
     }
 
-    .logo {
+    .logo-area {
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
 
-    .logo img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      border-radius: 12px;
+    .logo-area img {
+      height: 45px;
+      width: auto;
     }
 
     .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-text span:first-child {
       font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
+      font-size: 0.85rem;
       text-transform: uppercase;
       color: var(--cs-white);
     }
 
-    .logo-text span:last-child {
-      font-size: 0.8rem;
-      color: var(--cs-muted);
-    }
-
-    .main-nav {
+    .nav-right {
       display: flex;
       align-items: center;
-      gap: 1.4rem;
-      font-size: 0.9rem;
+      gap: 0.75rem;
     }
 
-    .main-nav a {
-      color: #e5e7ef;
-    }
-
-    .main-nav a:hover {
-      color: var(--cs-white);
-    }
-
-    .btn-login {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
+    .login-link {
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--cs-radius-pill);
+      border: 1px solid var(--cs-yellow);
       background: var(--cs-yellow);
-      color: #111827;
+      color: var(--cs-charcoal);
       font-weight: 600;
-      font-size: 0.86rem;
-      border: none;
+      font-size: 0.85rem;
       cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      box-shadow: none;
     }
 
-    .btn-login:hover {
-      filter: brightness(1.05);
+    .login-link:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--cs-shadow-soft);
+      background: #f7cf00;
     }
 
     /* HERO */
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 3rem;
+      position: relative;
+      padding: 5rem 0 4.5rem;
+      overflow: hidden;
+      color: var(--cs-white);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("cinesparq-mockup-hero-image.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(248, 212, 24, 0.28), transparent 55%),
+                  linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.95));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero-pill {
+      display: inline-flex;
       align-items: center;
-      padding-top: 2.2rem;
-      padding-bottom: 3rem;
-    }
-
-    .hero-copy {
-      text-align: left;
-    }
-
-    .hero-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
+      gap: 0.4rem;
+      padding: 0.25rem 0.9rem;
+      border-radius: var(--cs-radius-pill);
+      background: rgba(0, 0, 0, 0.7);
       color: var(--cs-yellow);
-      margin-bottom: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(248, 212, 24, 0.5);
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cs-yellow);
     }
 
     .hero-title {
-      font-size: clamp(1.9rem, 3vw + 1rem, 2.7rem);
-      line-height: 1.15;
+      font-size: clamp(2.4rem, 3.5vw + 1rem, 3.4rem);
+      line-height: 1.1;
       font-weight: 700;
       color: var(--cs-white);
-      margin-bottom: 0.9rem;
+      margin-bottom: 1rem;
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero-subcopy {
-      font-size: 0.98rem;
-      color: #d1d5db;
-      max-width: 32rem;
-      margin-bottom: 1.4rem;
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 34rem;
+      margin: 0 auto 2rem;
+      color: #e5e7eb;
     }
 
     .hero-actions {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 0.45rem;
-      margin-bottom: 0.8rem;
+      align-items: center;
+      gap: 0.6rem;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.85rem 1.7rem;
-      border-radius: 999px;
+      padding: 0.9rem 1.9rem;
+      border-radius: var(--cs-radius-pill);
+      border: none;
       background: var(--cs-yellow);
-      color: #111827;
+      color: var(--cs-charcoal);
       font-weight: 600;
       font-size: 0.95rem;
-      border: none;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
       cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 12px 30px rgba(250, 204, 21, 0.35);
+      box-shadow: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     .btn-primary:hover {
-      filter: brightness(1.05);
-      box-shadow: 0 16px 38px rgba(250, 204, 21, 0.4);
+      transform: translateY(-1px);
+      box-shadow: var(--cs-shadow-soft);
+      background: #f7cf00;
     }
 
-    .hero-login-cta {
-      font-size: 0.82rem;
-      color: var(--cs-muted);
+    .hero-note {
+      font-size: 0.8rem;
+      color: #cbd5f5;
     }
 
-    .hero-login-cta a {
-      color: var(--cs-white);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
+    /* GENERIC SECTION STYLES */
 
-    .hero-meta {
-      font-size: 0.78rem;
-      color: var(--cs-muted);
-      max-width: 22rem;
-    }
-
-    .hero-image {
-      width: 100%;
-      max-width: 520px;
-      margin-left: auto;
-      border-radius: 1.6rem;
-      padding: 0.4rem;
-      background: radial-gradient(circle at top, rgba(248, 212, 24, 0.08), transparent 60%);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-image-inner {
-      border-radius: 1.3rem;
-      overflow: hidden;
-      background: #020617;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: auto;         /* key to avoid stretch */
-      object-fit: contain;  /* preserves proportions */
-      display: block;
-    }
-
-    /* SECTION WRAPPER */
-
-    .section {
-      padding: 2rem 0 0;
+    section {
+      padding: 3.5rem 0;
     }
 
     .section-header {
-      margin-bottom: 1.4rem;
-    }
-
-    .section-kicker {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-      color: var(--cs-yellow);
-      margin-bottom: 0.4rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
     }
 
     .section-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--cs-white);
-      margin-bottom: 0.4rem;
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin: 0 0 0.4rem;
     }
 
-    .section-body {
-      font-size: 0.96rem;
+    .section-subtitle {
+      font-size: 0.98rem;
+      max-width: 32rem;
+      margin: 0.3rem auto 0;
+    }
+
+    .section-dark .section-subtitle {
       color: #d1d5db;
-      max-width: 40rem;
     }
 
-    .section-body span.emphasis {
-      font-weight: 600;
+    .section-light .section-subtitle {
+      color: #4b5563;
+    }
+
+    /* SECTION 2 – CHOOSE YOUR PATH (LIGHT) */
+
+    .choose-path .path-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.8rem;
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .path-card {
+      background: #111827;
       color: var(--cs-white);
+      border-radius: var(--cs-radius-lg);
+      padding: 1.8rem 1.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
     }
 
-    /* PILLARS SECTION */
+    .path-label {
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      color: var(--cs-yellow);
+      margin-bottom: 0.6rem;
+    }
 
-    .pillars-section {
-      padding-top: 2.4rem;
-      padding-bottom: 2.4rem;
+    .path-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .path-body {
+      font-size: 0.95rem;
+      color: #e5e7eb;
+    }
+
+    /* WHAT CINESPARQ DOES – SYSTEM LINE (DARK SECTION) */
+
+    .system-section {
+      /* section-dark already applied via class */
+    }
+
+    .system-inner {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .system-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .system-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .system-subtitle {
+      font-size: 0.98rem;
+    }
+
+    .alignment-wrap {
+      margin-top: 2rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .alignment-bar {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: var(--cs-radius-pill);
+      overflow: hidden;
+      border: 1px solid rgba(249, 250, 251, 0.24);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .alignment-node {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      position: relative;
+      color: #e5e7eb;
+    }
+
+    .alignment-node:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -0.2rem;
+      font-size: 0.9rem;
+      color: rgba(148, 163, 184, 0.75);
+    }
+
+    .alignment-node--center {
+      background: var(--cs-yellow);
+      color: var(--cs-charcoal);
+      font-weight: 600;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .alignment-node--center span {
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    .alignment-node--center strong {
+      font-size: 0.9rem;
+    }
+
+    .system-body {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 2.2fr);
+      gap: 2.2rem;
+      align-items: flex-start;
+    }
+
+    .system-copy p {
+      margin: 0 0 0.75rem;
+      font-size: 0.96rem;
+      color: #e5e7eb;
+    }
+
+    .system-copy p:last-of-type {
+      margin-bottom: 0;
     }
 
     .pillars {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.2rem;
-      align-items: end;
     }
 
     .pillar-card {
       background: #020617;
-      border-radius: 999px 999px 1.3rem 1.3rem;
-      padding: 2.1rem 1.1rem 1.4rem;
+      border-radius: var(--cs-radius-md);
+      padding: 1.2rem 1rem 1.3rem;
       border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.8);
       font-size: 0.87rem;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 260px;
     }
 
-    /* Larger pillar icons */
     .pillar-icon {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 1rem;
-    }
-
-    .pillar-icon img {
-      width: 100%;
-      height: 100%;
+      width: 45px;
+      height: 45px;
+      margin: 0 auto 0.7rem;
       object-fit: contain;
-      display: block;
     }
 
     .pillar-label {
@@ -333,7 +455,7 @@
 
     .pillar-title {
       font-weight: 600;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.25rem;
       font-size: 0.95rem;
       color: #f9fafb;
     }
@@ -343,12 +465,259 @@
       color: #e5e7eb;
     }
 
+    .system-mantra {
+      text-align: center;
+      margin-top: 2.2rem;
+      font-size: 0.92rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .system-mantra span {
+      display: inline-block;
+      margin: 0 0.6rem;
+    }
+
+    /* SECTION 4 – FEATURED PROJECTS (LIGHT) */
+
+    .featured-inner {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .featured-text {
+      max-width: 40rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .featured-text h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .featured-text p {
+      font-size: 0.96rem;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    .project-scroller {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .project-scroller::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .project-scroller::-webkit-scrollbar-track {
+      background: #e5e7eb;
+      border-radius: 999px;
+    }
+
+    .project-scroller::-webkit-scrollbar-thumb {
+      background: #9ca3af;
+      border-radius: 999px;
+    }
+
+    .project-card {
+      min-width: 230px;
+      max-width: 260px;
+      border-radius: 1.1rem;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.2);
+      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.4);
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      background: #020617;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* CORE BENEFITS (DARK) */
+
+    .core-benefits .benefits-inner {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .core-benefits .section-title {
+      color: var(--cs-white);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.8rem;
+    }
+
+    .benefit-card {
+      background: #020617;
+      border-radius: var(--cs-radius-lg);
+      padding: 1.7rem 1.5rem 1.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.9);
+      font-size: 0.95rem;
+    }
+
+    .benefit-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      color: #f9fafb;
+    }
+
+    .benefit-body {
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
+
+    /* HOW IT WORKS (LIGHT – NEW LAYOUT + IMAGES & ARROWS) */
+
+    .how-inner {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .how-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .how-item {
+      flex: 1 1 260px;
+      background: #111827;
+      color: #f9fafb;
+      border-radius: var(--cs-radius-lg);
+      padding: 1.3rem 1.2rem 1.4rem;
+      border: 1px solid rgba(15, 23, 42, 0.7);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.85);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .how-image {
+      width: 100%;
+      height: 140px;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+    }
+
+    .how-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .how-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--cs-yellow);
+      color: var(--cs-charcoal);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 0.96rem;
+    }
+
+    .step-body {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .how-arrow {
+      flex: 0 0 auto;
+      width: 56px;
+      height: 56px;
+      border-radius: 999px;
+      background: var(--cs-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .how-arrow::before {
+      content: "➜";
+      font-size: 1.4rem;
+      color: var(--cs-charcoal);
+    }
+
+    /* REINFORCEMENT CTA (DARK) */
+
+    .cta-strip {
+      background: var(--cs-bg-dark);
+      padding: 3.8rem 1.5rem;
+      color: var(--cs-white);
+    }
+
+    .cta-inner {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.4rem;
+    }
+
+    .cta-text {
+      font-weight: 700;
+      line-height: 1.05;
+      /* Approx ~75pt on desktop, responsive */
+      font-size: clamp(2.6rem, 6vw + 1rem, 4.7rem);
+    }
+
+    .cta-strip .btn-primary {
+      background: var(--cs-yellow);
+      color: var(--cs-charcoal);
+    }
+
+    .cta-strip .btn-primary:hover {
+      background: #f7cf00;
+    }
+
     /* FOOTER */
 
     .site-footer {
       background: #000000;
       color: var(--cs-white);
-      padding: 2.8rem 1.5rem 1.8rem;
+      padding: 2.4rem 1.5rem 1.6rem;
       margin-top: auto;
     }
 
@@ -362,10 +731,6 @@
       grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1.4fr);
       gap: 2.5rem;
       margin-bottom: 2rem;
-    }
-
-    .footer-column {
-      font-size: 0.9rem;
     }
 
     .footer-logo-block img {
@@ -407,15 +772,11 @@
       color: #ffffff;
     }
 
-    /* Social icons moved directly under Connect, made larger */
-    .footer-socials {
-      margin-bottom: 0.75rem;
-    }
-
     .footer-socials img {
-      max-width: 190px; /* single image with all icons */
+      max-width: 160px;
       height: auto;
       display: block;
+      margin-top: 0.4rem;
     }
 
     .footer-bottom {
@@ -431,223 +792,375 @@
 
     /* RESPONSIVE */
 
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 2rem;
-      }
-
-      .hero-copy {
-        text-align: center;
-      }
-
-      .hero-subcopy,
-      .hero-meta {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions {
-        align-items: center;
-      }
-
-      .hero-image {
-        margin: 0 auto;
-      }
-
+    @media (max-width: 960px) {
+      .choose-path .path-grid,
+      .system-body,
+      .pillars,
+      .benefits-grid,
       .footer-top {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
 
-      .footer-logo-block {
-        order: -1;
+      .how-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .how-arrow {
+        align-self: center;
+        transform: rotate(90deg);
+      }
+
+      .system-body {
+        gap: 1.6rem;
       }
     }
 
     @media (max-width: 720px) {
-      .pillars {
-        grid-template-columns: minmax(0, 1fr);
+      .hero {
+        padding-top: 4rem;
+        padding-bottom: 3.4rem;
+      }
+
+      .hero-inner {
+        padding-inline: 1.2rem;
+      }
+
+      .project-card {
+        min-width: 210px;
       }
     }
   </style>
 </head>
-
 <body>
+  <div class="page">
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">
-        <img src="assets/img/CSLogo-dark-bg.png" alt="CineSparq logo">
-        <div class="logo-text">
-          <span>Cinesparq</span>
-          <span>Project alignment for serious partners</span>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="logo-area">
+          <img src="CSLogo-light-bg.png" alt="CineSparq logo on light background" />
+          <div class="logo-text">CineSparq</div>
         </div>
-      </a>
-
-      <nav class="main-nav">
-        <a href="#">Overview</a>
-        <a href="#">Insights</a>
-        <a href="#">For Creators</a>
-        <a href="#">For Partners</a>
-        <a href="#" class="btn-login">Log in</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <div class="page-inner">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="hero-kicker">Project readiness intelligence</div>
-          <h1 class="hero-title">Changing how projects are discovered, qualified and funded.</h1>
-          <p class="hero-subcopy">
-            CineSparq gives you a structured, data-informed view of film and series projects
-            so decisions are grounded in market reality, not guesswork.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#" class="btn-primary">Explore insights</a>
-            <div class="hero-login-cta">
-              Already have access?
-              <a href="#">Log in to your dashboard.</a>
-            </div>
-          </div>
-
-          <p class="hero-meta">
-            Creators rise. Partners win. Projects move.
-          </p>
-        </div>
-
-        <div class="hero-image">
-          <div class="hero-image-inner">
-            <img src="assets/img/cinesparq-mockup-hero-image.png" alt="CineSparq mockup interface">
-          </div>
-        </div>
-      </section>
-
-      <!-- OVERVIEW SECTION (UPDATED HEADING) -->
-      <section class="section">
-        <div class="section-header">
-          <div class="section-kicker">What CineSparq does</div>
-          <h2 class="section-title">A clear view of project viability.</h2>
-          <div class="section-body">
-            <p style="margin-top: 0; margin-bottom: 0.7rem;">
-              CineSparq bridges the gap between creators and the marketplace with the insights,
-              context, and alignment tools that make it easy to move from an interesting idea
-              to an investable opportunity.
-            </p>
-            <p style="margin: 0;">
-              We focus on demand, readiness, and audience connection so you can see how a project maps
-              to what serious partners are actually looking for and what to adjust next.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- PILLARS SECTION -->
-      <section class="section pillars-section">
-        <div class="section-header">
-          <div class="section-kicker">The CineSparq pillars</div>
-          <h2 class="section-title">Demand. Readiness. Audience connection.</h2>
-          <p class="section-body">
-            Three aligned pillars that clarify where a project stands and what it needs before
-            it enters serious conversation.
-          </p>
-        </div>
-
-        <div class="pillars">
-          <!-- Pillar 1 -->
-          <article class="pillar-card">
-            <div class="pillar-icon">
-              <img src="assets/icons/icon-one.png" alt="Demand icon">
-            </div>
-            <div class="pillar-label">Pillar One</div>
-            <div class="pillar-title">Demand</div>
-            <p class="pillar-body">
-              Signals that show whether a project lines up with real market appetite, not just
-              internal enthusiasm.
-            </p>
-          </article>
-
-          <!-- Pillar 2 -->
-          <article class="pillar-card">
-            <div class="pillar-icon">
-              <img src="assets/icons/icon-two.png" alt="Readiness icon">
-            </div>
-            <div class="pillar-label">Pillar Two</div>
-            <div class="pillar-title">Readiness</div>
-            <p class="pillar-body">
-              Packaging, materials, and team indicators that affect how fast a project can
-              move through evaluation.
-            </p>
-          </article>
-
-          <!-- Pillar 3 -->
-          <article class="pillar-card">
-            <div class="pillar-icon">
-              <img src="assets/icons/icon-three.png" alt="Audience connection icon">
-            </div>
-            <div class="pillar-label">Pillar Three</div>
-            <div class="pillar-title">Audience connection</div>
-            <p class="pillar-body">
-              Clarity on who the project serves, how it reaches them, and where it fits in
-              a crowded landscape.
-            </p>
-          </article>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-
-      <div class="footer-top">
-        <!-- Column 1: Logo + Tagline -->
-        <div class="footer-column footer-logo-block">
-          <img src="assets/img/CSLogo-dark-bg.png" alt="CineSparq Logo">
-          <p class="footer-tagline">
-            Changing how projects are discovered, qualified, and funded.
-          </p>
-        </div>
-
-        <!-- Column 2: Quick Links -->
-        <div class="footer-column">
-          <div class="footer-heading">Quick Links</div>
-          <div class="footer-links">
-            <a href="#">About</a>
-            <a href="#">Insights</a>
-            <a href="#">How It Works</a>
-            <a href="#">FAQ</a>
-            <a href="#">Contact</a>
-          </div>
-        </div>
-
-        <!-- Column 3: Connect -->
-        <div class="footer-column">
-          <div class="footer-heading">Connect</div>
-
-          <div class="footer-socials">
-            <!-- Using existing sprite image -->
-            <img src="assets/icons/social-icons.png" alt="CineSparq social channels">
-          </div>
-
-          <p class="footer-tagline">
-            Stay tuned for platform updates, insights, and demo invites.
-          </p>
+        <div class="nav-right">
+          <!-- Wire to login.html for demo -->
+          <a href="login.html" class="login-link">Login</a>
         </div>
       </div>
+    </header>
 
-      <div class="footer-bottom">
-        <span>© 2025 CineSparq. All rights reserved.</span>
-        <span>Privacy Policy · Terms of Service</span>
+    <!-- HERO (IMAGE BACKGROUND) -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>AI-powered. Human-centered.</span>
+        </div>
+        <h1 class="hero-title">
+          Gain the market insight that moves projects forward.
+        </h1>
+        <p class="hero-subtitle">
+          CineSparq turns emerging stories into market-ready opportunities that attract aligned opportunities and accelerate momentum.
+        </p>
+        <div class="hero-actions">
+          <a href="#explore" class="btn-primary">Explore Insights</a>
+          <div class="hero-note">
+            Login available in the top-right menu.
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </footer>
+    <!-- SECTION 2 – CHOOSE YOUR PATH (LIGHT) -->
+    <section class="choose-path section-light">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Choose Your Path</h2>
+        </div>
+        <div class="path-grid">
+          <div class="path-card">
+            <div class="path-label">For Creators</div>
+            <div class="path-title">Build projects that travel farther.</div>
+            <div class="path-body">
+              Bring clarity to your development process, understand market demand, and shape your project into a compelling opportunity that travels farther.
+            </div>
+          </div>
+          <div class="path-card">
+            <div class="path-label">For Industry Partners</div>
+            <div class="path-title">Move faster on what fits.</div>
+            <div class="path-body">
+              Discover aligned stories earlier, reduce evaluation time, and move faster on the projects that match your mandates and momentum.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- WHAT CINESPARQ DOES – SYSTEM LINE (DARK) -->
+    <section class="system-section section-dark">
+      <div class="system-inner">
+        <div class="system-header">
+          <h2 class="system-title">What CineSparq Does</h2>
+          <p class="system-subtitle">Turn stories into aligned, opportunity-ready projects.</p>
+        </div>
+
+        <!-- ALIGNMENT BAR -->
+        <div class="alignment-wrap">
+          <div class="alignment-bar">
+            <div class="alignment-node">
+              Story
+            </div>
+            <div class="alignment-node alignment-node--center">
+              <div>
+                <span>CineSparq</span>
+                <strong>Alignment</strong>
+              </div>
+            </div>
+            <div class="alignment-node">
+              Opportunity
+            </div>
+          </div>
+        </div>
+
+        <div class="system-body">
+          <div class="system-copy">
+            <p>
+              CineSparq bridges the gap between creators and the marketplace with the insights, context, and alignment tools that make it easy.
+            </p>
+            <p>
+              We focus on demand, readiness, and audience connection so you have what it takes to move stories forward.
+            </p>
+          </div>
+
+          <div class="pillars">
+            <div class="pillar-card">
+              <img src="icon-one.png" alt="Demand icon" class="pillar-icon" />
+              <div class="pillar-label">Pillar 01</div>
+              <div class="pillar-title">Demand</div>
+              <div class="pillar-body">
+                What the market is leaning toward. See where interest is building so you can shape projects with intention.
+              </div>
+            </div>
+            <div class="pillar-card">
+              <img src="icon-two.png" alt="Readiness icon" class="pillar-icon" />
+              <div class="pillar-label">Pillar 02</div>
+              <div class="pillar-title">Readiness</div>
+              <div class="pillar-body">
+                How prepared a project is for opportunity. Understand where it stands against the expectations of serious partners.
+              </div>
+            </div>
+            <div class="pillar-card">
+              <img src="icon-three.png" alt="Audience Connection icon" class="pillar-icon" />
+              <div class="pillar-label">Pillar 03</div>
+              <div class="pillar-title">Audience Connection</div>
+              <div class="pillar-body">
+                Where resonance and positioning align. Connect stories to the audiences and ecosystems that will actually move them.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="system-mantra">
+          <span>Creators rise.</span>
+          <span>Partners win.</span>
+          <span>Projects move.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 – FEATURED PROJECTS (LIGHT, POSTER PLACEHOLDERS) -->
+    <section class="featured-projects section-light" id="explore">
+      <div class="featured-inner">
+        <div class="featured-text">
+          <h2>See What’s Rising Inside CineSparq</h2>
+          <p>
+            A curated look at emerging stories being shaped into market-ready opportunities. Scroll through sample projects to explore the range of voices, genres, and visions moving through the platform.
+          </p>
+        </div>
+
+        <div class="project-scroller">
+          <!-- Poster placeholders – you can replace src values with your actual thumbnails later -->
+          <article class="project-card">
+            <img src="poster-placeholder-1.png" alt="All By Design poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-2.png" alt="The Right Side poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-3.png" alt="Chapter & Hearse poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-4.png" alt="Hard Sale poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-5.png" alt="Descent poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-6.png" alt="It Takes Two poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-7.png" alt="Just In Time poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-8.png" alt="Altering poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-9.png" alt="Stay poster placeholder" />
+          </article>
+
+          <article class="project-card">
+            <img src="poster-placeholder-10.png" alt="CineSparq Concept Mockup poster placeholder" />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE BENEFITS (DARK) -->
+    <section class="core-benefits section-dark">
+      <div class="benefits-inner">
+        <div class="section-header">
+          <h2 class="section-title">Core Benefits</h2>
+          <p class="section-subtitle">
+            Insight that cuts through guesswork for both creators and industry partners.
+          </p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-title">Clarity on what the market wants</div>
+            <div class="benefit-body">
+              Access consolidated signals, trends, and insight that help you make informed creative and business decisions.
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-title">Alignment that opens doors</div>
+            <div class="benefit-body">
+              Position your project—or your pipeline—to match what buyers, investors, and platforms are actively seeking.
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-title">Momentum where it matters</div>
+            <div class="benefit-body">
+              Move faster with intelligence that cuts through guesswork, reduces uncertainty, and elevates the projects most ready for the moment.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (LIGHT, NEW LAYOUT WITH IMAGES + ARROWS) -->
+    <section class="how-it-works section-light">
+      <div class="how-inner">
+        <div class="section-header">
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            From raw projects and mandates to aligned opportunities and clearer decisions.
+          </p>
+        </div>
+
+        <div class="how-flow">
+          <!-- Step 1 -->
+          <div class="how-item">
+            <div class="how-image">
+              <img src="how-1.png" alt="How it works step 1 placeholder" />
+            </div>
+            <div class="how-label-row">
+              <div class="step-number">1</div>
+              <div class="step-title">Create your account</div>
+            </div>
+            <div class="step-body">
+              Whether you’re a creator or industry partner, you’ll unlock personalized access tailored to your goals.
+            </div>
+          </div>
+
+          <div class="how-arrow"></div>
+
+          <!-- Step 2 -->
+          <div class="how-item">
+            <div class="how-image">
+              <img src="how-2.png" alt="How it works step 2 placeholder" />
+            </div>
+            <div class="how-label-row">
+              <div class="step-number">2</div>
+              <div class="step-title">Explore the insights</div>
+            </div>
+            <div class="step-body">
+              See what the market is doing right now. Discover what’s gaining traction, where demand is shifting, and how projects align with current opportunities.
+            </div>
+          </div>
+
+          <div class="how-arrow"></div>
+
+          <!-- Step 3 -->
+          <div class="how-item">
+            <div class="how-image">
+              <img src="how-3.png" alt="How it works step 3 placeholder" />
+            </div>
+            <div class="how-label-row">
+              <div class="step-number">3</div>
+              <div class="step-title">Move your project—or pipeline—forward</div>
+            </div>
+            <div class="step-body">
+              Leverage clarity and alignment to advance the stories, collaborations, or acquisitions that meet your needs.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7 – REINFORCEMENT CTA (DARK) -->
+    <section class="cta-strip">
+      <div class="cta-inner">
+        <div class="cta-text">Ready to Unlock New Opportunities?</div>
+        <a href="#explore" class="btn-primary">Explore Insights</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-logo-block">
+            <img src="CSLogo-dark-bg.png" alt="CineSparq logo for dark background" />
+            <div class="footer-tagline">
+              Insight-driven project alignment for creators and industry.
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-heading">Quick Links</div>
+            <div class="footer-links">
+              <a href="#about">About</a>
+              <a href="#support">Support</a>
+              <a href="#faq">FAQ</a>
+              <a href="#legal">Legal</a>
+              <a href="#terms">Terms of Use</a>
+              <a href="#privacy">Privacy Policy</a>
+              <a href="#ip">Intellectual Property Notice</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-heading">Connect</div>
+            <div class="footer-socials">
+              <img src="social-icons.png" alt="Social media icons" />
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>© 2025 CineSparq. All rights reserved.</div>
+          <div>Powered by WordSmith Studios</div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
