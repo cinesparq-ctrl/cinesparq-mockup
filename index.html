@@ -804,8 +804,7 @@
         <div class="hero-card">
           <div class="hero-content">
             <div class="hero-pill">
-              <span class="hero-pill-dot"></span>
-              <span>AI-Powered · Human-Centered · Story-Focused</span>
+             <span>AI-Powered · Human-Centered · Story-Focused</span>
             </div>
             <h1 class="hero-title">
               Gain the market insight that moves projects forward
@@ -1013,71 +1012,83 @@
       </div>
     </section>
 
-    <!-- CREATOR SECURE STRIP -->
-    <section class="secure-strip">
-      <p>
-        CineSparq's Secure Share™ automatically tracks project access so you have peace of mind to share safely and stay in full control.
-      </p>
-    </section>
+   /* CREATOR SECURE TEXT (no strip background) */
+.secure-strip {
+  background: none;              /* remove strip */
+  padding: 1.8rem 1.5rem 0;      /* tighten spacing */
+  text-align: center;
+}
+
+.secure-strip p {
+  font-size: 1.15rem;            /* slightly larger than body */
+  font-weight: 600;              /* bold but not heavy */
+  color: var(--cs-charcoal);     /* clean, readable */
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
 
     <!-- SECTION 4 – PARTNER KPIS -->
-    <section class="partner-kpis-wrapper">
-      <section class="partner-kpis section-light">
-        <div class="kpi-inner">
-          <div class="section-header">
-            <h2 class="section-title">Qualified Projects at a Glance</h2>
-            <p class="section-subtitle">
-              Industry partners elevate deal flow with project clarity, mandate alignment, and opportunities primed for momentum.
-            </p>
+<section class="partner-kpis section-light">
+  <div class="kpi-inner">
+
+    <div class="section-header">
+      <h2 class="section-title">Qualified Projects at a Glance</h2>
+      <p class="section-subtitle">
+        Industry partners elevate deal flow with project clarity, mandate alignment, and opportunities primed for momentum.
+      </p>
+    </div>
+
+    <div class="kpi-grid">
+
+      <!-- Card 1 -->
+      <article class="kpi-card">
+        <div class="kpi-visual">
+          <div class="kpi-circle" data-percent="78">
+            <span class="kpi-metric">27</span>
           </div>
-
-          <div class="kpi-grid">
-            <!-- Card 1 -->
-            <article class="kpi-card">
-              <div class="kpi-visual">
-                <div class="kpi-circle" data-percent="78">
-                  <span class="kpi-metric">27</span>
-                </div>
-              </div>
-              <div class="kpi-label">Tailored Pipeline</div>
-              <div class="kpi-body">
-                Cut through clutter with opportunities aligned to your project mandates and strategic priorities.
-              </div>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="kpi-card">
-              <div class="kpi-visual">
-                <div class="kpi-circle" data-percent="65">
-                  <span class="kpi-metric">17</span>
-                </div>
-              </div>
-              <div class="kpi-label">Focus Flow</div>
-              <div class="kpi-body">
-                Track your active opportunities with real-time insights that keep you ahead and positioned to move first on high-potential wins.
-              </div>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="kpi-card">
-              <div class="kpi-visual">
-                <div class="kpi-circle" data-percent="82">
-                  <span class="kpi-metric kpi-metric--wide">$217.2M</span>
-                </div>
-              </div>
-              <div class="kpi-label">Pipeline Potential</div>
-              <div class="kpi-body">
-                See your pipeline at a glance, prioritize your workflow, and close deals with clarity and focus.
-              </div>
-            </article>
-          </div>
-
-          <p class="kpi-note kpi-note-emphasis">
-            CineSparq’s Secure Share™ helps you minimize IP risk so your project evaluations are always protected and compliant.
-          </p>
         </div>
-      </section>
-    </section>
+        <div class="kpi-label">Tailored Pipeline</div>
+        <div class="kpi-body">
+          Cut through clutter with opportunities aligned to your project mandates and strategic priorities.
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="kpi-card">
+        <div class="kpi-visual">
+          <div class="kpi-circle" data-percent="65">
+            <span class="kpi-metric">17</span>
+          </div>
+        </div>
+        <div class="kpi-label">Focus Flow</div>
+        <div class="kpi-body">
+          Track your active opportunities with real-time insights that keep you ahead and positioned to move first on high-potential wins.
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="kpi-card">
+        <div class="kpi-visual">
+          <div class="kpi-circle" data-percent="82">
+            <span class="kpi-metric kpi-metric--wide">$217.2M</span>
+          </div>
+        </div>
+        <div class="kpi-label">Pipeline Potential</div>
+        <div class="kpi-body">
+          See your pipeline at a glance, prioritize your workflow, and close deals with clarity and focus.
+        </div>
+      </article>
+
+    </div>
+
+    <p class="kpi-note kpi-note-emphasis">
+      CineSparq’s Secure Share™ helps you minimize IP risk so your project evaluations are always protected and compliant.
+    </p>
+
+  </div>
+</section>
+
 
     <!-- REINFORCEMENT CTA STRIP -->
     <section class="cta-strip">
