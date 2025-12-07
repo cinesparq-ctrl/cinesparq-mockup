@@ -62,8 +62,6 @@
       padding: 0 1.5rem;
     }
 
-    /* SECTION BACKGROUND MODES */
-
     .section-light {
       background: var(--cs-bg-light);
       color: var(--cs-charcoal);
@@ -151,7 +149,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: url("assets/hero/cinesparq-mockup-hero-image.png");
+      background-image: url("assets/img/cinesparq-mockup-hero-image.png");
       background-size: cover;
       background-position: center;
       opacity: 0.4;
@@ -203,14 +201,14 @@
       font-weight: 700;
       color: var(--cs-white);
       margin-bottom: 1rem;
-      max-width: 46rem;      /* wider line length */
+      max-width: 46rem;
       margin-left: auto;
       margin-right: auto;
     }
 
     .hero-subtitle {
       font-size: 1rem;
-      max-width: 44rem;      /* wider line length */
+      max-width: 44rem;
       margin: 0 auto 2.2rem;
       color: #e5e7eb;
     }
@@ -246,10 +244,10 @@
       background: #f7cf00;
     }
 
-    /* GENERIC SECTION STYLES */
+    /* SECTIONS */
 
     section {
-      padding: 4.5rem 0; /* increased padding for all sections */
+      padding: 4.5rem 0;
     }
 
     .section-header {
@@ -269,15 +267,10 @@
       margin: 0.3rem auto 0;
     }
 
-    .section-dark .section-subtitle {
-      color: #d1d5db;
-    }
+    .section-dark .section-subtitle { color: #d1d5db; }
+    .section-light .section-subtitle { color: #4b5563; }
 
-    .section-light .section-subtitle {
-      color: #4b5563;
-    }
-
-    /* SECTION 2 – CHOOSE YOUR PATH (LIGHT) */
+    /* CHOOSE YOUR PATH */
 
     .choose-path .path-grid {
       display: grid;
@@ -335,11 +328,7 @@
       color: #e5e7eb;
     }
 
-    /* WHAT CINESPARQ DOES – SYSTEM LINE (DARK) */
-
-    .system-section {
-      /* section-dark already applied */
-    }
+    /* WHAT CINESPARQ DOES */
 
     .system-inner {
       max-width: var(--cs-max-width);
@@ -358,9 +347,7 @@
       margin-bottom: 0.3rem;
     }
 
-    .system-subtitle {
-      font-size: 0.98rem;
-    }
+    .system-subtitle { font-size: 0.98rem; }
 
     .alignment-wrap {
       margin-top: 2.2rem;
@@ -422,29 +409,38 @@
       display: grid;
       grid-template-columns: minmax(0, 2.1fr) minmax(0, 2.2fr);
       gap: 2.4rem;
-      align-items: stretch; /* stretch both columns to same height */
+      align-items: stretch;
     }
 
     .system-copy {
-      background: #020617;
-      border-radius: var(--cs-radius-xl);
-      padding: 1.7rem 1.6rem 1.9rem;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.9);
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /* center copy inside the tall card */
-    }
+  background: #020617;
+  border-radius: var(--cs-radius-xl);
+  padding: 1.9rem 1.8rem 2.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.system-copy-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0 0 0.9rem;
+}
+
+.system-copy-subtitle {
+  font-size: 0.98rem;
+  color: #cbd5f5;
+}
 
     .system-copy p {
       margin: 0 0 0.9rem;
-      font-size: 0.96rem;
+      font-size: 1rem;
       color: #e5e7eb;
     }
 
-    .system-copy p:last-of-type {
-      margin-bottom: 0;
-    }
+    .system-copy p:last-of-type { margin-bottom: 0; }
 
     .pillars {
       display: grid;
@@ -455,7 +451,7 @@
 
     .pillar-card {
       background: #020617;
-      border-radius: 999px 999px 1.3rem 1.3rem; /* pillar-shaped top */
+      border-radius: 999px 999px 1.3rem 1.3rem;
       padding: 2.1rem 1.1rem 1.4rem;
       border: 1px solid rgba(148, 163, 184, 0.45);
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
@@ -510,7 +506,7 @@
       margin: 0 0.6rem;
     }
 
-    /* SECTION 4 – FEATURED PROJECTS (LIGHT, POSTER PLACEHOLDERS + ARROWS) */
+    /* FEATURED PROJECTS */
 
     .featured-inner {
       max-width: var(--cs-max-width);
@@ -546,15 +542,11 @@
       scroll-snap-type: x mandatory;
     }
 
-    .project-scroller::-webkit-scrollbar {
-      height: 6px;
-    }
-
+    .project-scroller::-webkit-scrollbar { height: 6px; }
     .project-scroller::-webkit-scrollbar-track {
       background: #e5e7eb;
       border-radius: 999px;
     }
-
     .project-scroller::-webkit-scrollbar-thumb {
       background: #9ca3af;
       border-radius: 999px;
@@ -570,7 +562,7 @@
       scroll-snap-align: start;
       flex-shrink: 0;
       background: #020617;
-      aspect-ratio: 2 / 3; /* portrait format */
+      aspect-ratio: 2 / 3;
     }
 
     .project-card img {
@@ -595,18 +587,13 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
-      pointer-events: none; /* visual only for mockup */
+      pointer-events: none; /* mockup only */
     }
 
-    .scroll-arrow--left {
-      left: -0.3rem;
-    }
+    .scroll-arrow--left { left: -0.3rem; }
+    .scroll-arrow--right { right: -0.3rem; }
 
-    .scroll-arrow--right {
-      right: -0.3rem;
-    }
-
-    /* CORE BENEFITS (DARK) */
+    /* CORE BENEFITS */
 
     .core-benefits .benefits-inner {
       max-width: var(--cs-max-width);
@@ -614,9 +601,7 @@
       padding: 0 1.5rem;
     }
 
-    .core-benefits .section-title {
-      color: var(--cs-white);
-    }
+    .core-benefits .section-title { color: var(--cs-white); }
 
     .benefits-grid {
       display: grid;
@@ -645,7 +630,7 @@
       font-size: 0.95rem;
     }
 
-    /* HOW IT WORKS (LIGHT – EQUAL BOXES, CENTERED HEADLINES, IMAGES & ARROWS) */
+    /* HOW IT WORKS */
 
     .how-inner {
       max-width: var(--cs-max-width);
@@ -673,7 +658,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.9rem;
-      min-height: 320px; /* equal box height */
+      min-height: 320px;
       text-align: center;
     }
 
@@ -744,10 +729,10 @@
       color: var(--cs-charcoal);
     }
 
-    /* REINFORCEMENT CTA STRIP – SEPARATE COLOR, CENTERED */
+    /* CTA STRIP */
 
     .cta-strip {
-      background: #0a4f84; /* brand navy so it stands out */
+      background: #0a4f84;
       padding: 3.2rem 1.5rem;
       color: var(--cs-white);
       text-align: center;
@@ -765,7 +750,7 @@
     .cta-text {
       font-weight: 700;
       line-height: 1.1;
-      font-size: clamp(2rem, 4vw + 0.5rem, 3.2rem); /* slightly smaller per request */
+      font-size: clamp(2rem, 4vw + 0.5rem, 3.2rem);
     }
 
     .cta-strip .btn-primary {
@@ -773,9 +758,7 @@
       color: var(--cs-charcoal);
     }
 
-    .cta-strip .btn-primary:hover {
-      background: #f7cf00;
-    }
+    .cta-strip .btn-primary:hover { background: #f7cf00; }
 
     /* FOOTER */
 
@@ -833,9 +816,7 @@
       color: #e5e7ef;
     }
 
-    .footer-links a:hover {
-      color: #ffffff;
-    }
+    .footer-links a:hover { color: #ffffff; }
 
     .footer-socials img {
       max-width: 180px;
@@ -879,9 +860,7 @@
         transform: rotate(90deg);
       }
 
-      .system-body {
-        gap: 1.8rem;
-      }
+      .system-body { gap: 1.8rem; }
     }
 
     @media (max-width: 720px) {
@@ -890,17 +869,11 @@
         padding-bottom: 3.6rem;
       }
 
-      .hero-inner {
-        padding-inline: 1.2rem;
-      }
+      .hero-inner { padding-inline: 1.2rem; }
 
-      .project-card {
-        min-width: 190px;
-      }
+      .project-card { min-width: 190px; }
 
-      .scroll-arrow {
-        display: none; /* hide arrows on very small screens */
-      }
+      .scroll-arrow { display: none; }
     }
   </style>
 </head>
@@ -911,7 +884,7 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="logo-area">
-          <img src="assets/logos/CSLogo-light-bg.png" alt="CineSparq logo on light background" />
+          <img src="assets/img/CS_Logo_light-bg.png" alt="CineSparq logo on light background" />
           <div class="logo-text">CineSparq</div>
         </div>
         <div class="nav-right">
@@ -920,7 +893,7 @@
       </div>
     </header>
 
-    <!-- HERO (IMAGE BACKGROUND) -->
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-pill">
@@ -939,7 +912,7 @@
       </div>
     </section>
 
-    <!-- SECTION 2 – CHOOSE YOUR PATH (LIGHT) -->
+    <!-- CHOOSE YOUR PATH -->
     <section class="choose-path section-light">
       <div class="container">
         <div class="section-header">
@@ -948,7 +921,8 @@
         <div class="path-grid">
           <div class="path-card">
             <div class="path-image">
-              <img src="assets/people/filmmaker-image.png" alt="Filmmaker representation placeholder" />
+              <!-- placeholder until you upload filmmaker-image.png -->
+              <img src="assets/img/learning-poster.png" alt="Filmmaker representation placeholder" />
             </div>
             <div>
               <div class="path-label">For Creators</div>
@@ -960,7 +934,8 @@
           </div>
           <div class="path-card">
             <div class="path-image">
-              <img src="assets/people/industry-partner-image.png" alt="Industry partner representation placeholder" />
+              <!-- placeholder until you upload industry-partner-image.png -->
+              <img src="assets/img/oceans-poster.png" alt="Industry partner representation placeholder" />
             </div>
             <div>
               <div class="path-label">For Industry Partners</div>
@@ -974,7 +949,7 @@
       </div>
     </section>
 
-    <!-- WHAT CINESPARQ DOES – SYSTEM LINE (DARK) -->
+    <!-- WHAT CINESPARQ DOES -->
     <section class="system-section section-dark">
       <div class="system-inner">
         <div class="system-header">
@@ -982,33 +957,32 @@
           <p class="system-subtitle">Turn stories into aligned, opportunity-ready projects.</p>
         </div>
 
-        <!-- ALIGNMENT BAR -->
         <div class="alignment-wrap">
           <div class="alignment-bar">
-            <div class="alignment-node">
-              Story
-            </div>
+            <div class="alignment-node">Story</div>
             <div class="alignment-node alignment-node--center">
               <div>
                 <span>CineSparq</span>
                 <strong>Alignment</strong>
               </div>
             </div>
-            <div class="alignment-node">
-              Opportunity
-            </div>
+            <div class="alignment-node">Opportunity</div>
           </div>
         </div>
 
         <div class="system-body">
           <div class="system-copy">
-            <p>
-              CineSparq bridges the gap between creators and the marketplace with the insights, context, and alignment tools that make it easy.
-            </p>
-            <p>
-              We focus on demand, readiness, and audience connection so you have what it takes to move stories forward.
-            </p>
-          </div>
+  <h3 class="system-copy-title">
+    A clear view of where your project stands.
+  </h3>
+  <p>
+    CineSparq bridges the gap between creators and the marketplace with the insights, context, and alignment tools that make it easy to move from “interesting idea” to investable opportunity.
+  </p>
+  <p class="system-copy-subtitle">
+    We focus on demand, readiness, and audience connection so you can see how your project maps to what serious partners are actually looking for—and what to adjust next.
+  </p>
+</div>
+
 
           <div class="pillars">
             <div class="pillar-card">
@@ -1046,7 +1020,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4 – FEATURED PROJECTS (LIGHT, POSTER PLACEHOLDERS + ARROWS) -->
+    <!-- FEATURED PROJECTS -->
     <section class="featured-projects section-light" id="explore">
       <div class="featured-inner">
         <div class="featured-text">
@@ -1059,27 +1033,27 @@
         <div class="project-scroller-wrap">
           <button class="scroll-arrow scroll-arrow--left" type="button">❮</button>
           <div class="project-scroller">
-            <!-- 7 portrait-format project placeholders -->
             <article class="project-card">
-              <img src="assets/projects/project-1.png" alt="Project 1 poster placeholder" />
+              <img src="assets/img/abyss-poster.png" alt="Project poster 1" />
             </article>
             <article class="project-card">
-              <img src="assets/projects/project-2.png" alt="Project 2 poster placeholder" />
+              <img src="assets/img/as-time-goes-by-poster.png" alt="Project poster 2" />
             </article>
             <article class="project-card">
-              <img src="assets/projects/project-3.png" alt="Project 3 poster placeholder" />
+              <img src="assets/img/learning-poster.png" alt="Project poster 3" />
             </article>
             <article class="project-card">
-              <img src="assets/projects/project-4.png" alt="Project 4 poster placeholder" />
+              <img src="assets/img/oceans-poster.png" alt="Project poster 4" />
+            </article>
+            <!-- reusing to reach 7 placeholders -->
+            <article class="project-card">
+              <img src="assets/img/abyss-poster.png" alt="Project poster 5" />
             </article>
             <article class="project-card">
-              <img src="assets/projects/project-5.png" alt="Project 5 poster placeholder" />
+              <img src="assets/img/as-time-goes-by-poster.png" alt="Project poster 6" />
             </article>
             <article class="project-card">
-              <img src="assets/projects/project-6.png" alt="Project 6 poster placeholder" />
-            </article>
-            <article class="project-card">
-              <img src="assets/projects/project-7.png" alt="Project 7 poster placeholder" />
+              <img src="assets/img/learning-poster.png" alt="Project poster 7" />
             </article>
           </div>
           <button class="scroll-arrow scroll-arrow--right" type="button">❯</button>
@@ -1087,7 +1061,7 @@
       </div>
     </section>
 
-    <!-- CORE BENEFITS (DARK) -->
+    <!-- CORE BENEFITS -->
     <section class="core-benefits section-dark">
       <div class="benefits-inner">
         <div class="section-header">
@@ -1119,7 +1093,7 @@
       </div>
     </section>
 
-    <!-- HOW IT WORKS (LIGHT, EQUAL BOXES, CENTERED HEADLINES, IMAGES & ARROWS) -->
+    <!-- HOW IT WORKS -->
     <section class="how-it-works section-light">
       <div class="how-inner">
         <div class="section-header">
@@ -1130,10 +1104,10 @@
         </div>
 
         <div class="how-flow">
-          <!-- Step 1 -->
           <div class="how-item">
             <div class="how-image">
-              <img src="assets/how/how-1.png" alt="How it works step 1 placeholder" />
+              <!-- placeholder until you upload assets/how/how-1.png -->
+              <img src="assets/img/learning-poster.png" alt="Step 1 placeholder" />
             </div>
             <div class="how-label-row">
               <div class="step-number">1</div>
@@ -1146,10 +1120,10 @@
 
           <div class="how-arrow"></div>
 
-          <!-- Step 2 -->
           <div class="how-item">
             <div class="how-image">
-              <img src="assets/how/how-2.png" alt="How it works step 2 placeholder" />
+              <!-- placeholder until you upload assets/how/how-2.png -->
+              <img src="assets/img/oceans-poster.png" alt="Step 2 placeholder" />
             </div>
             <div class="how-label-row">
               <div class="step-number">2</div>
@@ -1162,10 +1136,10 @@
 
           <div class="how-arrow"></div>
 
-          <!-- Step 3 -->
           <div class="how-item">
             <div class="how-image">
-              <img src="assets/how/how-3.png" alt="How it works step 3 placeholder" />
+              <!-- placeholder until you upload assets/how/how-3.png -->
+              <img src="assets/img/abyss-poster.png" alt="Step 3 placeholder" />
             </div>
             <div class="how-label-row">
               <div class="step-number">3</div>
@@ -1179,7 +1153,7 @@
       </div>
     </section>
 
-    <!-- REINFORCEMENT CTA STRIP -->
+    <!-- CTA STRIP -->
     <section class="cta-strip">
       <div class="cta-inner">
         <div class="cta-text">Ready to Unlock Opportunities?</div>
@@ -1192,7 +1166,7 @@
       <div class="footer-inner">
         <div class="footer-top">
           <div class="footer-logo-block">
-            <img src="assets/logos/CSLogo-dark-bg.png" alt="CineSparq logo for dark background" />
+            <img src="assets/img/CSLogo-dark-bg.png" alt="CineSparq logo for dark background" />
             <div class="footer-tagline">
               Insight-driven project alignment for creators and industry.
             </div>
@@ -1214,7 +1188,7 @@
           <div>
             <div class="footer-heading">Connect</div>
             <div class="footer-socials">
-              <img src="assets/social/social-icons.png" alt="Social media icons" />
+              <img src="assets/icons/social-icons.png" alt="Social media icons" />
             </div>
           </div>
         </div>
