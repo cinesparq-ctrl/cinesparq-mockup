@@ -4,217 +4,788 @@
   <meta charset="UTF-8" />
   <title>CineSparq – Changing how projects are discovered, qualified, and funded</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="home">
 
-  <!-- Top Navigation -->
+  <style>
+    :root {
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .main-nav a {
+      color: #4b5563;
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.18s ease;
+    }
+
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.45rem 1.1rem;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: #111827;
+    }
+
+    .btn-primary {
+      background: var(--cs-gold);
+      color: #111827;
+      border-color: var(--cs-gold);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(0.96);
+    }
+
+    .btn-outline {
+      border-color: #d1d5db;
+      background: var(--cs-white);
+    }
+
+    .btn-outline:hover {
+      background: #f3f4f6;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: radial-gradient(circle at top left, #fef9c3 0, #ffffff 45%, #e5f0f8 100%);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.4rem 1.5rem 2.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6b7280;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-title {
+      font-size: 2.15rem;
+      line-height: 1.1;
+      font-weight: 750;
+      color: var(--cs-ink);
+      margin: 0 0 0.75rem;
+      max-width: 22rem;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 1rem;
+      font-size: 0.98rem;
+      color: #4b5563;
+      max-width: 27rem;
+    }
+
+    .hero-punchline {
+      margin: 0 0 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cs-deep-blue);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-footnote {
+      font-size: 0.8rem;
+      color: #6b7280;
+      max-width: 24rem;
+    }
+
+    .hero-media {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .hero-image-wrapper {
+      width: 100%;
+      max-width: 440px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+      background: #000;
+    }
+
+    .hero-image-wrapper img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.92; /* slightly lifted from full dark */
+    }
+
+    /* BENEFITS */
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.1rem 1.5rem 0;
+    }
+
+    .section-heading {
+      margin-bottom: 1.2rem;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.35rem;
+    }
+
+    .section-heading p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: #4b5563;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .benefit-card {
+      background: var(--cs-white);
+      border-radius: 18px;
+      padding: 1.25rem 1.3rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .benefit-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 0.7rem;
+    }
+
+    .benefit-card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .benefit-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #4b5563;
+    }
+
+    /* LIVE PROJECT FEED */
+
+    .feed-section {
+      padding-bottom: 2.4rem;
+    }
+
+    .feed-strip {
+      background: var(--cs-white);
+      border-radius: 20px;
+      padding: 1.3rem 1.2rem 1.4rem;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .feed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feed-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .feed-header p {
+      margin: 0.14rem 0 0;
+      font-size: 0.84rem;
+      color: #6b7280;
+    }
+
+    .feed-note {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin: 0;
+    }
+
+    .feed-row {
+      display: flex;
+      gap: 0.9rem;
+      overflow-x: auto;
+      padding: 0.2rem 0.15rem 0.3rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .feed-row::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .feed-row::-webkit-scrollbar-track {
+      background: #f3f4f6;
+    }
+
+    .feed-row::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 999px;
+    }
+
+    .project-card {
+      flex: 0 0 170px;
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 0.45rem 0.45rem 0.7rem;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .project-poster {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111827;
+      height: 210px;
+    }
+
+    .project-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0.25rem 0 0.05rem;
+    }
+
+    .project-logline {
+      font-size: 0.78rem;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      margin-top: 0.35rem;
+    }
+
+    .project-tag-pill {
+      font-size: 0.7rem;
+      padding: 0.08rem 0.45rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .project-meta-line {
+      margin-top: 0.3rem;
+      font-size: 0.75rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.3rem;
+      align-items: center;
+    }
+
+    .pill-sparq {
+      font-size: 0.68rem;
+      padding: 0.05rem 0.45rem;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: var(--cs-deep-blue);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: auto;
+      background: var(--cs-ink);
+      color: #e5e7eb;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.4rem 1.5rem 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1.3rem;
+      font-size: 0.8rem;
+    }
+
+    .footer-left p {
+      margin: 0.1rem 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .header-inner,
+      .hero-inner,
+      .section,
+      .footer-inner {
+        padding-inline: 1rem;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+      }
+
+      .hero-media {
+        justify-content: flex-start;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="brand">
-        <span class="brand-mark"></span>
-        <span class="brand-name">CineSparq</span>
-      </a>
+      <div class="header-left">
+        <img src="CS_Logo_light bg.png" alt="CineSparq logo" class="brand-logo" />
+      </div>
 
-      <nav class="main-nav">
-        <a href="#how-it-works">How it works</a>
-        <a href="#benefits">For creators</a>
-        <a href="#partners">For partners</a>
-        <a href="#beta" class="nav-cta">Join beta</a>
-      </nav>
+      <div class="header-right">
+        <nav class="main-nav">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#live-feed">Live Slate</a>
+          <a href="#for-creators">For Creators</a>
+          <a href="#for-partners">For Partners</a>
+        </nav>
 
-      <a href="login.html" class="btn btn-login">Login</a>
+        <div class="cta-row">
+          <a href="login.html" class="btn btn-outline">Sign In</a>
+          <a href="login.html" class="btn btn-primary">Join the Beta</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="home-main">
-
-    <!-- HERO SECTION -->
-    <section class="hero" id="top">
+  <!-- HERO -->
+  <main>
+    <section class="hero">
       <div class="hero-inner">
-
-        <div class="hero-copy">
-          <p class="eyebrow">AI-powered · Human-centered</p>
-
-          <h1>Changing how projects are discovered, qualified, and funded.</h1>
-
+        <div>
+          <p class="hero-kicker">AI-powered. Human-centered.</p>
+          <h1 class="hero-title">
+            Changing the way projects are discovered, qualified, and funded.
+          </h1>
           <p class="hero-subtitle">
-            Creators rise. Partners win. Projects move. CineSparq turns emerging stories
-            into market-ready opportunities.
+            CineSparq standardizes readiness, protects IP, and connects creators and industry partners around the same data—so projects move faster from idea to greenlight.
+          </p>
+          <p class="hero-punchline">
+            Creators rise. Partners win. Projects move.
           </p>
 
           <div class="hero-cta-row">
-            <a href="#how-it-works" class="btn btn-primary">Explore CineSparq</a>
-            <a href="#beta" class="btn btn-secondary">Join the early beta</a>
+            <a href="login.html" class="btn btn-primary">I’m a Creator</a>
+            <a href="login.html" class="btn btn-outline">I’m an Industry Partner</a>
           </div>
-
-          <p class="hero-support">
-            Built for creators who are done waiting for permission—and partners who need
-            qualified, investment-ready projects.
+          <p class="hero-footnote">
+            This mockup preview shows the CineSparq experience in motion. Final product design and flows may evolve.
           </p>
         </div>
 
-        <div class="hero-image-wrapper">
-          <!-- Use your actual hero file path here -->
-          <img
-            src="assets/images/hero-dashboard.jpg"
-            alt="CineSparq dashboard showing project ratings and matches"
-            class="hero-image"
-          />
+        <div class="hero-media">
+          <div class="hero-image-wrapper">
+            <img src="cinesparq-mockup-hero-image.png" alt="Preview of the CineSparq dashboard experience" />
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- BENEFITS SECTION -->
-    <section class="home-section benefits" id="benefits">
-      <div class="section-header">
-        <h2>What CineSparq makes possible</h2>
-        <p>We don’t replace your taste. We standardize the path to readiness.</p>
+    <!-- BENEFITS -->
+    <section class="section" id="how-it-works">
+      <div class="section-heading">
+        <h2>AI-powered, human-centered project readiness.</h2>
+        <p>
+          CineSparq turns emerging stories into market-ready opportunities without replacing the people who make the decisions.
+        </p>
       </div>
 
       <div class="benefits-grid">
         <article class="benefit-card">
-          <h3>Stand out instantly</h3>
+          <img src="icon-one.png" alt="" class="benefit-icon" />
+          <h3>Standardized Readiness</h3>
           <p>
-            Turn your project into a clear, investor-ready package—without needing
-            insider connections or complex tools.
+            A clear Sparq Rating and category breakdown so everybody sees the same picture of how prepared a project really is.
           </p>
         </article>
 
         <article class="benefit-card">
-          <h3>Move with confidence</h3>
+          <img src="icon-two.png" alt="" class="benefit-icon" />
+          <h3>Protected IP</h3>
           <p>
-            See strengths, gaps, and risk signals before you pitch so your next move
-            is strategic, not hopeful.
+            Light-weight viewing agreements, tracked access, and tiered visibility—designed to reduce risk for creators and partners.
           </p>
         </article>
 
         <article class="benefit-card">
-          <h3>Build better relationships</h3>
+          <img src="icon-three.png" alt="" class="benefit-icon" />
+          <h3>Aligned Discovery</h3>
           <p>
-            Creators and partners connect around aligned mandates and shared data,
-            not endless cold outreach.
+            Creators see who’s buying. Partners see what’s ready.
+            Both sides move using the same data instead of guesswork.
           </p>
         </article>
       </div>
     </section>
 
-    <!-- HOW IT WORKS SECTION -->
-    <section class="home-section how-it-works" id="how-it-works">
-      <div class="section-header">
-        <h2>How CineSparq works</h2>
-        <p>One shared view of readiness—for creators, investors, and industry partners.</p>
-      </div>
-
-      <ol class="how-grid">
-        <li class="how-step">
-          <h3>1. Upload your project</h3>
-          <p>
-            Securely share your materials. Your IP stays protected and visible only
-            to verified partners.
+    <!-- LIVE PROJECT FEED -->
+    <section class="section feed-section" id="live-feed">
+      <div class="feed-strip">
+        <div class="feed-header">
+          <div>
+            <h3>Live Project Feed (Preview)</h3>
+            <p>
+              A social-style slate view where creators and partners can see what’s coming without exposing sensitive materials.
+            </p>
+          </div>
+          <p class="feed-note">
+            In-platform, scores and documents stay hidden until projects are ready and access is granted.
           </p>
-        </li>
-
-        <li class="how-step">
-          <h3>2. Get a readiness snapshot</h3>
-          <p>
-            See where your project shines, where it needs work, and how it aligns with
-            real-world mandates.
-          </p>
-        </li>
-
-        <li class="how-step">
-          <h3>3. Connect with aligned partners</h3>
-          <p>
-            Investors and industry partners discover projects based on fit, not noise—
-            and move faster when the match is right.
-          </p>
-        </li>
-      </ol>
-    </section>
-
-    <!-- PARTNERS SECTION -->
-    <section class="home-section partners" id="partners">
-      <div class="section-header">
-        <h2>Built for both sides of the table</h2>
-        <p>Creators get clarity. Partners get confidence. The ecosystem gets stronger.</p>
-      </div>
-
-      <div class="two-column">
-        <div>
-          <h3>For creators</h3>
-          <ul class="bullet-list">
-            <li>Clarify your value and positioning before you pitch.</li>
-            <li>See how your project maps to actual investment criteria.</li>
-            <li>Track interest, engagement, and investor-introductions in one place.</li>
-          </ul>
         </div>
 
-        <div>
-          <h3>For partners & investors</h3>
-          <ul class="bullet-list">
-            <li>Quickly surface aligned, investment-ready projects.</li>
-            <li>Reduce risk with transparent, standardized project data.</li>
-            <li>Spend less time sifting, more time closing the right deals.</li>
-          </ul>
+        <div class="feed-row">
+          <!-- 10 project cards, reusing your existing posters for now -->
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="as-time-goes-by-poster.png" alt="As Time Goes By poster" />
+            </div>
+            <h4 class="project-title">As Time Goes By</h4>
+            <p class="project-logline">
+              A love story told across decades in Chicago, where music, memory, and sacrifice collide.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Feature</span>
+              <span class="project-tag-pill">Period Drama</span>
+              <span class="project-tag-pill">Chicago</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Rated</span>
+              <span>120 min</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="learning-poster.png" alt="Learning to Fall In Love poster" />
+            </div>
+            <h4 class="project-title">Learning to Fall In Love</h4>
+            <p class="project-logline">
+              After a major setback, a successful retiree must choose between ambition and the unexpected chance to love again.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Romantic Comedy</span>
+              <span class="project-tag-pill">Asia-set</span>
+              <span class="project-tag-pill">Feel-good</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Rated</span>
+              <span>100 min</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="abyss-poster.png" alt="Abyss of Deceptions poster" />
+            </div>
+            <h4 class="project-title">Abyss of Deceptions</h4>
+            <p class="project-logline">
+              A coming-of-age vertical thriller where one secret drags a group of friends into deeper waters than they can escape.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Microdrama</span>
+              <span class="project-tag-pill">Vertical Series</span>
+              <span class="project-tag-pill">Thriller</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Rated</span>
+              <span>Series</span>
+            </div>
+          </article>
+
+          <!-- 7 placeholder projects – titles can be adjusted later; using existing posters so nothing breaks -->
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="learning-poster.png" alt="Southside Saints poster" />
+            </div>
+            <h4 class="project-title">Southside Saints</h4>
+            <p class="project-logline">
+              Three siblings fight to keep their late father’s bar alive as development pressures close in on their block.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Drama</span>
+              <span class="project-tag-pill">Family</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Ready</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="as-time-goes-by-poster.png" alt="Neon Baptism poster" />
+            </div>
+            <h4 class="project-title">Neon Baptism</h4>
+            <p class="project-logline">
+              A DJ-turned-pastor must reconcile his past life in the club scene when an old track goes viral again.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Music</span>
+              <span class="project-tag-pill">Drama</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">In Evaluation</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="abyss-poster.png" alt="Golden Hour Hustle poster" />
+            </div>
+            <h4 class="project-title">Golden Hour Hustle</h4>
+            <p class="project-logline">
+              A burned-out PA turns a one-day music video gig into a life-changing shot at producing.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Dramedy</span>
+              <span class="project-tag-pill">Industry</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Ready</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="learning-poster.png" alt="Signal in the Dark poster" />
+            </div>
+            <h4 class="project-title">Signal in the Dark</h4>
+            <p class="project-logline">
+              A pirate radio host starts receiving calls from a future that may still be prevented.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Sci-Fi</span>
+              <span class="project-tag-pill">Low Budget</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">In Evaluation</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="as-time-goes-by-poster.png" alt="Between Two Seasons poster" />
+            </div>
+            <h4 class="project-title">Between Two Seasons</h4>
+            <p class="project-logline">
+              An estranged mother and daughter are forced to road-trip across the country with one last box of family tapes.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Road Drama</span>
+              <span class="project-tag-pill">Festival</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Rated</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="abyss-poster.png" alt="The Quiet Harbor poster" />
+            </div>
+            <h4 class="project-title">The Quiet Harbor</h4>
+            <p class="project-logline">
+              A retired dock worker uncovers a decades-old cover-up when a ship returns to port without a crew.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Mystery</span>
+              <span class="project-tag-pill">Contained</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">In Development</span>
+              <span>Feature</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-poster">
+              <img src="learning-poster.png" alt="The Sparrow’s Oath poster" />
+            </div>
+            <h4 class="project-title">The Sparrow’s Oath</h4>
+            <p class="project-logline">
+              A young organizer must choose between her safety and her city when a protest spirals out of control.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag-pill">Social Drama</span>
+              <span class="project-tag-pill">Festival</span>
+            </div>
+            <div class="project-meta-line">
+              <span class="pill-sparq">Sparq Ready</span>
+              <span>Feature</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
-
-    <!-- BETA CTA SECTION -->
-    <section class="home-section beta-cta" id="beta">
-      <div class="beta-inner">
-        <h2>Be part of the first wave.</h2>
-        <p>
-          We’re inviting a small group of creators and partners to help shape the
-          CineSparq experience before launch.
-        </p>
-        <a href="beta-signup.html" class="btn btn-primary">Request early access</a>
-      </div>
-    </section>
-
   </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-left">
-        <p class="footer-brand">CineSparq</p>
-        <p class="footer-tagline">
-          Changing how projects are discovered, qualified, and funded.
-        </p>
+        <p>© <span id="year"></span> CineSparq. All rights reserved.</p>
+        <p>AI-powered, human-centered project readiness for the next wave of storytellers.</p>
       </div>
-
       <div class="footer-links">
-        <div>
-          <h4>Quick links</h4>
-          <ul>
-            <li><a href="#how-it-works">How it works</a></li>
-            <li><a href="#benefits">For creators</a></li>
-            <li><a href="#partners">For partners</a></li>
-            <li><a href="#beta">Join beta</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Connect</h4>
-          <div class="social-row">
-            <a href="#" aria-label="LinkedIn" class="social-icon">in</a>
-            <a href="#" aria-label="Instagram" class="social-icon">IG</a>
-            <a href="#" aria-label="X" class="social-icon">X</a>
-          </div>
-        </div>
+        <a href="#how-it-works">How it works</a>
+        <a href="#for-creators" id="for-creators">For creators</a>
+        <a href="#for-partners" id="for-partners">For partners</a>
       </div>
     </div>
-
-    <p class="footer-meta">
-      © <span id="year"></span> CineSparq. All rights reserved.
-    </p>
   </footer>
 
   <script>
-    // Simple current-year for footer
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
