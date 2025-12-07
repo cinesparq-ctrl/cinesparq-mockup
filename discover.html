@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CineSparq – Discover Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --cs-deep-blue: #0a4f84;
+      --cs-gold: #f8d418;
+      --cs-ink: #1c1f26;
+      --cs-cream: #f9f5ef;
+      --cs-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background-color: #f3f4f6;
+      color: var(--cs-ink);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      background-color: var(--cs-white);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+
+    .dashboard-nav {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .dashboard-nav a {
+      color: #4b5563;
+      position: relative;
+      padding-bottom: 0.2rem;
+    }
+
+    .dashboard-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--cs-gold);
+      transition: width 0.18s ease;
+    }
+
+    .dashboard-nav a:hover::after {
+      width: 100%;
+    }
+
+    .dashboard-nav a.active {
+      color: var(--cs-deep-blue);
+      font-weight: 600;
+    }
+
+    .dashboard-nav a.active::after {
+      width: 100%;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-name {
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .menu-button {
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      width: 26px;
+      height: 26px;
+      background: transparent;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .menu-button-bars {
+      width: 14px;
+      height: 10px;
+      position: relative;
+    }
+
+    .menu-button-bars span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #4b5563;
+      border-radius: 999px;
+    }
+
+    .menu-button-bars span:nth-child(1) { top: 0; }
+    .menu-button-bars span:nth-child(2) { top: 4px; }
+    .menu-button-bars span:nth-child(3) { top: 8px; }
+
+    /* PAGE LAYOUT */
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.6rem 1.5rem 2.6rem;
+      flex: 1;
+    }
+
+    .page-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .page-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin: 0 0 0.3rem;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .page-header p {
+      margin: 0.3rem 0 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+      max-width: 36rem;
+    }
+
+    .page-note {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      max-width: 40rem;
+    }
+
+    .discover-card {
+      background: var(--cs-white);
+      border-radius: 18px;
+      padding: 1.3rem 1.35rem 1.5rem;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .discover-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .discover-header-row h2 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .discover-header-row p {
+      margin: 0.16rem 0 0;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    .discover-controls {
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .pill-filter {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 0.18rem 0.6rem;
+      background: #f9fafb;
+      font-size: 0.78rem;
+    }
+
+    /* PROJECT GRID */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .project-card {
+      background: #f9fafb;
+      border-radius: 14px;
+      padding: 0.5rem 0.5rem 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .project-poster {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111827;
+      height: 200px;
+    }
+
+    .project-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0.3rem 0 0.05rem;
+    }
+
+    .project-title a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .project-logline {
+      font-size: 0.78rem;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem;
+      margin-top: 0.25rem;
+    }
+
+    .project-tag-pill {
+      font-size: 0.7rem;
+      padding: 0.08rem 0.45rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+
+    .project-meta-line {
+      margin-top: 0.25rem;
+      font-size: 0.74rem;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.3rem;
+      align-items: center;
+    }
+
+    /* FOOTER */
+
+    .page-footer {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner,
+      .page,
+      .page-footer {
+        padding-inline: 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .project-poster {
+        height: 190px;
+      }
+
+      .discover-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .discover-controls {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .project-poster {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <img src="assets/img/CS_Logo_light bg.png" alt="CineSparq logo" class="brand-logo" />
+      </div>
+      <div class="header-right">
+        <nav class="dashboard-nav">
+          <a href="filmmaker-dashboard.html">Dashboard</a>
+          <a href="discover.html" class="active">Discover</a>
+          <a href="#">Reports</a>
+        </nav>
+        <div class="header-user">
+          <span class="user-name">Olivia</span>
+          <div class="user-avatar" aria-label="User profile">O</div>
+          <button class="menu-button" aria-label="Open user menu">
+            <div class="menu-button-bars">
+              <span></span><span></span><span></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="page">
+    <section class="page-header">
+      <p class="page-kicker">Shared Project Slate</p>
+      <h1>Discover Projects</h1>
+      <p>
+        A social-style view of projects in the CineSparq ecosystem. Creators and industry partners can see what’s in motion without exposing scores or sensitive materials.
+      </p>
+      <p class="page-note">
+        In the live platform, full details and documents are only visible after access is granted and agreements are accepted.
+      </p>
+    </section>
+
+    <section class="discover-card">
+      <div class="discover-header-row">
+        <div>
+          <h2>Live Project Feed (Preview)</h2>
+          <p>
+            Scroll the slate, click a title to explore, and move from curiosity to conversation.
+          </p>
+        </div>
+        <div class="discover-controls">
+          <span>Quick view:</span>
+          <span class="pill-filter">All projects</span>
+          <span class="pill-filter">Features</span>
+          <span class="pill-filter">Series &amp; Microdramas</span>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- 1. As Time Goes By -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/as-time-goes-by-poster.png" alt="As Time Goes By poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">As Time Goes By</a>
+          </h3>
+          <p class="project-logline">
+            A love story told across decades in Chicago, where music, memory, and sacrifice collide.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Feature</span>
+            <span class="project-tag-pill">Period Drama</span>
+            <span class="project-tag-pill">Chicago</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>120 min</span>
+          </div>
+        </article>
+
+        <!-- 2. Learning to Fall In Love -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/learning-poster.png" alt="Learning to Fall In Love poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Learning to Fall In Love</a>
+          </h3>
+          <p class="project-logline">
+            After a major setback, a successful retiree trades love for ambition until life teaches him how to open his heart again.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Romantic Comedy</span>
+            <span class="project-tag-pill">Asia-Set</span>
+            <span class="project-tag-pill">Light-Hearted</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>100 min</span>
+          </div>
+        </article>
+
+        <!-- 3. Abyss of Deceptions -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/abyss-poster.png" alt="Abyss of Deceptions poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Abyss of Deceptions</a>
+          </h3>
+          <p class="project-logline">
+            A coming-of-age vertical thriller where one secret pulls a tight-knit crew into deeper danger with every episode.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Microdrama</span>
+            <span class="project-tag-pill">Vertical Series</span>
+            <span class="project-tag-pill">Thriller</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Series · Vertical</span>
+            <span>Psychological</span>
+          </div>
+        </article>
+
+        <!-- 4. Southside Saints (placeholder) -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/learning-poster.png" alt="Southside Saints poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Southside Saints</a>
+          </h3>
+          <p class="project-logline">
+            Three siblings fight to keep their late father’s bar alive as development pressures close in on their block.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Drama</span>
+            <span class="project-tag-pill">Family</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Ensemble</span>
+          </div>
+        </article>
+
+        <!-- 5. Neon Baptism -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/as-time-goes-by-poster.png" alt="Neon Baptism poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Neon Baptism</a>
+          </h3>
+          <p class="project-logline">
+            A DJ-turned-pastor must confront his past when an old club track explodes on social again.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Music Drama</span>
+            <span class="project-tag-pill">Festival Lane</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Urban</span>
+          </div>
+        </article>
+
+        <!-- 6. Golden Hour Hustle -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/abyss-poster.png" alt="Golden Hour Hustle poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Golden Hour Hustle</a>
+          </h3>
+          <p class="project-logline">
+            A burned-out PA turns a chaotic one-day music video shoot into a life-changing shot at producing.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Dramedy</span>
+            <span class="project-tag-pill">Industry</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Low Budget</span>
+          </div>
+        </article>
+
+        <!-- 7. Signal in the Dark -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/learning-poster.png" alt="Signal in the Dark poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Signal in the Dark</a>
+          </h3>
+          <p class="project-logline">
+            A pirate radio host starts receiving calls from a future that might still be changed.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Sci-Fi</span>
+            <span class="project-tag-pill">Contained</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Streaming</span>
+          </div>
+        </article>
+
+        <!-- 8. Between Two Seasons -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/as-time-goes-by-poster.png" alt="Between Two Seasons poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">Between Two Seasons</a>
+          </h3>
+          <p class="project-logline">
+            An estranged mother and daughter road-trip across the country with one last box of family tapes.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Road Drama</span>
+            <span class="project-tag-pill">Festival</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Character-Driven</span>
+          </div>
+        </article>
+
+        <!-- 9. The Quiet Harbor -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/abyss-poster.png" alt="The Quiet Harbor poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">The Quiet Harbor</a>
+          </h3>
+          <p class="project-logline">
+            A retired dock worker uncovers a decades-old cover-up when a ship returns to port without a crew.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Mystery</span>
+            <span class="project-tag-pill">Contained</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Waterfront</span>
+          </div>
+        </article>
+
+        <!-- 10. The Sparrow’s Oath -->
+        <article class="project-card">
+          <div class="project-poster">
+            <img src="assets/img/learning-poster.png" alt="The Sparrow’s Oath poster" />
+          </div>
+          <h3 class="project-title">
+            <a href="project-detail-partner.html">The Sparrow’s Oath</a>
+          </h3>
+          <p class="project-logline">
+            A young organizer must choose between her safety and her city when a protest spirals out of control.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag-pill">Social Drama</span>
+            <span class="project-tag-pill">Impact</span>
+          </div>
+          <div class="project-meta-line">
+            <span>Feature Film</span>
+            <span>Ensemble</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    © <span id="year"></span> CineSparq. All rights reserved. Discover today’s stories. Decide tomorrow’s slate.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
