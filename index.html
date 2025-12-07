@@ -158,9 +158,10 @@
       border-radius: 2.3rem;
       overflow: hidden;
       min-height: 420px;
-      background-image: url("assets/hero/cinesparq-mockup-hero-image.png");
-      background-size: cover;
+      background-image: url("assets/img/cinesparq-mockup-hero-image.png");
+      background-size: cover;          /* keeps aspect ratio, no stretch */
       background-position: center;
+      background-repeat: no-repeat;
       box-shadow: var(--cs-shadow-soft);
       display: flex;
       align-items: center;
@@ -290,7 +291,7 @@
     /* SECTION 2 – FEATURED PROJECTS */
 
     .featured-projects {
-      background: var(--cs-bg-soft);
+      background: var(--cs-white);
     }
 
     .featured-text {
@@ -365,6 +366,7 @@
       gap: 0.4rem;
       font-size: 0.7rem;
       color: #f9fafb;
+      flex-wrap: wrap;
     }
 
     .project-tag {
@@ -389,15 +391,26 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65);
-      pointer-events: none; /* purely visual in mockup */
+      pointer-events: none; /* mockup only */
     }
 
-    .scroll-arrow--left {
-      left: -0.3rem;
+    .scroll-arrow--left { left: -0.3rem; }
+    .scroll-arrow--right { right: -0.3rem; }
+
+    /* INSIGHTS STRIP */
+
+    .headline-strip {
+      background: var(--cs-bg-soft);
+      padding: 2.2rem 1.5rem 2.6rem;
+      text-align: center;
     }
 
-    .scroll-arrow--right {
-      right: -0.3rem;
+    .headline-strip-text {
+      max-width: var(--cs-max-width);
+      margin: 0 auto;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--cs-charcoal);
     }
 
     /* KPI – COMMON */
@@ -410,50 +423,29 @@
     }
 
     .kpi-card {
-      background: var(--cs-bg-soft);
+      background: var(--cs-white);
       border-radius: var(--cs-radius-lg);
       padding: 1.9rem 1.7rem 1.8rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      border: none;
       box-shadow: var(--cs-shadow-soft);
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .kpi-header-row {
-      display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem;
-    }
-
-    .kpi-label {
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-
-    .kpi-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: rgba(10, 79, 132, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
+      text-align: center;
+      gap: 1rem;
     }
 
     .kpi-visual {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       margin-top: 0.3rem;
     }
 
     .kpi-circle {
-      --percent: 70;
-      width: 84px;
-      height: 84px;
+      --percent: 0;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       background:
         conic-gradient(var(--cs-navy) calc(var(--percent) * 1%), #e5e7eb 0);
@@ -462,14 +454,15 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      transition: background 1.2s ease-out;
     }
 
     .kpi-circle::before {
       content: "";
       position: absolute;
-      inset: 10px;
+      inset: 12px;
       border-radius: 50%;
-      background: var(--cs-bg-soft);
+      background: var(--cs-white);
     }
 
     .kpi-metric {
@@ -478,6 +471,15 @@
       font-size: 1.3rem;
       font-weight: 700;
       color: var(--cs-navy);
+    }
+
+    .kpi-metric--wide {
+      font-size: 0.96rem;
+    }
+
+    .kpi-label {
+      font-size: 0.98rem;
+      font-weight: 600;
     }
 
     .kpi-body {
@@ -493,16 +495,41 @@
       margin: 0 auto;
     }
 
+    .kpi-note-emphasis {
+      font-weight: 600;
+    }
+
     /* CREATOR KPIS */
 
     .creator-kpis {
       background: var(--cs-white);
     }
 
+    /* CREATOR SECURE STRIP */
+
+    .secure-strip {
+      background: var(--cs-bg-soft);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .secure-strip p {
+      margin: 0;
+      font-weight: 600;
+      max-width: var(--cs-max-width);
+      margin-inline: auto;
+      color: var(--cs-charcoal);
+    }
+
     /* PARTNER KPIS */
 
     .partner-kpis {
+      background: var(--cs-white);
+    }
+
+    .partner-kpis-wrapper {
       background: var(--cs-bg-soft);
+      padding: 4.5rem 0;
     }
 
     .partner-kpis .kpi-card {
@@ -520,10 +547,6 @@
 
     .partner-kpis .kpi-label {
       color: #111827;
-    }
-
-    .partner-kpis .kpi-icon {
-      background: rgba(248, 212, 24, 0.12);
     }
 
     .partner-kpis .kpi-note {
@@ -678,7 +701,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: center;
+      align-items:VES center;
       gap: 0.75rem;
     }
 
@@ -761,7 +784,7 @@
       <div class="header-inner">
         <div class="logo-area">
           <!-- Make sure this filename matches your actual logo asset -->
-          <img src="assets/logos/CSLogo-light-bg.png" alt="CineSparq logo on light background" />
+          <img src="assets/img/CSLogo-light-bg.png" alt="CineSparq logo on light background" />
           <div class="logo-text">CineSparq</div>
         </div>
         <div class="nav-right">
@@ -809,53 +832,115 @@
         <div class="project-scroller-wrap">
           <button class="scroll-arrow scroll-arrow--left" type="button">❮</button>
           <div class="project-scroller">
-            <!-- 7 portrait-format project placeholders -->
+            <!-- Use real posters from assets/img -->
             <article class="project-card">
-              <img src="assets/projects/project-1.png" alt="Project 1 poster placeholder" />
+              <img src="assets/img/stay-fts-poster.png" alt="Stay poster" />
               <div class="project-meta">
                 <span class="project-tag">Feature · Drama</span>
-                <span class="project-tag">Festival Favorite</span>
+                <span class="project-tag">Festival Heat</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-2.png" alt="Project 2 poster placeholder" />
+              <img src="assets/img/hard-sale-poster.png" alt="Hard Sale poster" />
               <div class="project-meta">
-                <span class="project-tag">Series · Dramedy</span>
-                <span class="project-tag">Audience-Building</span>
+                <span class="project-tag">Feature · Dramedy</span>
+                <span class="project-tag">Audience Favourite</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-3.png" alt="Project 3 poster placeholder" />
+              <img src="assets/img/as-time-goes-by-poster.png" alt="As Time Goes By poster" />
               <div class="project-meta">
-                <span class="project-tag">Limited Series · Thriller</span>
-                <span class="project-tag">High Rewatch Value</span>
+                <span class="project-tag">Feature · Romance</span>
+                <span class="project-tag">Legacy Story</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-4.png" alt="Project 4 poster placeholder" />
+              <img src="assets/img/abyss-poster.png" alt="Abyss poster" />
+              <div class="project-meta">
+                <span class="project-tag">Feature · Thriller</span>
+                <span class="project-tag">High Tension</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/haunted-poster.png" alt="Haunted poster" />
               <div class="project-meta">
                 <span class="project-tag">Feature · Horror</span>
                 <span class="project-tag">Microbudget-Friendly</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-5.png" alt="Project 5 poster placeholder" />
+              <img src="assets/img/learning-poster.png" alt="Learning To Fall In Love poster" />
               <div class="project-meta">
-                <span class="project-tag">Feature · Rom-Com</span>
+                <span class="project-tag">Feature · Romance</span>
                 <span class="project-tag">Four-Quadrant Appeal</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-6.png" alt="Project 6 poster placeholder" />
+              <img src="assets/img/betrayal-poster.png" alt="Betrayal poster" />
               <div class="project-meta">
-                <span class="project-tag">Doc Series · Culture</span>
+                <span class="project-tag">Series · Drama</span>
+                <span class="project-tag">High Rewatch Value</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/empire-poster.png" alt="Empire poster" />
+              <div class="project-meta">
+                <span class="project-tag">Series · Crime</span>
                 <span class="project-tag">Global Audience</span>
               </div>
             </article>
+
             <article class="project-card">
-              <img src="assets/projects/project-7.png" alt="Project 7 poster placeholder" />
+              <img src="assets/img/blossoms-poster.png" alt="Blossoms poster" />
               <div class="project-meta">
-                <span class="project-tag">Feature · Social Impact</span>
+                <span class="project-tag">Feature · Coming-of-Age</span>
+                <span class="project-tag">Festival-Friendly</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/out-loud-poster.png" alt="Out Loud poster" />
+              <div class="project-meta">
+                <span class="project-tag">Doc · Culture</span>
+                <span class="project-tag">Impact Ready</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/oceans-poster.png" alt="Oceans poster" />
+              <div class="project-meta">
+                <span class="project-tag">Feature · Adventure</span>
+                <span class="project-tag">Family Appeal</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/waves-poster.png" alt="Waves poster" />
+              <div class="project-meta">
+                <span class="project-tag">Feature · Drama</span>
+                <span class="project-tag">Critic-Friendly</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/cool-people-poster.png" alt="Cool People poster" />
+              <div class="project-meta">
+                <span class="project-tag">Series · Comedy</span>
+                <span class="project-tag">Bingeable</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <img src="assets/img/homegrown-poster.png" alt="Homegrown poster" />
+              <div class="project-meta">
+                <span class="project-tag">Doc · Community</span>
                 <span class="project-tag">Cause-Driven</span>
               </div>
             </article>
@@ -863,6 +948,11 @@
           <button class="scroll-arrow scroll-arrow--right" type="button">❯</button>
         </div>
       </div>
+    </section>
+
+    <!-- INSIGHTS STRIP -->
+    <section class="headline-strip">
+      <p class="headline-strip-text">Insights That Power the Film Industry</p>
     </section>
 
     <!-- SECTION 3 – CREATOR KPIS -->
@@ -878,15 +968,12 @@
         <div class="kpi-grid">
           <!-- Card 1 -->
           <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">Project Traction</div>
-              <div class="kpi-icon">⧉</div>
-            </div>
             <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 86;">
+              <div class="kpi-circle" data-percent="86">
                 <span class="kpi-metric">86</span>
               </div>
             </div>
+            <div class="kpi-label">Project Traction</div>
             <div class="kpi-body">
               Understand how your projects are attracting attention and connections that lead to real opportunities.
             </div>
@@ -894,15 +981,12 @@
 
           <!-- Card 2 -->
           <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">Project Alignment</div>
-              <div class="kpi-icon">◎</div>
-            </div>
             <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 72;">
+              <div class="kpi-circle" data-percent="72">
                 <span class="kpi-metric">18</span>
               </div>
             </div>
+            <div class="kpi-label">Project Alignment</div>
             <div class="kpi-body">
               Access the market insights that help you position your projects for new opportunities.
             </div>
@@ -910,93 +994,84 @@
 
           <!-- Card 3 -->
           <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">Active Interest</div>
-              <div class="kpi-icon">✦</div>
-            </div>
             <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 64;">
+              <div class="kpi-circle" data-percent="64">
                 <span class="kpi-metric">4</span>
               </div>
             </div>
+            <div class="kpi-label">Active Interest</div>
             <div class="kpi-body">
               Act on insights that reveal when partners are actively exploring your project or ready to make a connection.
             </div>
           </article>
         </div>
-
-        <p class="kpi-note">
-          CineSparq's Secure Share™ automatically tracks access so you have peace of mind to share safely and stay in full control.
-        </p>
       </div>
     </section>
 
+    <!-- CREATOR SECURE STRIP -->
+    <section class="secure-strip">
+      <p>
+        CineSparq's Secure Share™ automatically tracks project access so you have peace of mind to share safely and stay in full control.
+      </p>
+    </section>
+
     <!-- SECTION 4 – PARTNER KPIS -->
-    <section class="partner-kpis section-light">
-      <div class="kpi-inner">
-        <div class="section-header">
-          <h2 class="section-title">Qualified Projects at a Glance</h2>
-          <p class="section-subtitle">
-            Industry partners elevate deal flow with project clarity, mandate alignment, and opportunities primed for momentum.
+    <section class="partner-kpis-wrapper">
+      <section class="partner-kpis section-light">
+        <div class="kpi-inner">
+          <div class="section-header">
+            <h2 class="section-title">Qualified Projects at a Glance</h2>
+            <p class="section-subtitle">
+              Industry partners elevate deal flow with project clarity, mandate alignment, and opportunities primed for momentum.
+            </p>
+          </div>
+
+          <div class="kpi-grid">
+            <!-- Card 1 -->
+            <article class="kpi-card">
+              <div class="kpi-visual">
+                <div class="kpi-circle" data-percent="78">
+                  <span class="kpi-metric">27</span>
+                </div>
+              </div>
+              <div class="kpi-label">Tailored Pipeline</div>
+              <div class="kpi-body">
+                Cut through clutter with opportunities aligned to your project mandates and strategic priorities.
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="kpi-card">
+              <div class="kpi-visual">
+                <div class="kpi-circle" data-percent="65">
+                  <span class="kpi-metric">17</span>
+                </div>
+              </div>
+              <div class="kpi-label">Focus Flow</div>
+              <div class="kpi-body">
+                Track your active opportunities with real-time insights that keep you ahead and positioned to move first on high-potential wins.
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="kpi-card">
+              <div class="kpi-visual">
+                <div class="kpi-circle" data-percent="82">
+                  <span class="kpi-metric kpi-metric--wide">$217.2M</span>
+                </div>
+              </div>
+              <div class="kpi-label">Pipeline Potential</div>
+              <div class="kpi-body">
+                See your pipeline at a glance, prioritize your workflow, and close deals with clarity and focus.
+              </div>
+            </article>
+          </div>
+
+          <p class="kpi-note kpi-note-emphasis">
+            CineSparq’s Secure Share™ helps you minimize IP risk so your project evaluations are always protected and compliant.
           </p>
         </div>
-
-        <div class="kpi-grid">
-          <!-- Card 1 -->
-          <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">
-                Curate a tailored evaluation pipeline that streamlines your deal flow.
-              </div>
-              <div class="kpi-icon">✓</div>
-            </div>
-            <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 78;">
-                <span class="kpi-metric">27</span>
-              </div>
-            </div>
-            <div class="kpi-body">
-              Cut through clutter with opportunities aligned to your project mandates and strategic priorities.
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">Focus Flow</div>
-              <div class="kpi-icon">↻</div>
-            </div>
-            <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 65;">
-                <span class="kpi-metric">17</span>
-              </div>
-            </div>
-            <div class="kpi-body">
-              Track your active opportunities with real-time insights that keep you ahead and positioned to move first on high-potential wins.
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="kpi-card">
-            <div class="kpi-header-row">
-              <div class="kpi-label">Pipeline Potential</div>
-              <div class="kpi-icon">$</div>
-            </div>
-            <div class="kpi-visual">
-              <div class="kpi-circle" style="--percent: 82;">
-                <span class="kpi-metric">$217.2M</span>
-              </div>
-            </div>
-            <div class="kpi-body">
-              See your pipeline at a glance, prioritize your workflow, and close deals with clarity and focus.
-            </div>
-          </article>
-        </div>
-
-        <p class="kpi-note">
-          CineSparq’s Secure Share™ helps you minimize IP risk so your project evaluations are always protected and compliant.
-        </p>
-      </div>
+      </section>
     </section>
 
     <!-- REINFORCEMENT CTA STRIP -->
@@ -1013,8 +1088,8 @@
         <div class="footer-top">
           <!-- Column 1: Logo + tagline -->
           <div class="footer-logo-block">
-            <!-- Make sure this filename matches your dark logo asset -->
-            <img src="assets/logos/CSLogo-dark-bg.png" alt="CineSparq logo for dark background" />
+            <!-- Ensure this filename/path matches your dark logo asset -->
+            <img src="assets/img/CSLogo-dark-bg.png" alt="CineSparq logo for dark background" />
             <div class="footer-tagline">
               Insight-driven project alignment for creators and industry.
             </div>
@@ -1074,12 +1149,39 @@
             </div>
           </div>
           <div class="footer-socials-row">
-            <!-- Confirm this filename + path match your sprite or icon image -->
-            <img src="assets/social/social-icons.png" alt="Social media icons" />
+            <!-- Confirm this filename + path matches your sprite or icon image -->
+            <img src="assets/img/social-icons.png" alt="Social media icons" />
           </div>
         </div>
       </div>
     </footer>
   </div>
+
+  <!-- KPI ANIMATION SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sections = document.querySelectorAll(".creator-kpis, .partner-kpis");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const circles = entry.target.querySelectorAll(".kpi-circle");
+              circles.forEach((circle) => {
+                const target = parseInt(circle.dataset.percent, 10);
+                if (!isNaN(target)) {
+                  circle.style.setProperty("--percent", target);
+                }
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.35 }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    });
+  </script>
 </body>
 </html>
