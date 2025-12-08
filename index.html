@@ -883,19 +883,16 @@
     }
 
     .footer-socials-row {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .site-footer .footer-socials-row img {
-  height: 64px;          /* bump size, adjust as you like */
-  width: auto;
-  object-fit: contain;
-  filter: none !important;   /* kill any invert/brightness filters */
-  opacity: 1 !important;     /* make sure it's fully visible */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
+.footer-socials-row img {
+  height: 32px;      /* bump to 36–40px if you want them larger */
+  width: 32px;
+  display: block;
+}
 }
 
     /* RESPONSIVE */
@@ -1296,13 +1293,20 @@
             </div>
           </div>
           <div class="footer-socials-row">
-            <!-- Confirm this filename + path matches your sprite or icon image -->
-            <img src="assets/icons/social-icons-yellow.png" alt="Social media icons" />
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+  <a href="#" aria-label="LinkedIn">
+    <img src="assets/icons/linkedin-icon.svg" alt="LinkedIn" />
+  </a>
+  <a href="#" aria-label="Instagram">
+    <img src="assets/icons/instagram-icon.svg" alt="Instagram" />
+  </a>
+  <a href="#" aria-label="Facebook">
+    <img src="assets/icons/facebook-icon.svg" alt="Facebook" />
+  </a>
+  <a href="#" aria-label="Threads">
+    <img src="assets/icons/threads-icon.svg" alt="Threads" />
+  </a>
+</div>
+
 
   <script>
   document.addEventListener('DOMContentLoaded', function () {
