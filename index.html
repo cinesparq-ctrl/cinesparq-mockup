@@ -558,44 +558,89 @@
       background: var(--cs-white);
     }
 /* EXPERIENCE SECTIONS – CREATOR + PARTNER */
+
 .experience-section {
-  padding: 4rem 1.5rem;
+  padding: 3.5rem 1.5rem 4rem;
+  background: var(--cs-white);
 }
 
 .experience-inner {
   max-width: var(--cs-max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 2.5rem;
   align-items: center;
 }
 
-.experience-text h3 {
-  font-size: 1.8rem;
+.experience-content-eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  color: var(--cs-navy);
+  margin-bottom: 0.4rem;
+}
+
+.experience-content-title {
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--cs-charcoal);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.7rem;
 }
 
-.experience-text p {
-  font-size: 1.05rem;
+.experience-content-body {
+  font-size: 0.96rem;
   color: var(--cs-muted);
-  margin-bottom: 1.4rem;
+  max-width: 28rem;
 }
 
-.experience-photo img {
+.experience-content-list {
+  margin: 1.25rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+  color: var(--cs-charcoal);
+}
+
+.experience-content-list li + li {
+  margin-top: 0.35rem;
+}
+
+.experience-image {
   width: 100%;
-  border-radius: var(--cs-radius-lg);
+}
+
+.experience-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--cs-radius-xl);
   box-shadow: var(--cs-shadow-soft);
   object-fit: cover;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
+/* Alternate layout for partner: image left, text right on desktop */
+@media (min-width: 901px) {
+  .experience-partner .experience-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+
+  .experience-partner .experience-image {
+    order: 1;
+  }
+
+  .experience-partner .experience-content {
+    order: 2;
+  }
+}
+
+/* Mobile stacking (both: text first, image second) */
+@media (max-width: 900px) {
   .experience-inner {
     grid-template-columns: 1fr;
-    text-align: center;
+  }
+
+  .experience-image {
+    margin-top: 1.5rem;
   }
 }
 
@@ -1065,18 +1110,28 @@
       </div>
     </section>
 
-    <!-- CREATOR EXPERIENCE (New Section) -->
-<section class="experience-section">
-  <div class="experience-photo">
-    <img src="assets/img/creator-kpi-photo.png" alt="Creator Experience Photo">
-  </div>
-  <div class="experience-text">
-    <h3 class="experience-title">Creators Move With Clarity</h3>
-    <p class="experience-body">
-      With CineSparq, creators see how the market responds in real time; empowering smarter decisions, stronger positioning, and a film funding journey built on data-driven confidence.
-    </p>
-  </div>
-</section>
+       <!-- CREATOR EXPERIENCE SECTION -->
+    <section class="experience-section experience-creator">
+      <div class="experience-inner">
+        <div class="experience-content">
+          <div class="experience-content-eyebrow">For Creators & Filmmakers</div>
+          <h3 class="experience-content-title">See Your Project Like The Industry Sees It</h3>
+          <p class="experience-content-body">
+            CineSparq turns your creative vision into a clear market signal. You see how your work lands,
+            where it aligns with current demand, and what to refine before you spend more time or money.
+          </p>
+          <ul class="experience-content-list">
+            <li>Understand how buyers experience your project at a glance.</li>
+            <li>Spot alignment gaps before you pitch, not after a pass.</li>
+            <li>Use insight, not guesswork, to plan your next creative move.</li>
+          </ul>
+        </div>
+        <div class="experience-image">
+          <img src="assets/img/creator-kpi-photo.jpg" alt="Creator reviewing project insights on CineSparq" />
+        </div>
+      </div>
+    </section>
+
 
     <!-- SECTION 4 – PARTNER KPIS -->
 <section class="partner-kpis section-light">
@@ -1138,18 +1193,28 @@
 
   </div>
 </section>
-<!-- PARTNER EXPERIENCE (New Section) -->
-<section class="experience-section">
-  <div class="experience-photo">
-    <img src="assets/img/partner-kpi-photo.png" alt="Industry Partner Experience Photo">
-  </div>
-  <div class="experience-text">
-    <h3 class="experience-title">Partners Evaluate With Precision</h3>
-    <p class="experience-body">
-      CineSparq gives industry partners a clear, organized view of projects aligned with their mandates—streamlining evaluation, accelerating deal flow, and surfacing opportunities positioned for momentum.
-    </p>
-  </div>
-</section>
+    <!-- PARTNER EXPERIENCE SECTION -->
+    <section class="experience-section experience-partner">
+      <div class="experience-inner">
+        <div class="experience-content">
+          <div class="experience-content-eyebrow">For Industry Partners</div>
+          <h3 class="experience-content-title">Keep Your Pipeline Focused On What Performs</h3>
+          <p class="experience-content-body">
+            CineSparq gives you a fast, clear read on which projects deserve deeper consideration, so your
+            time goes to opportunities that match your mandates and move the needle.
+          </p>
+          <ul class="experience-content-list">
+            <li>Scan project viability in minutes instead of sifting for hours.</li>
+            <li>Build a focused slate aligned with real audience and market signals.</li>
+            <li>Stay ahead of competing buyers with a clear, prioritized pipeline.</li>
+          </ul>
+        </div>
+        <div class="experience-image">
+          <img src="assets/img/partner-kpi-photo.jpg" alt="Industry partner reviewing aligned projects on CineSparq" />
+        </div>
+      </div>
+    </section>
+
 
 
     <!-- REINFORCEMENT CTA STRIP -->
