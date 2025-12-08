@@ -888,12 +888,14 @@
       gap: 0.8rem;
     }
 
-    .footer-socials-row img {
-  height: 44px;      /* increase visibility */
+    .site-footer .footer-socials-row img {
+  height: 64px;          /* bump size, adjust as you like */
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* makes icons white/bright for dark footer */
-  opacity: 0.9;       /* optional: slightly soften */
+  filter: none !important;   /* kill any invert/brightness filters */
+  opacity: 1 !important;     /* make sure it's fully visible */
+}
+
 }
 
     /* RESPONSIVE */
