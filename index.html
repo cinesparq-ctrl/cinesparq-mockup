@@ -889,10 +889,12 @@
     }
 
     .footer-socials-row img {
-      height: 45px;
-      width: auto;
-      object-fit: contain;
-    }
+  height: 44px;      /* increase visibility */
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* makes icons white/bright for dark footer */
+  opacity: 0.9;       /* optional: slightly soften */
+}
 
     /* RESPONSIVE */
 
